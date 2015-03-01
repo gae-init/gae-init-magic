@@ -1,5 +1,5 @@
 application: gae-init
-version: 1
+version: magic
 runtime: python27
 api_version: 1
 threadsafe: true
@@ -40,7 +40,6 @@ handlers:
 
 - url: /.*
   script: main.app
-  secure: always
 
 skip_files:
 - ^(.*/)?#.*#

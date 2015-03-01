@@ -1,4 +1,4 @@
-<header class="navbar navbar-inverse navbar-fixed-top" role="banner">
+<header class="navbar navbar-default navbar-fixed-top" role="banner">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -11,6 +11,9 @@
     </div>
     <nav class="collapse navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
+        <li class="{{'active' if html_class == 'project-list'}}">
+          <a href="{{url_for('project_list')}}"><span class="fa fa-building-o fa-fw"></span> My Projects</a>
+        </li>
         # include 'bit/contact_menu.html'
       </ul>
       <ul class="nav navbar-nav navbar-right">

@@ -1,0 +1,34 @@
+&#35; extends 'base.html'
+&#35; import 'macro/forms.html' as forms
+&#35; import 'macro/utils.html' as utils
+
+
+&#35; block content
+  &lt;div class="page-header"&gt;
+    &lt;h1&gt;
+      &#35; if {{model_db.variable_name}}_db.key
+        &#123;&#123;utils.back_link('Back', '{{model_db.variable_name}}_view', {{model_db.variable_name}}_id={{model_db.variable_name}}_db.key.id())&#125;&#125;
+      &#35; else
+        &#123;&#123;utils.back_link('Back', '{{model_db.variable_name}}_list')&#125;&#125;
+      &#35; endif
+      &#123;&#123;title&#125;&#125;
+    &lt;/h1&gt;
+  &lt;/div&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-md-4 col-sm-6"&gt;
+      &lt;form method="POST" action="." novalidate&gt;
+        &#123;&#123;form.csrf_token&#125;&#125;
+      # for property_db in property_dbs if property_db.wtf_property and property_db.show_on_update
+        {{property_db.forms_field}}
+      # endfor
+        &lt;button type="submit" class="btn btn-primary btn-block btn-loading" &#123;&#123;forms.data_loading_text()&#125;&#125;&gt;
+          &#35; if {{model_db.variable_name}}_db.key
+            Update
+          &#35; else
+            Create
+          &#35; endif
+        &lt;/button&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&#35; endblock

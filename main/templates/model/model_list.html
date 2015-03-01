@@ -1,0 +1,93 @@
+# extends 'base.html'
+# import 'macro/utils.html' as utils
+
+# block head
+  {{utils.prefetch_link(next_url)}}
+# endblock
+
+# block content
+  <div class="page-header">
+    <a class="pull-right btn btn-primary" href="{{url_for('model_update', project_id=project_db.key.id())}}">
+      <fa class="fa fa-plus fa-fw"></fa>
+      Add Model
+    </a>
+    <h1>
+      {{utils.back_link('Back', 'project_list')}}
+      {{title}}
+      <small><a href="{{url_for('project_update', project_id=project_db.key.id())}}">edit</a></small>
+    </h1>
+  </div>
+  <table class="table table-striped table-bordered table-hover {{'hide' if not model_dbs|count}}">
+    <thead>
+      <tr class="text-nowrap">
+        <th class="col-xs-1 text-center">{{utils.order_by_link('rank', 'Rank')}}</th>
+        <th class="col-xs-4 h4">{{utils.order_by_link('name', 'Model')}}</th>
+        <th class="col-xs-5 hidden-xs">{{utils.order_by_link('verbose_name_', 'Verbose Name')}}</th>
+        <th class="col-xs-1 hidden-xs">{{utils.order_by_link('auth_user_key', 'User Authentication with')}}</th>
+        <th class="col-xs-1 hidden-xs">{{utils.order_by_link('admin_only', 'Only for Admins')}}</th>
+        <th class="col-xs-1 text-center">{{utils.order_by_link('property_count', 'Properties')}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      # for model_db in model_dbs
+        <tr class="row-link" id="{{model_db.key.urlsafe()}}" data-href="{{url_for('model_view', project_id=project_db.key.id(), model_id=model_db.key.id())}}">
+          <td class="text-center zero-padding not-link">
+            # if not loop.first and (not request.args.get('order') or request.args.get('order') == 'rank')
+              <a href="{{url_for('model_rank', project_id=project_db.key.id(), model_id=model_db.key.id(), direction='up')}}">
+                <span class="text-muted fa fa-fw fa-chevron-up" title="Move Up"></span></a>
+            # endif
+            <div>{{model_db.rank}}</div>
+            # if not loop.last and (not request.args.get('order') or request.args.get('order') == 'rank')
+              <a href="{{url_for('model_rank', project_id=project_db.key.id(), model_id=model_db.key.id(), direction='down')}}">
+                <span class="text-muted fa fa-fw fa-chevron-down" title="Move Down"></span></a>
+            # endif
+          </td>
+          <td class="h4">
+            <span class="fa fa-fw fa-{{model_db.icon}}"></span> {{model_db.name}}
+          </td>
+          <td class="hidden-xs">
+            # if model_db.verbose_name
+              {{model_db.verbose_name}}
+            # else
+              <span class="text-muted">{{model_db.default_verbose_name}}</span>
+            # endif
+          </td>
+          <td class="hidden-xs">{{model_db.auth_user_key.get().name if model_db.auth_user_key else ''}}</td>
+          <td class="text-center hidden-xs">
+            # if model_db.admin_only
+              <span class="fa fa-check"></span>
+            # endif
+          </td>
+          <td class="text-center">{{model_db.property_count}}</td>
+        </tr>
+      # endfor
+    </tbody>
+  </table>
+
+  {{utils.next_link(next_url)}}
+
+# if model_dbs
+  <h3>
+    Init via command line
+  </h3>
+
+<pre><code class="bash"># If you starting completely from scratch
+git clone https://github.com/gae-init/gae-init.git {{project_db.variable_name}}
+
+&#35; Go to the root of your project
+cd {{project_db.variable_name}}
+
+&#35; Execute at your own risk to update your project
+./magic.py -p {{project_db.key.id()}}{% if not project_db.public%}/{{project_db.access}}{% endif %}
+
+&#35; Install all depndecies if you are starting from scratch
+./run.py -C
+
+&#35; Start the project locally
+gulp
+
+&#35; Visit http://localhost:8080 to verify!
+</code></pre>
+# endif
+
+# endblock

@@ -3,6 +3,8 @@
 import flask
 
 import config
+import model
+import util
 
 from main import app
 
@@ -12,7 +14,13 @@ from main import app
 ###############################################################################
 @app.route('/')
 def welcome():
-  return flask.render_template('welcome.html', html_class='welcome')
+  project_dbs, project_cursor = model.Project.get_dbs(public=True)
+  return flask.render_template(
+      'welcome.html',
+      html_class='welcome',
+      project_dbs=project_dbs,
+      next_url=util.generate_next_url(project_cursor),
+    )
 
 
 ###############################################################################

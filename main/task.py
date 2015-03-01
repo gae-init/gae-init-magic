@@ -154,3 +154,26 @@ def email_conflict_notification(email):
       flask.url_for('user_list', email=email, _external=True),
     )
   send_mail_notification('Conflict with: %s' % email, body)
+
+
+###############################################################################
+# Count Specific
+###############################################################################
+def property_count_task(model_db):
+  property_keys, property_cursor = model_db.get_property_dbs(keys_only=True)
+  model_db.property_count = len(property_keys)
+  model_db.put()
+
+
+def property_count(model_db):
+  property_count_task(model_db)
+
+
+def model_count_task(project_db):
+  model_keys, model_cursor = project_db.get_model_dbs(keys_only=True)
+  project_db.model_count = len(model_keys)
+  project_db.put()
+
+
+def model_count(project_db):
+  model_count_task(project_db)

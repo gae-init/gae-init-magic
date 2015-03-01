@@ -1,0 +1,37 @@
+# extends 'base.html'
+# import 'macro/forms.html' as forms
+# import 'macro/utils.html' as utils
+
+
+# block content
+  <div class="page-header">
+    <h1>
+      <small class="pull-right">Project</small>
+      # if project_db.key
+        {{utils.back_link('Back', 'model_list', project_id=project_db.key.id())}}
+      # else
+        {{utils.back_link('Back', 'project_list')}}
+      # endif
+      {{title}}
+    </h1>
+  </div>
+  <div class="row">
+    <div class="col-md-4 col-sm-6">
+      <form method="POST" action="." novalidate>
+        {{form.csrf_token}}
+        {{forms.text_field(form.name, autofocus=True)}}
+        {{forms.textarea_field(form.description)}}
+        {{forms.text_field(form.url)}}
+        {{forms.checkbox_field(form.public)}}
+
+        <button type="submit" class="btn btn-primary btn-block btn-loading" {{forms.data_loading_text()}}>
+          # if project_db.key
+            Update
+          # else
+            Create
+          # endif
+        </button>
+      </form>
+    </div>
+  </div>
+# endblock

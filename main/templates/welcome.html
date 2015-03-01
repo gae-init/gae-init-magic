@@ -1,31 +1,44 @@
 # extends 'base.html'
 
 # block header
-  <div class="jumbotron">
+  <div class="jumbotron text-center">
     <div class="container">
       <h1>{{config.CONFIG_DB.brand_name}}</h1>
-      <p>Hello, world!</p>
+      <p>
+        The missing <em>magic</em> piece for
+        <a href="https://gae-init.appspot.com">gae-init</a>!
+      </p>
+      <p class="text-danger">
+        Use it at your own risk :)<br>
+        <small class="text-muted">(you've been warned)</small>
+      </p>
     </div>
   </div>
 # endblock
 
 # block content
   <div class="row">
-    <div class="col-sm-6 col-md-4 col-lg-3">
-      <h2>Heading</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <div class="col-md-offset-3 col-md-6 ">
+      <a class="btn btn-lg btn-primary btn-block" href="{{url_for('project_list')}}">
+        <span class="fa fa-building-o fa-fw"></span>
+        View My Projects
+      </a>
     </div>
-    <div class="col-sm-6 col-md-4 col-lg-3">
-      <h2>Heading</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-    <div class="col-sm-6 col-md-4 col-lg-3">
-      <h2>Heading</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-    <div class="col-sm-6 col-md-12 col-lg-3">
-      <h2>Heading</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
+  </div>
+
+  <h2 class="hide">Public Projects</h2>
+  <div class="row hide">
+    # for project_db in project_dbs
+      <div class="col-sm-4">
+        <div class="well well-sm">
+          <h3 class="ellipsis">{{project_db.name}}</h3>
+          <h4 class="ellipsis">
+            # set user_db = project_db.user_key.get()
+            <img src="{{user_db.avatar_url_size(48)}}" width="24" height="24">
+            {{user_db.name}}
+          </h4>
+        </div>
+      </div>
+    # endfor
   </div>
 # endblock

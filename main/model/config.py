@@ -5,7 +5,6 @@ from __future__ import absolute_import
 from google.appengine.ext import ndb
 
 from api import fields
-import config
 import model
 import util
 
@@ -17,7 +16,7 @@ class Config(model.Base, model.ConfigAuth):
       'info', 'warning', 'success', 'danger',
     ])
   anonymous_recaptcha = ndb.BooleanProperty(default=False)
-  brand_name = ndb.StringProperty(default=config.APPLICATION_ID)
+  brand_name = 'gae-init-magic'
   check_unique_email = ndb.BooleanProperty(default=True)
   email_authentication = ndb.BooleanProperty(default=False)
   feedback_email = ndb.StringProperty(default='')

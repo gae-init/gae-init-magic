@@ -1,0 +1,41 @@
+# extends 'base.html'
+# import 'macro/forms.html' as forms
+# import 'macro/utils.html' as utils
+
+# block content
+  <div class="page-header">
+    <h1>
+      <small class="pull-right">Model</small>
+      # if model_db.key.id()
+        {{utils.back_link('Back', 'model_view', project_id=project_db.key.id(), model_id=model_db.key.id())}}
+      # else
+        {{utils.back_link('Back', 'model_list', project_id=project_db.key.id())}}
+      # endif
+      <small>{{project_db.variable_name}}.</small>{{title}}
+    </h1>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <form method="POST" action="." novalidate>
+        {{form.csrf_token}}
+        {{forms.text_field(form.name, autofocus=True)}}
+        {{forms.text_field(form.verbose_name, placeholder=model_db.default_verbose_name)}}
+        {{forms.text_field(form.icon)}}
+        {{forms.checkbox_field(form.admin_only)}}
+        # if model_db.key.id()
+          {{forms.select_field(form.auth_user_key)}}
+          {{forms.select_field(form.title_property_key)}}
+        # else
+          {{forms.checkbox_field(form.auth_user)}}
+        # endif
+        <button type="submit" class="btn btn-primary btn-lg btn-block btn-loading" {{forms.data_loading_text()}}>
+          # if model_db.key.id()
+            Update
+          # else
+            Create
+          # endif
+        </button>
+      </form>
+    </div>
+  </div>
+# endblock

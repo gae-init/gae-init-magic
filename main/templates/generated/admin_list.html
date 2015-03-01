@@ -1,0 +1,64 @@
+&#35; extends 'admin/admin_base.html'
+&#35; import 'macro/utils.html' as utils
+
+&#35; block head
+  &#123;&#123;utils.prefetch_link(next_url)&#125;&#125;
+&#35; endblock
+
+&#35; block admin_content
+# if not model_db.auth_user_key
+  &lt;div class="panel panel-default"&gt;
+    &lt;div class="panel-body"&gt;
+      &lt;a class="btn btn-sm btn-primary" href="&#123;&#123;url_for('admin_{{model_db.variable_name}}_update')&#125;&#125;"&gt;
+        &lt;span class="fa fa-plus"&gt;&lt;/span&gt; New {{model_db.verbose_name_}}
+      &lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+# endif
+
+  &lt;div class="table-responsive &#123;&#123;'hide' if not {{model_db.variable_name}}_dbs|count&#125;&#125;"&gt;
+    &lt;table class="table table-striped table-bordered table-hover"&gt;
+      &lt;thead&gt;
+        &lt;tr class="text-nowrap"&gt;
+          # for property_db in property_dbs if property_db.show_on_admin_list
+            # if property_db.indexed
+          &lt;th class="col-xs-1"&gt;&#123;&#123;utils.order_by_link('{{property_db.name}}', '{{property_db.verbose_name_}}')&#125;&#125;&lt;/th&gt;
+            # else
+          &lt;th class="col-xs-1"&gt;{{property_db.verbose_name_}}&lt;/th&gt;
+            # endif
+          # endfor
+          # if model_db.auth_user_key
+          &lt;th class="col-xs-1"&gt;&#123;&#123;utils.order_by_link('{{model_db.auth_user_key.get().name}}', 'User')&#125;&#125;&lt;/th&gt;
+          # endif
+          &lt;th class="col-xs-1"&gt;&#123;&#123;utils.order_by_link('modified', 'Modified')&#125;&#125;&lt;br&gt;&lt;small&gt;&#123;&#123;utils.order_by_link('created', 'Created')&#125;&#125;&lt;/small&gt;&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &#35; for {{model_db.variable_name}}_db in {{model_db.variable_name}}_dbs
+          &lt;tr class="row-link" id="&#123;&#123;{{model_db.variable_name}}_db.key.urlsafe()&#125;&#125;" data-href="&#123;&#123;url_for('admin_{{model_db.variable_name}}_update', {{model_db.variable_name}}_id={{model_db.variable_name}}_db.key.id())&#125;&#125;"&gt;
+            # for property_db in property_dbs if property_db.show_on_admin_list
+            &lt;td&gt;&#123;&#123;{{model_db.variable_name}}_db.{{property_db.name}} or ''&#125;&#125;&lt;/td&gt;
+            # endfor
+            # if model_db.auth_user_key
+            &lt;td&gt;
+              &#35; set user_db = {{model_db.variable_name}}_db.{{model_db.auth_user_key.get().name}}.get()
+              &lt;img src="&#123;&#123;user_db.avatar_url_size(36)&#125;&#125;" width="18" height="18"&gt;
+              &#123;&#123;user_db.name&#125;&#125;
+            &lt;/td&gt;
+            # endif
+            &lt;td&gt;
+              &lt;time datetime="&#123;&#123;{{model_db.variable_name}}_db.modified&#125;&#125;"&gt;
+                &#123;&#123;{{model_db.variable_name}}_db.modified.strftime('%Y-%m-%d')&#125;&#125;
+              &lt;/time&gt;&lt;br&gt;
+              &lt;time class="text-success small" datetime="&#123;&#123;{{model_db.variable_name}}_db.created&#125;&#125;"&gt;
+                &#123;&#123;{{model_db.variable_name}}_db.created.strftime('%Y-%m-%d')&#125;&#125;
+              &lt;/time&gt;
+            &lt;/td>
+          &lt;/tr&gt;
+        &#35; endfor
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+
+  &#123;&#123;utils.next_link(next_url)&#125;&#125;
+&#35; endblock

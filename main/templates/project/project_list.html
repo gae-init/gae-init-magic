@@ -1,0 +1,44 @@
+# extends 'base.html'
+# import 'macro/utils.html' as utils
+
+# block head
+  {{utils.prefetch_link(next_url)}}
+# endblock
+
+# block content
+  <div class="page-header">
+    <a class="pull-right btn btn-primary" href="{{url_for('project_update')}}">
+      <fa class="fa fa-plus fa-fw"></fa>
+      Add Project
+    </a>
+    <h1>
+      {{title}}
+    </h1>
+  </div>
+  <table class="table table-striped table-bordered table-hover {{'hide' if not project_dbs|count}}">
+    <thead>
+      <tr class="text-nowrap">
+        <th class="col-xs-4 h4">{{utils.order_by_link('name', 'Project')}}</th>
+        <th class="col-xs-6 hidden-xs">{{utils.order_by_link('description', 'Description')}}</th>
+        <th class="col-xs-1 hidden-xs text-center">{{utils.order_by_link('public', 'Public')}}</th>
+        <th class="col-xs-1 text-center">{{utils.order_by_link('model_count', 'Models')}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      # for project_db in project_dbs
+        <tr class="row-link" id="{{project_db.key.urlsafe()}}" data-href="{{url_for('model_list', project_id=project_db.key.id())}}">
+          <td class="h4">{{project_db.name}}<br><span class="small text-muted not-link">{{project_db.key.id()}}</span></td>
+          <td class="hidden-xs">{{project_db.description}}</td>
+          <td class="hidden-xs text-center">
+            # if project_db.public
+              <span class="fa fa-check"></span>
+            # endif
+          </td>
+          <td class="text-center">{{project_db.model_count}}</td>
+        </tr>
+      # endfor
+    </tbody>
+  </table>
+
+  {{utils.next_link(next_url)}}
+# endblock

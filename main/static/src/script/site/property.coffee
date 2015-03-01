@@ -1,0 +1,104 @@
+window.init_property_update = ->
+  $('select').change on_change
+
+  $('#ndb_property').change on_ndb_change
+  $('#wtf_property').change on_wtf_change
+  $('#generic_property').change on_generic_change
+
+
+  $('select').each (i, val) ->
+    $($('select')[i]).change()
+
+on_change = (event) ->
+  $this = $(event.currentTarget)
+  id = $this.attr 'id'
+  val = $this.val()
+  $("fieldset[data-for='##{id}']").toggle Boolean val
+
+
+
+on_ndb_change = ->
+  value = $('#ndb_property').val()
+  show_kind = Boolean value.indexOf('ndb.Key') == 0
+  $('#kind').parent().toggle show_kind
+
+
+on_wtf_change = ->
+  value = $('#wtf_property').val()
+  show_choices = Boolean value.indexOf('wtforms.Select') == 0 or value.indexOf('wtforms.Radio') == 0
+  $('#choices').parent().toggle show_choices
+
+
+on_generic_change = ->
+  value = $('#generic_property').val()
+
+  $('#strip_filter').prop 'checked', false
+
+  if value == 'boolean'
+    $('#ndb_property').val('ndb.BooleanProperty').change()
+    $('#wtf_property').val('wtforms.BooleanField').change()
+    $('#forms_property').val('forms.checkbox_field').change()
+    $('#field_property').val('fields.Boolean').change()
+
+  else if value == 'string'
+    $('#ndb_property').val('ndb.StringProperty').change()
+    $('#wtf_property').val('wtforms.StringField').change()
+    $('#forms_property').val('forms.text_field').change()
+    $('#field_property').val('fields.String').change()
+    $('#strip_filter').prop 'checked', true
+
+  else if value == 'string_text'
+    $('#ndb_property').val('ndb.StringProperty').change()
+    $('#wtf_property').val('wtforms.TextAreaField').change()
+    $('#forms_property').val('forms.textarea_field').change()
+    $('#field_property').val('fields.String').change()
+    $('#strip_filter').prop 'checked', true
+
+  else if value == 'text'
+    $('#ndb_property').val('ndb.TextProperty').change()
+    $('#wtf_property').val('wtforms.TextAreaField').change()
+    $('#forms_property').val('forms.textarea_field').change()
+    $('#field_property').val('fields.String').change()
+    $('#strip_filter').prop 'checked', true
+
+  else if value == 'integer'
+    $('#ndb_property').val('ndb.IntegerProperty').change()
+    $('#wtf_property').val('wtforms.IntegerField').change()
+    $('#forms_property').val('forms.number_field').change()
+    $('#field_property').val('fields.Integer').change()
+
+  else if value == 'float'
+    $('#ndb_property').val('ndb.FloatProperty').change()
+    $('#wtf_property').val('wtforms.FloatField').change()
+    $('#forms_property').val('forms.number_field').change()
+    $('#field_property').val('fields.Float').change()
+
+  else if value == 'date'
+    $('#ndb_property').val('ndb.DateProperty').change()
+    $('#wtf_property').val('wtforms.DateField').change()
+    $('#forms_property').val('forms.date_field').change()
+    $('#field_property').val('fields.DateTime').change()
+
+  else if value == 'datetime'
+    $('#ndb_property').val('ndb.DateTimeProperty').change()
+    $('#wtf_property').val('wtforms.DateTimeField').change()
+    $('#forms_property').val('forms.date_field').change()
+    $('#field_property').val('fields.DateTime').change()
+
+  else if value == 'key'
+    $('#ndb_property').val('ndb.KeyProperty').change()
+    $('#wtf_property').val('').change()
+    $('#forms_property').val('').change()
+    $('#field_property').val('fields.Key').change()
+
+  else if value == 'json'
+    $('#ndb_property').val('ndb.JsonProperty').change()
+    $('#wtf_property').val('').change()
+    $('#forms_property').val('').change()
+    $('#field_property').val('fields.Raw').change()
+
+  else
+    $('#ndb_property').val('').change()
+    $('#wtf_property').val('').change()
+    $('#forms_property').val('').change()
+    $('#field_property').val('').change()

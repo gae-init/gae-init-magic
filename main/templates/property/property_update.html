@@ -1,0 +1,95 @@
+# extends 'base.html'
+# import 'macro/forms.html' as forms
+# import 'macro/utils.html' as utils
+
+# block content
+  <div class="page-header">
+    <h1>
+      <small class="pull-right">Property</small>
+      {{utils.back_link('Back', 'model_view', project_id=project_db.key.id(), model_id=model_db.key.id())}}
+      <small>{{project_db.variable_name}}.{{model_db.name}}.</small>{{title}}
+    </h1>
+  </div>
+  <form method="POST" action="." novalidate>
+    <div class="row">
+      <div class="col-md-3 col-sm-6">
+        {{form.csrf_token}}
+        {{forms.text_field(form.name, autofocus=True)}}
+        {{forms.checkbox_field(form.use_as_title)}}
+      </div>
+      <div class="col-md-3 col-sm-6">
+        {{forms.text_field(form.verbose_name, placeholder=property_db.default_verbose_name)}}
+      </div>
+      <div class="col-md-3 col-sm-6">
+        {{forms.checkbox_field(form.show_on_view)}}
+        {{forms.checkbox_field(form.show_on_update)}}
+        {{forms.checkbox_field(form.show_on_list)}}
+        {{forms.checkbox_field(form.show_on_admin_update)}}
+        {{forms.checkbox_field(form.show_on_admin_list)}}
+      </div>
+      <div class="col-md-3 col-sm-6">
+        {{forms.number_field(form.rank)}}
+      </div>
+    </div>
+    # if not property_db.key.id()
+      <div class="row">
+        <div class="col-md-3 col-sm-6">
+          {{forms.select_field(form.generic_property)}}
+        </div>
+      </div>
+    # endif
+    <hr>
+    <div class="row">
+      <div class="col-md-3 col-sm-6">
+        <legend>NDB</legend>
+        {{forms.select_field(form.ndb_property)}}
+        <fieldset data-for="#ndb_property">
+          {{forms.text_field(form.kind)}}
+          {{forms.text_field(form.default)}}
+          {{forms.checkbox_field(form.required)}}
+          {{forms.checkbox_field(form.repeated)}}
+          {{forms.checkbox_field(form.auto_now)}}
+          {{forms.checkbox_field(form.auto_now_add)}}
+          {{forms.checkbox_field(form.indexed)}}
+        </fieldset>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <legend>WTF-Forms</legend>
+        {{forms.select_field(form.wtf_property)}}
+        <fieldset data-for="#wtf_property">
+          {{forms.text_field(form.description)}}
+          {{forms.text_field(form.choices)}}
+          {{forms.checkbox_field(form.strip_filter)}}
+          {{forms.checkbox_field(form.email_filter)}}
+          {{forms.checkbox_field(form.sort_filter)}}
+        </fieldset>
+      </div>
+      <hr class="col-xs-12 visible-sm">
+      <div class="col-md-3 col-sm-6">
+        <legend>HTML5</legend>
+        {{forms.select_field(form.forms_property)}}
+        <fieldset data-for="#forms_property">
+          {{forms.text_field(form.placeholder)}}
+          {{forms.checkbox_field(form.autofocus)}}
+          {{forms.checkbox_field(form.readonly)}}
+        </fieldset>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <legend>API</legend>
+        {{forms.select_field(form.field_property)}}
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-offset-3 col-md-6">
+        <button type="submit" class="btn btn-primary btn-lg btn-block btn-loading" {{forms.data_loading_text()}}>
+          # if property_db.key.id()
+            Update
+          # else
+            Create
+          # endif
+        </button>
+      </div>
+    </div>
+  </form>
+# endblock

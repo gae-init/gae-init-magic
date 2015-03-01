@@ -1,0 +1,30 @@
+&#35; extends 'base.html'
+&#35; import 'macro/forms.html' as forms
+&#35; import 'macro/utils.html' as utils
+
+
+&#35; block content
+  &lt;div class="page-header"&gt;
+    &lt;h1&gt;
+      &lt;a class="pull-right btn btn-primary" href="&#123;&#123;url_for('{{model_db.variable_name}}_update', {{model_db.variable_name}}_id={{model_db.variable_name}}_db.key.id())&#125;&#125;"&gt;
+        &lt;fa class="fa fa-fw fa-pencil"&gt;&lt;/fa&gt; Edit
+      &lt;/a&gt;
+      &#123;&#123;utils.back_link('Back', '{{model_db.variable_name}}_list')&#125;&#125;
+      &#123;&#123;title&#125;&#125;
+    &lt;/h1&gt;
+  &lt;/div&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-md-6"&gt;
+      &lt;table class="table table-bordered table-striped"&gt;
+        &lt;tbody&gt;
+          # for property_db in property_dbs if property_db.show_on_view
+          &lt;tr&gt;
+            &lt;th class="text-nowrap col-xs-1"&gt;{{property_db.verbose_name_}}&lt;/th&gt;
+            &lt;td class="col-xs-11"&gt;&#123;&#123;{{model_db.variable_name}}_db.{{property_db.name}} or ''&#125;&#125;&lt;/td&gt;
+          &lt;/tr&gt;
+          # endfor
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&#35; endblock

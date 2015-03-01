@@ -34,7 +34,8 @@ def profile():
 class ProfileUpdateForm(wtf.Form):
   name = wtforms.StringField(
       'Name',
-      [wtforms.validators.required()], filters=[util.strip_filter],
+      [wtforms.validators.required()],
+      filters=[util.strip_filter],
     )
   email = wtforms.StringField(
       'Email',

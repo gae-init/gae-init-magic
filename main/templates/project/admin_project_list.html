@@ -1,0 +1,42 @@
+# extends 'admin/admin_base.html'
+# import 'macro/utils.html' as utils
+
+# block head
+  {{utils.prefetch_link(next_url)}}
+# endblock
+
+# block admin_content
+  <div class="table-responsive {{'hide' if not project_dbs|count}}">
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr class="text-nowrap">
+          <th class="col-xs-3">{{utils.order_by_link('name', 'Project')}}</th>
+          <th class="col-xs-5">{{utils.order_by_link('description', 'Description')}}</th>
+          <th class="col-xs-1 text-center">{{utils.order_by_link('public', 'Public')}}</th>
+          <th class="col-xs-1 text-center">{{utils.order_by_link('model_count', 'Models')}}</th>
+          <th class="col-xs-2">{{utils.order_by_link('user_key', 'User')}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        # for project_db in project_dbs
+          <tr class="row-link" id="{{project_db.key.urlsafe()}}" data-href="{{url_for('model_list', project_id=project_db.key.id())}}">
+            <td>{{project_db.name}}</td>
+            <td>{{project_db.description}}</td>
+            <td class="text-center">
+              # if project_db.public
+                <span class="fa fa-check"></span>
+              # endif
+            </td>
+            <td class="text-center">{{project_db.model_count}}</td>
+            <td class="ellipsis">
+              # set user_db = project_db.user_key.get()
+              <img src="{{user_db.avatar_url_size(36)}}" width="18" height="18">
+              {{user_db.name}}
+            </td>
+          </tr>
+        # endfor
+      </tbody>
+    </table>
+  </div>
+  {{utils.next_link(next_url)}}
+# endblock

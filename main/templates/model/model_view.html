@@ -1,0 +1,86 @@
+# extends 'base.html'
+# import 'macro/forms.html' as forms
+# import 'macro/utils.html' as utils
+
+# block content
+  <div class="page-header">
+    <a class="pull-right btn btn-primary" href="{{url_for('property_update', project_id=project_db.key.id(), model_id=model_db.key.id())}}">
+      <fa class="fa fa-plus fa-fw"></fa>
+      Add Property
+    </a>
+    <h1>
+      {{utils.back_link('Back to model list', 'model_list', project_id=project_db.key.id())}}
+      <small>{{project_db.variable_name}}.</small>{{title}}
+      <small><a href="{{url_for('model_update', project_id=project_db.key.id(), model_id=model_db.key.id())}}">edit</a></small>
+    </h1>
+
+    <div>
+      # if model_db.admin_only
+        <span class="label label-success"><span class="fa fa-lock"></span> Admin Only</span>
+      # endif
+    </div>
+  </div>
+
+  # include 'property/property_list.html'
+
+
+# if property_dbs
+  <hr>
+  {{render_source_file('main/control/__init__.py', 'generated/control_init.py')}}
+  {{render_source_file('main/model/__init__.py', 'generated/model_init.py')}}
+  {{render_source_file('main/templates/bit/header.html', 'generated/bit/header.html', lang='html')}}
+  {{render_source_file('main/templates/admin/admin.html', 'generated/admin/admin.html', lang='html')}}
+
+  {{render_source_file('main/model/%s.py' % model_db.variable_name, 'generated/model.py')}}
+  {{render_source_file('main/control/%s.py' % model_db.variable_name, 'generated/control.py')}}
+
+  {{render_source_file('main/templates/%(name)s/%(name)s_update.html' % {'name': model_db.variable_name}, 'generated/update.html', lang='html')}}
+  {{render_source_file('main/templates/%(name)s/%(name)s_view.html' % {'name': model_db.variable_name}, 'generated/view.html', lang='html')}}
+  {{render_source_file('main/templates/%(name)s/%(name)s_list.html' % {'name': model_db.variable_name}, 'generated/list.html', lang='html')}}
+
+  {{render_source_file('main/templates/%(name)s/admin_%(name)s_update.html' % {'name': model_db.variable_name}, 'generated/admin_update.html', lang='html')}}
+  {{render_source_file('main/templates/%(name)s/admin_%(name)s_list.html' % {'name': model_db.variable_name}, 'generated/admin_list.html', lang='html')}}
+
+  {{render_source_file('main/api/v1/%s_api.py' % model_db.variable_name)}}
+# endif
+# endblock
+
+# macro render_source_file(name, path, lang='python')
+<h2 class="{{'text-muted' if not path}}">{{name}}</h2>
+<label class="small {{'hide' if not path}}">
+  <input class="auto-select" type="checkbox" data-for="{{slugify(name)}}" checked>
+  Auto Select
+</label>
+
+<label class="small pull-right hide {{'hide' if not path}}">
+  <input class="expand" type="checkbox" data-for="{{slugify(name)}}">
+  Expand
+</label>
+
+
+# if path
+<pre><code class="{{lang}}" id="{{slugify(name)}}">
+#- include path
+</code></pre>
+# endif
+# endmacro
+
+# macro render_source_file_(name, path, lang='python')
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent=".panel-group" href="#{{slugify(name)}}">{{name}}</a>
+        <span class="fa fa-check pull-right {{'hide' if not path}}"></span>
+      </h4>
+    </div>
+    <div id="{{slugify(name)}}" class="panel-collapse collapse">
+      <div class="panel-body">
+        # if path
+<pre><code class="{{lang}}">
+#- include path
+</code></pre>
+        # endif
+      </div>
+    </div>
+  </div>
+# endmacro
