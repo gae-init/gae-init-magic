@@ -5,10 +5,15 @@
 
 &#35; block content
   &lt;div class="page-header"&gt;
-    &lt;h1&gt;
-      &lt;a class="pull-right btn btn-primary" href="&#123;&#123;url_for('{{model_db.variable_name}}_update', {{model_db.variable_name}}_id={{model_db.variable_name}}_db.key.id())&#125;&#125;"&gt;
+    &lt;div class="pull-right"&gt;
+      &lt;a class="btn btn-default" href="&#123;&#123;url_for('{{model_db.variable_name}}_update')&#125;&#125;" title="Add {{model_db.name}}"&gt;
+        &lt;fa class="fa fa-plus fa-fw"&gt;&lt;/fa&gt;
+      &lt;/a&gt;
+      &lt;a class="btn btn-primary" href="&#123;&#123;url_for('{{model_db.variable_name}}_update', {{model_db.variable_name}}_id={{model_db.variable_name}}_db.key.id())&#125;&#125;"&gt;
         &lt;fa class="fa fa-fw fa-pencil"&gt;&lt;/fa&gt; Edit
       &lt;/a&gt;
+    &lt;/div&gt;
+    &lt;h1&gt;
       &#123;&#123;utils.back_link('Back', '{{model_db.variable_name}}_list')&#125;&#125;
       &#123;&#123;title&#125;&#125;
     &lt;/h1&gt;
