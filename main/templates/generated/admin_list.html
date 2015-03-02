@@ -37,7 +37,12 @@
         &#35; for {{model_db.variable_name}}_db in {{model_db.variable_name}}_dbs
           &lt;tr class="row-link" id="&#123;&#123;{{model_db.variable_name}}_db.key.urlsafe()&#125;&#125;" data-href="&#123;&#123;url_for('admin_{{model_db.variable_name}}_update', {{model_db.variable_name}}_id={{model_db.variable_name}}_db.key.id())&#125;&#125;"&gt;
             # for property_db in property_dbs if property_db.show_on_admin_list
+            # set property_title = property_db.get_title_name()
+            # if property_title
+            &lt;td&gt;&#123;&#123;{{model_db.variable_name}}_db.{{property_db.name}}.get().{{property_title}} if {{model_db.variable_name}}_db.{{property_db.name}} else ''&#125;&#125;&lt;/td&gt;
+            # else
             &lt;td&gt;&#123;&#123;{{model_db.variable_name}}_db.{{property_db.name}} or ''&#125;&#125;&lt;/td&gt;
+            # endif
             # endfor
             # if model_db.auth_user_key
             &lt;td&gt;

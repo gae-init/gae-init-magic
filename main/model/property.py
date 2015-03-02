@@ -112,6 +112,16 @@ class Property(model.Base):
   def verbose_name_(self):
     return self.verbose_name or self.default_verbose_name
 
+  def get_title_name(self):
+    if self.ndb_property != 'ndb.KeyProperty' or self.kind == 'model.User':
+      return None
+    model_qry = model.Model.query(ancestor=self.key.parent().parent())
+    model_qry = model_qry.filter(model.Model.name == self.kind.split('.')[1])
+    model_db = model_qry.get()
+    if model_db and model_db.title_property_key:
+      return model_db.title_property_key.get().name
+    return None
+
   FIELDS = {
       'auto_now': fields.Boolean,
       'auto_now_add': fields.Boolean,
