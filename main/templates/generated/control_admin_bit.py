@@ -64,7 +64,18 @@ def admin_{{model_db.variable_name}}_update({{model_db.variable_name}}_id=0):
     flask.abort(404)
 
   form = {{model_db.name}}UpdateAdminForm(obj={{model_db.variable_name}}_db)
+{{model_db.get_property_key_choices(True)}}
+# for property_db in property_dbs if property_db.wtf_property and (property_db.show_on_update or property_db.show_on_admin_update) and property_db.kind and property_db.kind != 'model.User'
+  # if loop.first
+  if flask.request.method == 'GET' and not form.errors:
+  # endif
+    form.{{property_db.name}}.data = {{model_db.variable_name}}_db.{{property_db.name}}.urlsafe() if {{model_db.variable_name}}_db.{{property_db.name}} else None
+# endfor
+{% raw %}{% endraw %}
   if form.validate_on_submit():
+    # for property_db in property_dbs if property_db.wtf_property and (property_db.show_on_update or property_db.show_on_admin_update) and property_db.kind and property_db.kind != 'model.User'
+    form.{{property_db.name}}.data = ndb.Key(urlsafe=form.{{property_db.name}}.data) if form.{{property_db.name}}.data else None
+    # endfor
     form.populate_obj({{model_db.variable_name}}_db)
     {{model_db.variable_name}}_db.put()
     return flask.redirect(flask.url_for('admin_{{model_db.variable_name}}_list', {{model_db.variable_name}}_id={{model_db.variable_name}}_db.key.id()))

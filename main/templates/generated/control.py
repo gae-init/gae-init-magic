@@ -1,8 +1,7 @@
-# import 'macro/utils.html' as utils
-
 &#35; coding: utf-8
 
 from flask.ext import wtf
+from google.appengine.ext import ndb
 import flask
 import wtforms
 
@@ -11,7 +10,8 @@ import model
 import util
 
 from main import app
-{{utils.empty_line()}}
+
+{% raw %}{% endraw %}
 # if not model_db.admin_only
 # include 'generated/control_user_bit.py'
 {% raw %}{% endraw %}

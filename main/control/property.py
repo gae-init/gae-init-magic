@@ -84,9 +84,10 @@ class PropertyUpdateForm(wtf.Form):
       model.Property.indexed._verbose_name,
       [wtforms.validators.optional()],
     )
-  kind = wtforms.StringField(
+  kind = wtforms.SelectField(
       model.Property.kind._verbose_name,
       [wtforms.validators.optional()],
+      choices=[],
     )
   auto_now = wtforms.BooleanField(
       model.Property.auto_now._verbose_name,
@@ -170,6 +171,11 @@ def property_update(project_id, model_id, property_id=0):
     flask.abort(404)
 
   form = PropertyUpdateForm(obj=property_db)
+
+  model_dbs, model_cursor = project_db.get_model_dbs()
+  form.kind.choices = [('', '-'), ('model.User', 'model.User')]
+  form.kind.choices += [('model.%s' % m.name, 'model.%s' % m.name) for m in model_dbs if m.key != model_db.key]
+
   if form.validate_on_submit():
     form.populate_obj(property_db)
     property_db.put()
