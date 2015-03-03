@@ -2,7 +2,9 @@ window.init_property_update = ->
   $('select').change on_change
 
   $('#ndb_property').change on_ndb_change
+  $('#kind').change on_kind_change
   $('#wtf_property').change on_wtf_change
+  $('#forms_property').change on_forms_change
   $('#generic_property').change on_generic_change
 
 
@@ -16,11 +18,20 @@ on_change = (event) ->
   $("fieldset[data-for='##{id}']").toggle Boolean val
 
 
-
 on_ndb_change = ->
   value = $('#ndb_property').val()
   show_kind = Boolean value.indexOf('ndb.Key') == 0
   $('#kind').parent().toggle show_kind
+
+
+on_kind_change = ->
+  value = $('#kind').val()
+  if not value or value == 'model.User'
+    $('#wtf_property').val('').change()
+    $('#forms_property').val('').change()
+  else
+    $('#wtf_property').val('wtforms.SelectField').change()
+    $('#forms_property').val('forms.select_field').change()
 
 
 on_wtf_change = ->
@@ -28,6 +39,24 @@ on_wtf_change = ->
   show_choices = Boolean value.indexOf('wtforms.Select') == 0 or value.indexOf('wtforms.Radio') == 0
   $('#choices').parent().toggle show_choices
 
+  $('#strip_filter, #email_filter').parent().toggle value in [
+      'wtforms.StringField'
+      'wtforms.TextAreaField'
+    ]
+
+
+on_forms_change = ->
+  value = $('#forms_property').val()
+  $('#placeholder').parent().toggle value in [
+      'forms.date_field'
+      'forms.email_field'
+      'forms.input_field'
+      'forms.number_field'
+      'forms.password_field'
+      'forms.password_visible_field'
+      'forms.text_field'
+      'forms.textarea_field'
+    ]
 
 on_generic_change = ->
   value = $('#generic_property').val()

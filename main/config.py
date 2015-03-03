@@ -142,7 +142,6 @@ WTF_PROPERIES = [
     ('wtforms.DecimalField', 'DecimalField'),
     ('wtforms.FieldList', 'FieldList'),
     ('wtforms.FloatField', 'FloatField'),
-    ('wtforms.FormField', 'FormField'),
     ('wtforms.IntegerField', 'IntegerField'),
     ('wtforms.RadioField', 'RadioField'),
     ('wtforms.SelectField', 'SelectField'),
