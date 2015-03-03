@@ -25,7 +25,7 @@ class PropertyUpdateForm(wtf.Form):
       filters=[util.strip_filter],
     )
   use_as_title = wtforms.BooleanField(
-      u'Serves as Title property',
+      u'Serves as title property',
       [wtforms.validators.optional()],
     )
   verbose_name = wtforms.StringField(

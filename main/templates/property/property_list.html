@@ -29,11 +29,11 @@
           </td>
           <td>
             <span class="h4">{{property_db.name}}</span>
-            # if property_db.key == model_db.auth_user_key
-              <fa class="fa fa-user text-muted" title="User Authentication"></fa>
-            # endif
             # if property_db.required
               <fa class="fa fa-asterisk text-muted" title="Required"></fa>
+            # endif
+            # if property_db.key == model_db.auth_user_key
+              <fa class="fa fa-user text-muted" title="User Authentication"></fa>
             # endif
             # if property_db.key == model_db.title_property_key
               <fa class="fa fa-tag text-muted" title="Title Property"></fa>

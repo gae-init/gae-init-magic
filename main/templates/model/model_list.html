@@ -23,7 +23,8 @@
         <th class="col-xs-1 text-center">{{utils.order_by_link('rank', 'Rank')}}</th>
         <th class="col-xs-4 h4">{{utils.order_by_link('name', 'Model')}}</th>
         <th class="col-xs-5 hidden-xs">{{utils.order_by_link('verbose_name_', 'Verbose Name')}}</th>
-        <th class="col-xs-1 hidden-xs">{{utils.order_by_link('auth_user_key', 'User Authentication with')}}</th>
+        <th class="col-xs-1 hidden-xs">{{utils.order_by_link('title_property_key', 'Title Property')}}</th>
+        <th class="col-xs-1 hidden-xs">{{utils.order_by_link('auth_user_key', 'User Authentication')}}</th>
         <th class="col-xs-1 hidden-xs">{{utils.order_by_link('admin_only', 'Only for Admins')}}</th>
         <th class="col-xs-1 text-center">{{utils.order_by_link('property_count', 'Properties')}}</th>
       </tr>
@@ -52,7 +53,24 @@
               <span class="text-muted">{{model_db.default_verbose_name}}</span>
             # endif
           </td>
-          <td class="hidden-xs">{{model_db.auth_user_key.get().name if model_db.auth_user_key else ''}}</td>
+          # if model_db.title_property_key
+            <td class="hidden-xs not-link">
+              <a href="{{url_for('property_update', project_id=project_db.key.id(), model_id=model_db.key.id(), property_id=model_db.title_property_key.id())}}">
+                {{model_db.title_property_key.get().name}}
+              </a>
+            </td>
+          # else
+            <td class="hidden-xs"></td>
+          # endif
+          # if model_db.auth_user_key
+            <td class="hidden-xs not-link">
+              <a href="{{url_for('property_update', project_id=project_db.key.id(), model_id=model_db.key.id(), property_id=model_db.auth_user_key.id())}}">
+                {{model_db.auth_user_key.get().name}}
+              </a>
+            </td>
+          # else
+            <td class="hidden-xs"></td>
+          # endif
           <td class="text-center hidden-xs">
             # if model_db.admin_only
               <span class="fa fa-check"></span>
