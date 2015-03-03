@@ -38,16 +38,21 @@ on_wtf_change = ->
   value = $('#wtf_property').val()
   show_choices = Boolean value.indexOf('wtforms.Select') == 0 or value.indexOf('wtforms.Radio') == 0
   $('#choices').parent().toggle show_choices
-
-  $('#strip_filter, #email_filter').parent().toggle value in [
+  show_strip_filters = value in [
       'wtforms.StringField'
       'wtforms.TextAreaField'
     ]
+  $('#strip_filter, #email_filter').parent().toggle show_strip_filters
+  if show_strip_filters
+    $('#strip_filter').prop 'checked', true
+    $('#email_filter').prop 'checked', false
+  else
+    $('#strip_filter, #email_filter').prop 'checked', false
 
 
 on_forms_change = ->
   value = $('#forms_property').val()
-  $('#placeholder').parent().toggle value in [
+  show_placeholder = value in [
       'forms.date_field'
       'forms.email_field'
       'forms.input_field'
@@ -57,6 +62,10 @@ on_forms_change = ->
       'forms.text_field'
       'forms.textarea_field'
     ]
+  $('#placeholder').parent().toggle show_placeholder
+
+  if not show_placeholder
+    $('#placeholder').val ''
 
 on_generic_change = ->
   value = $('#generic_property').val()
