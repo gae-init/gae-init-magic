@@ -7,7 +7,6 @@ window.init_property_update = ->
   $('#forms_property').change on_forms_change
   $('#generic_property').change on_generic_change
 
-
   $('select').each (i, val) ->
     $($('select')[i]).change()
 
