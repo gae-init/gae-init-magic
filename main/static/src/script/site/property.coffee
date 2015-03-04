@@ -10,6 +10,7 @@ window.init_property_update = ->
   $('select').each (i, val) ->
     $($('select')[i]).change()
 
+
 on_change = (event) ->
   $this = $(event.currentTarget)
   id = $this.attr 'id'
@@ -22,6 +23,10 @@ on_ndb_change = ->
   show_kind = Boolean value.indexOf('ndb.Key') == 0
   $('#kind').parent().toggle show_kind
 
+  if $('#ndb_property').is(':focus')
+    if not show_kind
+      $('#kind').val ''
+
 
 on_kind_change = ->
   if not $('#kind').is(':focus')
@@ -33,7 +38,6 @@ on_kind_change = ->
   else
     $('#wtf_property').val('').change()
     $('#forms_property').val('').change()
-
 
 
 on_wtf_change = ->
@@ -68,6 +72,7 @@ on_forms_change = ->
 
   if not show_placeholder
     $('#placeholder').val ''
+
 
 on_generic_change = ->
   value = $('#generic_property').val()

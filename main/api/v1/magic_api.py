@@ -9,8 +9,9 @@ from main import app
 
 
 @app.route('/api/v1/project/<int:project_id>/magic/main/<what>/<variable_name>.py')
+@app.route('/api/v1/project/<int:project_id>/magic/main/<what>/v1/<variable_name>.py')
 def generate_python_modules(project_id, what, variable_name):
-  if what not in ['control', 'model']:
+  if what not in ['control', 'model', 'api']:
     flask.abort(404)
   project_db = model.Project.get_by_id(project_id)
   if not project_db:
