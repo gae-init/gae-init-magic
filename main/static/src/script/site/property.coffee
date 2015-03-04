@@ -24,13 +24,16 @@ on_ndb_change = ->
 
 
 on_kind_change = ->
+  if not $('#kind').is(':focus')
+    return
   value = $('#kind').val()
-  if not value or value == 'model.User'
-    $('#wtf_property').val('').change()
-    $('#forms_property').val('').change()
-  else
+  if value and value isnt 'model.User'
     $('#wtf_property').val('wtforms.SelectField').change()
     $('#forms_property').val('forms.select_field').change()
+  else
+    $('#wtf_property').val('').change()
+    $('#forms_property').val('').change()
+
 
 
 on_wtf_change = ->
