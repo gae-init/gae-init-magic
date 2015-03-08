@@ -119,3 +119,17 @@
     {{content}}</{{name}}>
   #- endif
 # endmacro
+
+
+# macro ndb_align_class(ndb_property, attr=False)
+  # set class = ''
+  # if ndb_property in ['ndb.BooleanProperty']
+    # set class = 'text-center'
+  # elif ndb_property in ['ndb.IntegerProperty', 'ndb.FloatProperty']
+    # set class = 'text-right'
+  # endif
+
+  # if class
+ {{('class="%s"' % class) if attr else class}}
+  #- endif
+# endmacro

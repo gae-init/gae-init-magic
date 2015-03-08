@@ -1,3 +1,4 @@
+# import 'macro/utils.html' as utils
 &#35; extends 'base.html'
 &#35; import 'macro/utils.html' as utils
 
@@ -16,26 +17,34 @@
     &lt;table class="table table-striped table-bordered table-hover"&gt;
       &lt;thead&gt;
         &lt;tr class="text-nowrap"&gt;
-          # for property_db in property_dbs if property_db.show_on_list
-            # if property_db.indexed
-          &lt;th class="col-xs-1"&gt;&#123;&#123;utils.order_by_link('{{property_db.name}}', '{{property_db.verbose_name_}}')&#125;&#125;&lt;/th&gt;
-            # else
-          &lt;th class="col-xs-1"&gt;{{property_db.verbose_name_}}&lt;/th&gt;
-            # endif
-          # endfor
+      # for property_db in property_dbs if property_db.show_on_list
+        # if property_db.indexed
+          &lt;th class="col-xs-1{{utils.ndb_align_class(property_db.ndb_property)}}"&gt;&#123;&#123;utils.order_by_link('{{property_db.name}}', '{{property_db.verbose_name_}}')&#125;&#125;&lt;/th&gt;
+        # else
+          &lt;th class="col-xs-1{{utils.ndb_align_class(property_db.ndb_property)}}"&gt;{{property_db.verbose_name_}}&lt;/th&gt;
+        # endif
+      # endfor
         &lt;/tr&gt;
       &lt;/thead&gt;
       &lt;tbody&gt;
         &#35; for {{model_db.variable_name}}_db in {{model_db.variable_name}}_dbs
           &lt;tr class="row-link" id="&#123;&#123;{{model_db.variable_name}}_db.key.urlsafe()&#125;&#125;" data-href="&#123;&#123;url_for('{{model_db.variable_name}}_view', {{model_db.variable_name}}_id={{model_db.variable_name}}_db.key.id())&#125;&#125;"&gt;
-            # for property_db in property_dbs if property_db.show_on_list
-            # set property_title = property_db.get_title_name()
-            # if property_title
+        # for property_db in property_dbs if property_db.show_on_list
+          # set property_title = property_db.get_title_name()
+          # if property_title
             &lt;td&gt;&#123;&#123;{{model_db.variable_name}}_db.{{property_db.name}}.get().{{property_title}} if {{model_db.variable_name}}_db.{{property_db.name}} else ''&#125;&#125;&lt;/td&gt;
-            # else
-            &lt;td&gt;&#123;&#123;{{model_db.variable_name}}_db.{{property_db.name}} or ''&#125;&#125;&lt;/td&gt;
-            # endif
-            # endfor
+          # elif property_db.ndb_property == 'ndb.BooleanProperty'
+            &lt;td{{utils.ndb_align_class(property_db.ndb_property, True)}}&gt;
+              &#35; if {{model_db.variable_name}}_db.{{property_db.name}}
+                &lt;span class="fa fa-fw fa-check"&gt;&lt;/span&gt;
+              &#35; else
+                &lt;span class="fa fa-fw fa-minus"&gt;&lt;/span&gt;
+              &#35; endif
+            &lt;/td&gt;
+          # else
+            &lt;td{{utils.ndb_align_class(property_db.ndb_property, True)}}&gt;&#123;&#123;{{model_db.variable_name}}_db.{{property_db.name}}&#125;&#125;&lt;/td&gt;
+          # endif
+        # endfor
           &lt;/tr&gt;
         &#35; endfor
       &lt;/tbody&gt;
