@@ -82,6 +82,27 @@ def project_list():
 
 
 ###############################################################################
+# Public View
+###############################################################################
+@app.route('/project/<int:project_id>/')
+def project_view(project_id):
+  project_db = model.Project.get_by_id(project_id)
+
+  if not project_db or not project_db.public:
+    flask.abort(404)
+
+  model_dbs, model_cursor = project_db.get_model_dbs()
+  return flask.render_template(
+      'project/project_view.html',
+      html_class='project-view',
+      title=project_db.name,
+      project_db=project_db,
+      model_dbs=model_dbs,
+      next_url=util.generate_next_url(model_cursor),
+    )
+
+
+###############################################################################
 # Admin List
 ###############################################################################
 @app.route('/admin/project/')

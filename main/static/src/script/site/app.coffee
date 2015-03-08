@@ -1,5 +1,6 @@
 $ ->
   init_common()
+  hljs.initHighlightingOnLoad()
 
 $ -> $('html.welcome').each ->
   LOG('init welcome')
@@ -26,9 +27,6 @@ $ -> $('html.model-view').each ->
 
 $ -> $('html.model-update').each ->
   init_model_update()
-
-$ -> $('html.model-list').each ->
-  hljs.initHighlightingOnLoad()
 
 $ -> $('html.property-update').each ->
   init_property_update()

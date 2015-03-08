@@ -20,9 +20,9 @@
   <div class="row">
     # for project_db in project_dbs
       # set user_db = project_db.user_key.get()
-      <div class="col-sm-4">
+      <div class="col-xs-6 col-sm-4 col-md-3">
         <div class="project-info">
-          <a href="#" class="title">
+          <a href="{{url_for('project_view', project_id=project_db.key.id())}}" class="title">
             <h4 class="list-group-item-heading">
               {{project_db.name}}
             </h4>

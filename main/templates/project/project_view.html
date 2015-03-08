@@ -1,0 +1,94 @@
+# extends 'base.html'
+# import 'macro/utils.html' as utils
+
+# block head
+  {{utils.prefetch_link(next_url)}}
+# endblock
+
+# block content
+  <div class="page-header">
+    <h1>
+      <small class="pull-right">
+        # set user_db = project_db.user_key.get()
+        <img class="avatar" src="{{user_db.avatar_url_size(64)}}" width="24" height="24">
+        {{user_db.name}}
+      </small>
+      {{title}}
+    </h1>
+  </div>
+
+<pre class="lead text-center text-info well">
+./magic.py -p {{project_db.key.id()}}{% if not project_db.public%}/{{project_db.access}}{% endif %}
+</pre>
+  <hr>
+  # for model_db in model_dbs
+    <table class="table table-bordered">
+      <thead>
+        <tr class="info">
+          <th class="col-xs-4 h3">
+            <span class="fa fa-fw fa-{{model_db.icon}}"></span> {{model_db.name}}
+          </th>
+          <th class="col-xs-2 small text-info">NDB</th>
+          <th class="col-xs-2 small text-info">WTF-Forms</th>
+          <th class="col-xs-2 small text-info">HTML5</th>
+          <th class="col-xs-2 small text-info">API</th>
+        </tr>
+      </thead>
+      # for property_db in model_db.get_property_dbs()[0]
+        <tr id="{{property_db.key.urlsafe()}}">
+          <td>
+            <span class="h4">{{property_db.name}}</span>
+            # if property_db.required
+              <fa class="fa fa-asterisk text-muted" title="Required"></fa>
+            # endif
+            # if property_db.key == model_db.auth_user_key
+              <fa class="fa fa-user text-muted" title="User Authentication"></fa>
+            # endif
+            # if property_db.key == model_db.title_property_key
+              <fa class="fa fa-tag text-muted" title="Title Property"></fa>
+            # endif
+            <br>
+            # if property_db.verbose_name
+              {{property_db.verbose_name}}
+            # else
+              <span class="text-muted">{{property_db.default_verbose_name}}</span>
+            # endif
+          </td>
+          <td class="text-nowrap">{{property_db.ndb_property}}</td>
+          <td class="text-nowrap">{{property_db.wtf_property}}</td>
+          <td class="text-nowrap">{{property_db.forms_property}}</td>
+          <td class="text-nowrap">{{property_db.field_property}}</td>
+        </tr>
+      # endfor
+    </table>
+  # endfor
+
+  {{utils.next_link(next_url)}}
+
+<hr>
+
+# if model_dbs
+  <h3>
+    Init via command line
+  </h3>
+
+<pre><code class="bash"># If you starting completely from scratch
+git clone https://github.com/gae-init/gae-init.git {{project_db.variable_name}}
+
+&#35; Go to the root of your project
+cd {{project_db.variable_name}}
+
+&#35; Execute at your own risk to update your project
+./magic.py -p {{project_db.key.id()}}{% if not project_db.public%}/{{project_db.access}}{% endif %}
+
+&#35; Install all depndecies if you are starting from scratch
+./run.py -C
+
+&#35; Start the project locally
+gulp
+
+&#35; Visit http://localhost:8080 to verify!
+</code></pre>
+# endif
+
+# endblock
