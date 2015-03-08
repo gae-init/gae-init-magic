@@ -15,7 +15,7 @@ def admin_{{model_db.variable_name}}_list():
       title='{{model_db.verbose_name_}} List',
       {{model_db.variable_name}}_dbs={{model_db.variable_name}}_dbs,
       next_url=util.generate_next_url({{model_db.variable_name}}_cursor),
-      api_url=flask.url_for('admin.api.{{model_db.variable_name}}s'),
+      api_url=flask.url_for('admin.api.{{model_db.variable_plural_name}}'),
     )
 
 {% raw %}

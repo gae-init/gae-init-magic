@@ -17,8 +17,8 @@ from main import api
 # Admin
 ###############################################################################
 {%- endraw %}
-@api.resource('/api/admin/v1/{{model_db.variable_name}}s/', endpoint='admin.api.{{model_db.variable_name}}s')
-class Admin{{model_db.name}}sAPI(restful.Resource):
+@api.resource('/api/admin/v1/{{model_db.variable_plural_name}}/', endpoint='admin.api.{{model_db.variable_plural_name}}')
+class Admin{{model_db.plural_name}}API(restful.Resource):
   @auth.admin_required
   def get(self):
     {{model_db.variable_name}}_keys = util.param('{{model_db.variable_name}}_keys', list)
