@@ -14,7 +14,10 @@ from main import app
 ###############################################################################
 @app.route('/')
 def welcome():
-  project_dbs, project_cursor = model.Project.get_dbs(public=True)
+  project_dbs, project_cursor = model.Project.get_dbs(
+      public=True,
+      order=util.param('order') or '-created'
+    )
   return flask.render_template(
       'welcome.html',
       html_class='welcome',
