@@ -6,26 +6,41 @@
 # endblock
 
 # block content
+  # set user_db = project_db.user_key.get()
   <div class="page-header">
+    <img class="pull-right img-thumbnail" src="{{user_db.avatar_url_size(192)}}" width="96" height="96">
     <h1>
-      <small class="pull-right">
-        # set user_db = project_db.user_key.get()
-        <img class="avatar" src="{{user_db.avatar_url_size(64)}}" width="24" height="24">
+      {{title}}
+      <small>
+        by
         {{user_db.name}}
       </small>
-      {{title}}
     </h1>
+    <p class="lead">
+      {{project_db.description}}
+    </p>
+    <p class="lead">
+      <a class="text-success" href="{{project_db.url}}" target="{{project_db.key.id()}}">
+        {{project_db.url}}
+      </a>
+    </p>
   </div>
 
-<pre class="lead text-center text-info well">
+  <p class="lead">
+    Execute the following command from the root of your
+    <a href="https://github.com/gae-init/gae-init">gae-init</a> project to
+    generate the boilerplate code for <strong>{{project_db.name}}</strong>.
+  </p>
+
+<pre class="lead text-center alert alert-info">
 ./magic.py -p {{project_db.key.id()}}{% if not project_db.public%}/{{project_db.access}}{% endif %}
 </pre>
   <hr>
   # for model_db in model_dbs
-    <table class="table table-bordered">
+    <table class="table table-bordered table-condence">
       <thead>
-        <tr class="info">
-          <th class="col-xs-4 h3">
+        <tr class="active">
+          <th class="col-xs-3 h3">
             <span class="fa fa-fw fa-{{model_db.icon}}"></span> {{model_db.name}}
           </th>
           <th class="col-xs-2 small text-info">NDB</th>
@@ -36,7 +51,7 @@
       </thead>
       # for property_db in model_db.get_property_dbs()[0]
         <tr id="{{property_db.key.urlsafe()}}">
-          <td>
+          <td class="text-nowrap">
             <span class="h4">{{property_db.name}}</span>
             # if property_db.required
               <fa class="fa fa-asterisk text-muted" title="Required"></fa>
@@ -48,11 +63,6 @@
               <fa class="fa fa-tag text-muted" title="Title Property"></fa>
             # endif
             <br>
-            # if property_db.verbose_name
-              {{property_db.verbose_name}}
-            # else
-              <span class="text-muted">{{property_db.default_verbose_name}}</span>
-            # endif
           </td>
           <td class="text-nowrap">{{property_db.ndb_property}}</td>
           <td class="text-nowrap">{{property_db.wtf_property}}</td>
