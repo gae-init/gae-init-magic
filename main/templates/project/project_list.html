@@ -29,9 +29,11 @@
         <tr class="row-link" id="{{project_db.key.urlsafe()}}" data-href="{{url_for('model_list', project_id=project_db.key.id())}}">
           <td class="h4">{{project_db.name}}<br><span class="small text-muted not-link">{{project_db.key.id()}}</span></td>
           <td class="hidden-xs">{{project_db.description}}</td>
-          <td class="hidden-xs text-center">
+          <td class="hidden-xs text-center not-link">
             # if project_db.public
-              <span class="fa fa-check"></span>
+              <a href="{{url_for('project_view', project_id=project_db.key.id())}}">
+                <span class="fa fa-check"></span>
+              </a>
             # endif
           </td>
           <td class="text-center">{{project_db.model_count}}</td>
