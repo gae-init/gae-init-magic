@@ -30,11 +30,6 @@ class ModelUpdateForm(wtf.Form):
       [wtforms.validators.optional()],
       filters=[util.strip_filter],
     )
-  plural = wtforms.StringField(
-      model.Model.plural._verbose_name,
-      [wtforms.validators.optional()],
-      filters=[util.strip_filter],
-    )
   icon = wtforms.SelectField(
       model.Model.icon._verbose_name,
       [wtforms.validators.required()],

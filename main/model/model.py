@@ -12,7 +12,6 @@ import util
 class Model(model.Base):
   name = ndb.StringProperty(required=True)
   verbose_name = ndb.StringProperty(default='')
-  plural = ndb.StringProperty(default='', verbose_name='Plural Name')
   icon = ndb.StringProperty(default='list')
   property_count = ndb.IntegerProperty(default=0)
   rank = ndb.IntegerProperty(default=0)
@@ -39,14 +38,6 @@ class Model(model.Base):
   @ndb.ComputedProperty
   def verbose_name_(self):
     return self.verbose_name or self.default_verbose_name
-
-  @ndb.ComputedProperty
-  def plural_name(self):
-    return self.plural or '%ss' % self.name if self.name else ''
-
-  @ndb.ComputedProperty
-  def variable_plural_name(self):
-    return util.camel_to_snake(self.plural_name)
 
   def get_title_property(self):
     if self.title_property_key:

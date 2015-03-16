@@ -17,8 +17,8 @@ from main import api
 # Admin
 ###############################################################################
 {%- endraw %}
-@api.resource('/api/admin/v1/{{model_db.variable_plural_name}}/', endpoint='admin.api.{{model_db.variable_plural_name}}')
-class Admin{{model_db.plural_name}}API(restful.Resource):
+@api.resource('/api/v1/admin/{{model_db.variable_name}}/', endpoint='api.admin.{{model_db.variable_name}}.list')
+class Admin{{model_db.name}}ListAPI(restful.Resource):
   @auth.admin_required
   def get(self):
     {{model_db.variable_name}}_keys = util.param('{{model_db.variable_name}}_keys', list)
@@ -31,7 +31,7 @@ class Admin{{model_db.plural_name}}API(restful.Resource):
     return helpers.make_response({{model_db.variable_name}}_dbs, model.{{model_db.name}}.FIELDS, {{model_db.variable_name}}_cursor)
 
 
-@api.resource('/api/admin/v1/{{model_db.variable_name}}/&lt;string:{{model_db.variable_name}}_key&gt;/', endpoint='admin.api.{{model_db.variable_name}}')
+@api.resource('/api/v1/admin/{{model_db.variable_name}}/&lt;string:{{model_db.variable_name}}_key&gt;/', endpoint='api.admin.{{model_db.variable_name}}')
 class Admin{{model_db.name}}API(restful.Resource):
   @auth.admin_required
   def get(self, {{model_db.variable_name}}_key):
