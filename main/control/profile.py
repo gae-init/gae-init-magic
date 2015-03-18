@@ -6,6 +6,7 @@ import wtforms
 
 import auth
 import config
+import model
 import util
 import task
 
@@ -33,12 +34,11 @@ def profile():
 ###############################################################################
 class ProfileUpdateForm(wtf.Form):
   name = wtforms.StringField(
-      'Name',
-      [wtforms.validators.required()],
-      filters=[util.strip_filter],
+      model.User.name._verbose_name,
+      [wtforms.validators.required()], filters=[util.strip_filter],
     )
   email = wtforms.StringField(
-      'Email',
+      model.User.email._verbose_name,
       [wtforms.validators.optional(), wtforms.validators.email()],
       filters=[util.email_filter],
     )
