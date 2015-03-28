@@ -9,10 +9,10 @@ from api import helpers
 import model
 import util
 
-from main import api
+from main import api_v1
 
 
-@api.resource('/api/v1/project/', endpoint='api.projects')
+@api_v1.resource('/project/', endpoint='api.projects')
 class ProjectsAPI(restful.Resource):
   def get(self):
     project_keys = util.param('project_keys', list)
@@ -25,7 +25,7 @@ class ProjectsAPI(restful.Resource):
     return helpers.make_response(project_dbs, model.Project.FIELDS, project_cursor)
 
 
-@api.resource('/api/v1/project/<int:project_id>/', endpoint='api.project')
+@api_v1.resource('/project/<int:project_id>/', endpoint='api.project')
 class ProjectAPI(restful.Resource):
   def get(self, project_id):
     project_db = model.Project.get_by_id(project_id)

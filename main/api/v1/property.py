@@ -8,10 +8,10 @@ import flask
 from api import helpers
 import model
 
-from main import api
+from main import api_v1
 
 
-@api.resource('/api/v1/project/<int:project_id>/model/<int:model_id>/property/', endpoint='api.properties')
+@api_v1.resource('/project/<int:project_id>/model/<int:model_id>/property/', endpoint='api.properties')
 class PropertiesAPI(restful.Resource):
   def get(self, project_id, model_id):
     project_db = model.Project.get_by_id(project_id)
@@ -26,7 +26,7 @@ class PropertiesAPI(restful.Resource):
     return helpers.make_response(property_dbs, model.Property.FIELDS, property_cursor)
 
 
-@api.resource('/api/v1/project/<int:project_id>/model/<int:model_id>/property/<int:property_id>/', endpoint='api.property')
+@api_v1.resource('/project/<int:project_id>/model/<int:model_id>/property/<int:property_id>/', endpoint='api.property')
 class PropertyAPI(restful.Resource):
   def get(self, project_id, model_id, property_id):
     project_db = model.Project.get_by_id(project_id)

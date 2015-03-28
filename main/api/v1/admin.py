@@ -9,10 +9,10 @@ from api import helpers
 import auth
 import model
 
-from main import api
+from main import api_v1
 
 
-@api.resource('/api/v1/admin/upgrade/model/', endpoint='api.admin.upgrade.model')
+@api_v1.resource('/admin/upgrade/model/', endpoint='api.admin.upgrade.model')
 class AdminUpgradeModelAPI(restful.Resource):
   @auth.admin_required
   def get(self):
@@ -21,7 +21,7 @@ class AdminUpgradeModelAPI(restful.Resource):
     return helpers.make_response(model_dbs, model.Model.FIELDS, model_cursor)
 
 
-@api.resource('/api/v1/admin/upgrade/property/', endpoint='api.admin.upgrade.property')
+@api_v1.resource('/admin/upgrade/property/', endpoint='api.admin.upgrade.property')
 class AdminUpgradePropertyAPI(restful.Resource):
   @auth.admin_required
   def get(self):

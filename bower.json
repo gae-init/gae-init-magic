@@ -2,7 +2,6 @@
   "name": "gae-init",
   "dependencies": {
     "bootstrap": "~3",
-    "bootstrap-sweetalert": "~0",
     "bootswatch": "~3",
     "font-awesome": "~4",
     "highlight.js": "https://github.com/isagalaev/highlight.js.git#8.4",
@@ -14,9 +13,6 @@
   "overrides": {
     "bootstrap": {
       "main": ["less/**", "fonts/*", "js/*"]
-    },
-    "bootstrap-sweetalert": {
-      "main": ["lib/*.less", "lib/sweet-alert.js"]
     },
     "bootswatch": {
       "main": ["**/*.less"]

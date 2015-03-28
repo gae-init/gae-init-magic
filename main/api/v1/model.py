@@ -8,10 +8,10 @@ import flask
 from api import helpers
 import model
 
-from main import api
+from main import api_v1
 
 
-@api.resource('/api/v1/project/<int:project_id>/model/', endpoint='api.models')
+@api_v1.resource('/project/<int:project_id>/model/', endpoint='api.models')
 class ModelsAPI(restful.Resource):
   def get(self, project_id):
     project_db = model.Project.get_by_id(project_id)
@@ -22,7 +22,7 @@ class ModelsAPI(restful.Resource):
     return helpers.make_response(model_dbs, model.Model.FIELDS, model_cursor)
 
 
-@api.resource('/api/v1/project/<int:project_id>/model/<int:model_id>/', endpoint='api.model')
+@api_v1.resource('/project/<int:project_id>/model/<int:model_id>/', endpoint='api.model')
 class ModelAPI(restful.Resource):
   def get(self, project_id, model_id):
     project_db = model.Project.get_by_id(project_id)
