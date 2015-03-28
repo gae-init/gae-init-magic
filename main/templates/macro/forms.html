@@ -174,7 +174,11 @@
       <div class="panel-body">
         # if is_iterable(fields)
           # for field in fields:
-            {{text_field(field)}}
+            # if field.type == 'BooleanField'
+              {{checkbox_field(field)}}
+            # else
+              {{text_field(field)}}
+            # endif
           # endfor
         #else
           {{text_field(fields)}}
