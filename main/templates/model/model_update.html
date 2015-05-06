@@ -22,6 +22,7 @@
         {{forms.text_field(form.verbose_name, placeholder=model_db.default_verbose_name)}}
         {{forms.text_field(form.icon)}}
         {{forms.checkbox_field(form.admin_only)}}
+        {{forms.checkbox_field(form.public_view)}}
         # if model_db.key.id()
           {{forms.select_field(form.auth_user_key)}}
           {{forms.select_field(form.title_property_key)}}

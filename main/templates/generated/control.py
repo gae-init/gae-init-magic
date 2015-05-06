@@ -13,7 +13,14 @@ from main import app
 
 {% raw %}{% endraw %}
 # if not model_db.admin_only
-# include 'generated/control_user_bit.py'
+# include 'generated/control_update_bit.py'
+{% raw %}{% endraw %}
+{% raw %}{% endraw %}
+{% raw %}{% endraw %}
+# endif
+
+# if not model_db.admin_only or model_db.public_view
+# include 'generated/control_view_bit.py'
 {% raw %}{% endraw %}
 {% raw %}{% endraw %}
 {% raw %}{% endraw %}

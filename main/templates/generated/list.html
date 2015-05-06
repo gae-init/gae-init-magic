@@ -8,9 +8,11 @@
 
 &#35; block content
   &lt;div class="page-header"&gt;
+  # if not model_db.admin_only
     &lt;a class="pull-right btn btn-primary" href="&#123;&#123;url_for('{{model_db.variable_name}}_update')&#125;&#125;"&gt;
       &lt;fa class="fa fa-plus fa-fw"&gt;&lt;/fa&gt; Add {{model_db.name}}
     &lt;/a&gt;
+  # endif
     &lt;h1&gt;&#123;&#123;title&#125;&#125;&lt;/h1&gt;
   &lt;/div&gt;
   &lt;div class="table-responsive &#123;&#123;'hide' if not {{model_db.variable_name}}_dbs|count&#125;&#125;"&gt;

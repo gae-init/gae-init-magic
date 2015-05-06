@@ -49,6 +49,10 @@ class ModelUpdateForm(wtf.Form):
       model.Model.admin_only._verbose_name,
       [wtforms.validators.optional()],
     )
+  public_view = wtforms.BooleanField(
+      model.Model.public_view._verbose_name,
+      [wtforms.validators.optional()],
+    )
   title_property_key = wtforms.SelectField(
       model.Model.title_property_key._verbose_name,
       [wtforms.validators.optional()],

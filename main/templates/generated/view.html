@@ -5,6 +5,7 @@
 
 &#35; block content
   &lt;div class="page-header"&gt;
+  # if not model_db.admin_only
     &lt;div class="pull-right"&gt;
       &lt;a class="btn btn-default" href="&#123;&#123;url_for('{{model_db.variable_name}}_update')&#125;&#125;" title="Add {{model_db.name}}"&gt;
         &lt;fa class="fa fa-plus fa-fw"&gt;&lt;/fa&gt;
@@ -13,6 +14,7 @@
         &lt;fa class="fa fa-fw fa-pencil"&gt;&lt;/fa&gt; Edit
       &lt;/a&gt;
     &lt;/div&gt;
+  # endif
     &lt;h1&gt;
       &#123;&#123;utils.back_link('Back', '{{model_db.variable_name}}_list')&#125;&#125;
       &#123;&#123;title&#125;&#125;

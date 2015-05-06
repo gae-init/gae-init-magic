@@ -17,6 +17,7 @@ class Model(model.Base):
   rank = ndb.IntegerProperty(default=0)
   auth_user_key = ndb.KeyProperty(kind=model.Property, verbose_name='User Authentication with')
   admin_only = ndb.BooleanProperty(default=False, verbose_name='Only for Admins')
+  public_view = ndb.BooleanProperty(default=False)
   title_property_key = ndb.KeyProperty(verbose_name='Title Property')
 
   @ndb.ComputedProperty
@@ -38,6 +39,11 @@ class Model(model.Base):
   @ndb.ComputedProperty
   def verbose_name_(self):
     return self.verbose_name or self.default_verbose_name
+
+  # Make this header clickable in header
+  @ndb.ComputedProperty
+  def show_in_header(self):
+    return not self.admin_only or self.public_view
 
   def get_title_property(self):
     if self.title_property_key:
@@ -103,6 +109,7 @@ class Model(model.Base):
       'icon': fields.String,
       'name': fields.String,
       'property_count': fields.Integer,
+      'public_view': fields.Boolean,
       'rank': fields.Integer,
       'title_property_key': fields.Key,
       'variable_name': fields.String,

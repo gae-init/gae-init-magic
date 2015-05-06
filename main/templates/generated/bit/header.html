@@ -1,5 +1,5 @@
 # set model_dbs = model_dbs or [model_db]
-# for model_db in model_dbs if not model_db.admin_only
+# for model_db in model_dbs if model_db.show_in_header
 &lt;li class="&#123;&#123;'active' if html_class == '{{model_db.css_name}}'&#125;&#125;"&gt;
   &lt;a href="&#123;&#123;url_for('{{model_db.variable_name}}_list')&#125;&#125;"&gt;&lt;span class="fa fa-fw fa-{{model_db.icon}}"&gt;&lt;/span&gt; {{model_db.verbose_name_}} List&lt;/a&gt;
 &lt;/li&gt;
