@@ -25,6 +25,7 @@ class Property(model.Base):
   default = ndb.StringProperty()
   required = ndb.BooleanProperty(default=False)
   repeated = ndb.BooleanProperty(default=False)
+  tags = ndb.BooleanProperty(default=False)
   indexed = ndb.BooleanProperty(default=True)
   auto_now = ndb.BooleanProperty(default=False)
   auto_now_add = ndb.BooleanProperty(default=False)

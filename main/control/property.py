@@ -80,6 +80,10 @@ class PropertyUpdateForm(wtf.Form):
       model.Property.repeated._verbose_name,
       [wtforms.validators.optional()],
     )
+  tags = wtforms.BooleanField(
+      model.Property.tags._verbose_name,
+      [wtforms.validators.optional()],
+    )
   indexed = wtforms.BooleanField(
       model.Property.indexed._verbose_name,
       [wtforms.validators.optional()],

@@ -7,6 +7,15 @@ window.init_property_update = ->
   $('#forms_property').change on_forms_change
   $('#generic_property').change on_generic_change
 
+  $('#tags').change ->
+    if $('#tags').prop 'checked'
+      $('#repeated').prop 'checked', true
+
+  $('#repeated').change ->
+    if not $('#repeated').prop 'checked'
+      $('#tags').prop 'checked', false
+
+
   $('select').each (i, val) ->
     $($('select')[i]).change()
 
@@ -23,9 +32,14 @@ on_ndb_change = ->
   show_kind = Boolean value.indexOf('ndb.Key') == 0
   $('#kind').parent().toggle show_kind
 
+  show_tags = Boolean value.indexOf('ndb.String') == 0
+  $('#tags').parent().toggle show_tags
+
   if $('#ndb_property').is(':focus')
     if not show_kind
       $('#kind').val ''
+    if not show_tags
+      $('#tags').prop 'checked', false
 
 
 on_kind_change = ->
@@ -78,6 +92,8 @@ on_generic_change = ->
   value = $('#generic_property').val()
 
   $('#strip_filter').prop 'checked', false
+  $('#repeated').prop 'checked', false
+  $('#tags').prop 'checked', false
 
   if value == 'boolean'
     $('#ndb_property').val('ndb.BooleanProperty').change()
@@ -98,6 +114,15 @@ on_generic_change = ->
     $('#forms_property').val('forms.textarea_field').change()
     $('#field_property').val('fields.String').change()
     $('#strip_filter').prop 'checked', true
+
+  else if value == 'string_tags'
+    $('#ndb_property').val('ndb.StringProperty').change()
+    $('#wtf_property').val('wtforms.StringField').change()
+    $('#forms_property').val('forms.text_field').change()
+    $('#field_property').val('fields.String').change()
+    $('#strip_filter').prop 'checked', true
+    $('#repeated').prop 'checked', true
+    $('#tags').prop 'checked', true
 
   else if value == 'text'
     $('#ndb_property').val('ndb.TextProperty').change()

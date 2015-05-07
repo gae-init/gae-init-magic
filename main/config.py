@@ -52,6 +52,7 @@ GENERIC_PROPERIES = [
     ('key', 'Key'),
     ('string', 'String (single-line)'),
     ('string_text', 'String (multi-line)'),
+    ('string_tags', 'String (tags)'),
     ('text', 'Text (long)'),
   ]
 
