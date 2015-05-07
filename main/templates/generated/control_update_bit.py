@@ -31,19 +31,25 @@ def {{model_db.variable_name}}_update({{model_db.variable_name}}_id=0):
 
 {{model_db.get_property_key_choices()}}
 
-#- for property_db in property_dbs if property_db.wtf_property and property_db.show_on_update and property_db.kind and property_db.kind != 'model.User'
+#- for property_db in property_dbs if property_db.show_on_update and ((property_db.wtf_property and property_db.kind and property_db.kind != 'model.User') or property_db.tags)
   # if loop.first
-  {% raw %}{% endraw %}
   if flask.request.method == 'GET' and not form.errors:
   # endif
+    # if property_db.tags
+    form.{{property_db.name}}.data = ' '.join(form.{{property_db.name}}.data)
+    # else
     form.{{property_db.name}}.data = {{model_db.variable_name}}_db.{{property_db.name}}.urlsafe() if {{model_db.variable_name}}_db.{{property_db.name}} else None
+    # endif
   # if loop.last
   {% raw %}{% endraw %}
   # endif
 # endfor
   if form.validate_on_submit():
-    # for property_db in property_dbs if property_db.wtf_property and property_db.show_on_update and property_db.kind and property_db.kind != 'model.User'
+    # for property_db in property_dbs if property_db.show_on_update and process_keys
     form.{{property_db.name}}.data = ndb.Key(urlsafe=form.{{property_db.name}}.data) if form.{{property_db.name}}.data else None
+    # endfor
+    # for property_db in property_dbs if property_db.show_on_update and property_db.tags
+    form.{{property_db.name}}.data = form.{{property_db.name}}.data.split(' ')
     # endfor
     form.populate_obj({{model_db.variable_name}}_db)
     {{model_db.variable_name}}_db.put()
