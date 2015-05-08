@@ -86,7 +86,7 @@ def admin_{{model_db.variable_name}}_update({{model_db.variable_name}}_id=0):
     form.{{property_db.name}}.data = ndb.Key(urlsafe=form.{{property_db.name}}.data) if form.{{property_db.name}}.data else None
     # endfor
     # for property_db in property_dbs if property_db.tags and (property_db.show_on_update or property_db.show_on_admin_update)
-    form.{{property_db.name}}.data = form.{{property_db.name}}.data.split(' ')
+    form.{{property_db.name}}.data = util.parse_tags(form.{{property_db.name}}.data)
     # endfor
     form.populate_obj({{model_db.variable_name}}_db)
     {{model_db.variable_name}}_db.put()
