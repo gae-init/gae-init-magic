@@ -43,6 +43,12 @@
                 &lt;span class="fa fa-fw fa-minus"&gt;&lt;/span&gt;
               &#35; endif
             &lt;/td&gt;
+          # elif property_db.tags
+            &lt;td{{utils.ndb_align_class(property_db.ndb_property, True)}}&gt;
+              &#35; for tag in {{model_db.variable_name}}_db.{{property_db.name}}
+                &lt;span class="label label-default"&gt;&#123;&#123;tag&#125;&#125;&lt;/span&gt;
+              &#35; endfor
+            &lt;/td&gt;
           # else
             &lt;td{{utils.ndb_align_class(property_db.ndb_property, True)}}&gt;&#123;&#123;{{model_db.variable_name}}_db.{{property_db.name}}&#125;&#125;&lt;/td&gt;
           # endif
