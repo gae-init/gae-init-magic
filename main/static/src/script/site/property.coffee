@@ -10,6 +10,7 @@ window.init_property_update = ->
   $('#tags').change ->
     if $('#tags').prop 'checked'
       $('#repeated').prop 'checked', true
+      $('#strip_filter').prop 'checked', false
 
   $('#repeated').change ->
     if not $('#repeated').prop 'checked'
