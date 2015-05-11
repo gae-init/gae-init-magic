@@ -73,7 +73,7 @@ def admin_{{model_db.variable_name}}_update({{model_db.variable_name}}_id=0):
   if flask.request.method == 'GET' and not form.errors:
   # endif
     # if property_db.tags
-    form.{{property_db.name}}.data = ' '.join(form.{{property_db.name}}.data)
+    form.{{property_db.name}}.data = config.TAG_SEPARATOR.join(form.{{property_db.name}}.data)
     # else
     form.{{property_db.name}}.data = {{model_db.variable_name}}_db.{{property_db.name}}.urlsafe() if {{model_db.variable_name}}_db.{{property_db.name}} else None
     # endif
