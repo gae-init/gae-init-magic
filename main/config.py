@@ -36,6 +36,7 @@ else:
 DEFAULT_DB_LIMIT = 64
 MAX_DB_LIMIT = 1024
 SIGNIN_RETRY_LIMIT = 4
+TAG_SEPARATOR = ' '
 
 
 ###############################################################################
