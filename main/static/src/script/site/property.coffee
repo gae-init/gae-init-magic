@@ -121,7 +121,7 @@ on_generic_change = ->
     $('#wtf_property').val('wtforms.StringField').change()
     $('#forms_property').val('forms.text_field').change()
     $('#field_property').val('fields.String').change()
-    $('#strip_filter').prop 'checked', true
+    $('#strip_filter').prop 'checked', false
     $('#repeated').prop 'checked', true
     $('#tags').prop 'checked', true
 
