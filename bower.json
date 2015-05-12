@@ -8,7 +8,8 @@
     "jquery": "~2",
     "lesshat": "~3",
     "moment": "~2",
-    "nprogress": "https://github.com/lipis/nprogress.git#master"
+    "nprogress": "https://github.com/lipis/nprogress.git#master",
+    "selectize": "~0"
   },
   "overrides": {
     "bootstrap": {
@@ -22,6 +23,9 @@
     },
     "highlight.js": {
       "main": ["src/**/*.{js,css}"]
+    },
+    "selectize": {
+      "main": ["dist/**/*.{js,less}"]
     }
   }
 }

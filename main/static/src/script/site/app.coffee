@@ -2,6 +2,16 @@ $ ->
   init_common()
   hljs.initHighlightingOnLoad()
 
+  $('#icon').selectize
+    sortField: 'text'
+    render:
+      item: (item, escape) ->
+        return "<div> <i class='fa fa-#{item.value} fa-fw'></i> #{item.text}</div>"
+
+      option: (item, escape) ->
+        "<div> <i class='fa fa-#{item.value} fa-fw'></i> #{item.text}</div>"
+
+
 $ -> $('html.welcome').each ->
   LOG('init welcome')
 
