@@ -1,5 +1,6 @@
 # extends 'base.html'
 # import 'macro/utils.html' as utils
+# import 'macro/magic.html' as magic
 
 # block head
   {{utils.prefetch_link(next_url)}}
@@ -64,7 +65,7 @@
             # endif
             <br>
           </td>
-          <td class="text-nowrap">{{property_db.ndb_property}}</td>
+          <td class="text-nowrap">{{magic.ndb(property_db)}}</td>
           <td class="text-nowrap">{{property_db.wtf_property}}</td>
           <td class="text-nowrap">{{property_db.forms_property}}</td>
           <td class="text-nowrap">{{property_db.field_property}}</td>

@@ -67,7 +67,7 @@ def project_update(project_id=0):
 ###############################################################################
 # List
 ###############################################################################
-@app.route('/projects/')
+@app.route('/project/')
 @auth.login_required
 def project_list():
   project_dbs, project_cursor = auth.current_user_db().get_project_dbs()

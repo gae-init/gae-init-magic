@@ -1,0 +1,61 @@
+# macro ndb(property_db)
+  # if property_db.ndb_property
+    {{property_db.ndb_property}}<br>
+
+    <div class="small text-muted">
+      # if property_db.required
+        <fa class="fa fa-fw fa-asterisk" title="Required"></fa>
+      # endif
+      # if property_db.repeated
+        <fa class="fa fa-fw fa-list" title="Repeated"></fa>
+      # endif
+      # if property_db.tags
+        <fa class="fa fa-fw fa-tag" title="Tags"></fa>
+      # endif
+      # if property_db.kind
+        <fa class="fa fa-fw fa-chain" title="{{property_db.kind}}"></fa>
+      # endif
+      # if property_db.default
+        <fa class="fa fa-fw fa-code" title="Default: {{property_db.default}}"></fa>
+      # endif
+    </div>
+  # endif
+# endmacro
+
+
+# macro wtf(property_db)
+  # if property_db.wtf_property
+    {{property_db.wtf_property}}<br>
+
+    <div class="small text-muted">
+      # if property_db.strip_filter
+        <fa class="fa fa-fw fa-female" title="Strip Filter"></fa>
+      # endif
+      # if property_db.email_filter
+        <fa class="fa fa-fw fa-at" title="Email Filter"></fa>
+      # endif
+      # if property_db.sort_filter
+        <fa class="fa fa-fw fa-sort-alpha-asc" title="Sort Filter"></fa>
+      # endif
+    </div>
+  # endif
+# endmacro
+
+
+# macro html5(property_db)
+  # if property_db.forms_property
+    {{property_db.forms_property}}<br>
+
+    <div class="small text-muted">
+      # if property_db.placeholder
+        <fa class="fa fa-fw fa-code" title="Placeholder: {{property_db.placeholder}}"></fa>
+      # endif
+      # if property_db.autofocus
+        <fa class="fa fa-fw fa-edit" title="Autofocus"></fa>
+      # endif
+      # if property_db.readonly
+        <fa class="fa fa-fw fa-lock" title="Readonly"></fa>
+      # endif
+    </div>
+  # endif
+# endmacro
