@@ -45,7 +45,7 @@ def {{model_db.variable_name}}_update({{model_db.variable_name}}_id=0):
   # endif
 # endfor
   if form.validate_on_submit():
-    # for property_db in property_dbs if property_db.show_on_update and process_keys
+    # for property_db in property_dbs if property_db.show_on_update and property_db.kind and property_db.kind != 'model.User'
     form.{{property_db.name}}.data = ndb.Key(urlsafe=form.{{property_db.name}}.data) if form.{{property_db.name}}.data else None
     # endfor
     # for property_db in property_dbs if property_db.show_on_update and property_db.tags
