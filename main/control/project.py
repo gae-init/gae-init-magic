@@ -88,7 +88,9 @@ def project_list():
 def project_view(project_id):
   project_db = model.Project.get_by_id(project_id)
 
-  if not project_db or not project_db.public:
+  is_admin = auth.is_logged_in() and auth.current_user_db().admin
+
+  if not project_db or not (is_admin or project_db.public):
     flask.abort(404)
 
   model_dbs, model_cursor = project_db.get_model_dbs()

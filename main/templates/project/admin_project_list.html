@@ -10,28 +10,40 @@
     <table class="table table-striped table-bordered table-hover">
       <thead>
         <tr class="text-nowrap">
-          <th class="col-xs-3">{{utils.order_by_link('name', 'Project')}}</th>
-          <th class="col-xs-5">{{utils.order_by_link('description', 'Description')}}</th>
+          <th class="h4 col-xs-7">{{utils.order_by_link('name', 'Project')}}</th>
           <th class="col-xs-1 text-center">{{utils.order_by_link('public', 'Public')}}</th>
           <th class="col-xs-1 text-center">{{utils.order_by_link('model_count', 'Models')}}</th>
           <th class="col-xs-2">{{utils.order_by_link('user_key', 'User')}}</th>
+          <th class="col-xs-1">{{utils.order_by_link('modified', 'Modified')}}<br><small>{{utils.order_by_link('created', 'Created')}}</small></th>
         </tr>
       </thead>
       <tbody>
         # for project_db in project_dbs
-          <tr class="row-link" id="{{project_db.key.urlsafe()}}" data-href="{{url_for('model_list', project_id=project_db.key.id())}}">
-            <td>{{project_db.name}}</td>
-            <td>{{project_db.description}}</td>
+          <tr class="row-link" id="{{project_db.key.urlsafe()}}" data-href="{{url_for('project_view', project_id=project_db.key.id())}}">
+            <td class="h4">
+              {{project_db.name}}
+              <p class="small">{{project_db.description}}</p>
+            </td>
             <td class="text-center">
               # if project_db.public
                 <span class="fa fa-check"></span>
               # endif
             </td>
             <td class="text-center">{{project_db.model_count}}</td>
-            <td class="ellipsis">
+            <td class="ellipsis not-link">
               # set user_db = project_db.user_key.get()
-              <img src="{{user_db.avatar_url_size(36)}}" width="18" height="18">
-              {{user_db.name}}
+              <a href="{{url_for('user_update', user_id=user_db.key.id())}}">
+                <img src="{{user_db.avatar_url_size(36)}}" width="18" height="18">
+                {{user_db.name}}
+              </a>
+            </td>
+            <td>
+              <time datetime="{{project_db.modified}}">
+                {{project_db.modified.strftime('%Y-%m-%d')}}
+              </time><br>
+              <time class="text-success small" datetime="{{project_db.created}}">
+                {{project_db.created.strftime('%Y-%m-%d')}}
+              </time>
             </td>
           </tr>
         # endfor
