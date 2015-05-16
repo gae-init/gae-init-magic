@@ -54,20 +54,16 @@
         <tr id="{{property_db.key.urlsafe()}}">
           <td class="text-nowrap">
             <span class="h4">{{property_db.name}}</span>
-            # if property_db.required
-              <fa class="fa fa-asterisk text-muted" title="Required"></fa>
-            # endif
             # if property_db.key == model_db.auth_user_key
-              <fa class="fa fa-user text-muted" title="User Authentication"></fa>
+              <fa class="fa fa-fw fa-user text-muted" title="User Authentication"></fa>
             # endif
             # if property_db.key == model_db.title_property_key
-              <fa class="fa fa-tag text-muted" title="Title Property"></fa>
+              <fa class="fa fa-fw fa-text-width text-muted" title="Title Property"></fa>
             # endif
-            <br>
           </td>
           <td class="text-nowrap">{{magic.ndb(property_db)}}</td>
-          <td class="text-nowrap">{{property_db.wtf_property}}</td>
-          <td class="text-nowrap">{{property_db.forms_property}}</td>
+          <td class="text-nowrap">{{magic.wtf(property_db)}}</td>
+          <td class="text-nowrap">{{magic.html5(property_db)}}</td>
           <td class="text-nowrap">{{property_db.field_property}}</td>
         </tr>
       # endfor
