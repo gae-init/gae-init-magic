@@ -22,7 +22,7 @@
           <tr class="row-link" id="{{project_db.key.urlsafe()}}" data-href="{{url_for('project_view', project_id=project_db.key.id())}}">
             <td class="h4">
               {{project_db.name}}
-              <p class="small">{{project_db.description}}</p>
+              <div class="small">{{project_db.description}}</div>
             </td>
             <td class="text-center">
               # if project_db.public
