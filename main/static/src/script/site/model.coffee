@@ -1,9 +1,5 @@
 window.init_model_view = ->
   hljs.initHighlightingOnLoad()
-  $('code').click (event) ->
-    id = $(event.currentTarget).attr 'id'
-    if $(".auto-select[data-for='#{id}']").is ':checked'
-      select_text id
 
   $('.expand').click (event) ->
     $current = $(event.currentTarget)
@@ -20,14 +16,3 @@ window.init_model_update = ->
     $('#auth_user').parent().parent().toggleClass 'disabled', admin_only
     $('#auth_user_key').val ''
     $('#auth_user').prop 'checked', false
-
-
-window.select_text = (containerid) ->
-  if document.selection
-    range = document.body.createTextRange()
-    range.moveToElementText document.getElementById containerid
-    range.select()
-  else if window.getSelection
-    range = document.createRange()
-    range.selectNode document.getElementById containerid
-    window.getSelection().addRange range

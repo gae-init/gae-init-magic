@@ -53,14 +53,10 @@
 # macro render_source_file(name, path, lang='python')
 <div id="{{slugify(name)}}" class="anchor"></div>
 <hr class="break">
-<h4>
-  <a href="#top" title="Back to top"><fa class="pull-right fa fa-fw fa-angle-double-up"></fa></a>
-  <span class="pull-right {{'text-muted' if not path}}">{{name}}</span>
+<h4 class="text-right">
+  <span class="{{'text-muted' if not path}}">{{name}}</span>
+  <a href="#top" title="Back to top"><fa class="fa fa-fw fa-angle-double-up"></fa></a>
 </h4>
-<label class="small {{'hide' if not path}}">
-  <input class="auto-select" type="checkbox" data-for="{{slugify(name)}}" checked>
-  Auto Select
-</label>
 
 # if path
 <pre><code class="{{lang}}" id="{{slugify(name)}}">

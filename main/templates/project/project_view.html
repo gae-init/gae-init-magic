@@ -13,8 +13,10 @@
     <h1>
       {{title}}
       <small>
-        by
-        {{user_db.name}}
+        by {{user_db.name}}
+        # if project_db.user_key == current_user.user_db.key
+          &mdash; <a href="{{url_for('model_list', project_id=project_db.key.id())}}">edit</a>
+        # endif
       </small>
     </h1>
     <p class="lead">
