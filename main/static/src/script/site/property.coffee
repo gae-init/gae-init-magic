@@ -22,8 +22,6 @@ window.init_property_update = ->
       $('#required').prop 'checked', true
       $('#autofocus').prop 'checked', true
 
-      LOG 'shi'
-
   $('select').each (i, val) ->
     $($('select')[i]).change()
 
