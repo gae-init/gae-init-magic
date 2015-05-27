@@ -16,6 +16,13 @@ window.init_property_update = ->
     if not $('#repeated').prop 'checked'
       $('#tags').prop 'checked', false
 
+  $('#use_as_title').change ->
+    if $('#generic_property') and $('#use_as_title').prop 'checked'
+      $('#generic_property').val('string').change()
+      $('#required').prop 'checked', true
+      $('#autofocus').prop 'checked', true
+
+      LOG 'shi'
 
   $('select').each (i, val) ->
     $($('select')[i]).change()
