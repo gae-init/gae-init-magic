@@ -53,11 +53,6 @@ class ModelUpdateForm(wtf.Form):
       model.Model.public_view._verbose_name,
       [wtforms.validators.optional()],
     )
-  title_property_key = wtforms.SelectField(
-      model.Model.title_property_key._verbose_name,
-      [wtforms.validators.optional()],
-      description='Choose a property that could serve as title',
-    )
 
 
 @app.route('/project/<int:project_id>/model/create/', methods=['GET', 'POST'])
@@ -70,7 +65,6 @@ def model_update(project_id, model_id=0):
     flask.abort(404)
 
   auth_choices = [('', '-')]
-  title_choices = [('', '-')]
 
   if model_id:
     model_db = model.Model.get_by_id(model_id, parent=project_db.key)
@@ -78,8 +72,6 @@ def model_update(project_id, model_id=0):
     for property_db in property_dbs:
       if property_db.ndb_property == 'ndb.KeyProperty':
         auth_choices.append((property_db.key.urlsafe(), property_db.name))
-      else:
-        title_choices.append((property_db.key.urlsafe(), property_db.verbose_name_))
   else:
     model_db = model.Model(
         parent=project_db.key,
@@ -92,18 +84,12 @@ def model_update(project_id, model_id=0):
 
   form = ModelUpdateForm(obj=model_db)
   form.auth_user_key.choices = auth_choices
-  form.title_property_key.choices = title_choices
 
   if form.validate_on_submit():
     if model_id and not form.admin_only.data and form.auth_user_key.data:
       form.auth_user_key.data = ndb.Key(urlsafe=form.auth_user_key.data)
     else:
       form.auth_user_key.data = None
-
-    if model_id and form.title_property_key.data:
-      form.title_property_key.data = ndb.Key(urlsafe=form.title_property_key.data)
-    else:
-      form.title_property_key.data = None
 
     form.populate_obj(model_db)
     model_db.put()
@@ -135,8 +121,6 @@ def model_update(project_id, model_id=0):
   if model_id and not form.errors:
     if model_db.auth_user_key:
       form.auth_user_key.data = model_db.auth_user_key.urlsafe()
-    if model_db.title_property_key:
-      form.title_property_key.data = model_db.title_property_key.urlsafe()
 
   return flask.render_template(
       'model/model_update.html',

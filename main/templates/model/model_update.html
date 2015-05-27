@@ -25,7 +25,6 @@
         {{forms.checkbox_field(form.public_view)}}
         # if model_db.key.id()
           {{forms.select_field(form.auth_user_key)}}
-          {{forms.select_field(form.title_property_key)}}
         # else
           {{forms.checkbox_field(form.auth_user)}}
         # endif
