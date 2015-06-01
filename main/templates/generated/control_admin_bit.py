@@ -90,7 +90,7 @@ def admin_{{model_db.variable_name}}_update({{model_db.variable_name}}_id=0):
     # endfor
     form.populate_obj({{model_db.variable_name}}_db)
     {{model_db.variable_name}}_db.put()
-    return flask.redirect(flask.url_for('admin_{{model_db.variable_name}}_list', {{model_db.variable_name}}_id={{model_db.variable_name}}_db.key.id()))
+    return flask.redirect(flask.url_for('admin_{{model_db.variable_name}}_list', order='-modified'))
 
   return flask.render_template(
       '{{model_db.variable_name}}/admin_{{model_db.variable_name}}_update.html',

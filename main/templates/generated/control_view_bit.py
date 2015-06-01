@@ -29,7 +29,7 @@ def {{model_db.variable_name}}_list():
 # endif
 def {{model_db.variable_name}}_view({{model_db.variable_name}}_id):
   {{model_db.variable_name}}_db = model.{{model_db.name}}.get_by_id({{model_db.variable_name}}_id)
-  if not {{model_db.variable_name}}_db{{' and %s_db.%s != auth.current_user_key()' % (model_db.variable_name, model_db.auth_user_key_property) if model_db.auth_user_key else ''}}:
+  if not {{model_db.variable_name}}_db{{' or %s_db.%s != auth.current_user_key()' % (model_db.variable_name, model_db.auth_user_key_property) if model_db.auth_user_key else ''}}:
     flask.abort(404)
 
   return flask.render_template(

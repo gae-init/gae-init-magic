@@ -24,7 +24,7 @@ def {{model_db.variable_name}}_update({{model_db.variable_name}}_id=0):
   else:
     {{model_db.variable_name}}_db = model.{{model_db.name}}({{'%s=auth.current_user_key()' % model_db.auth_user_key_property if model_db.auth_user_key else ''}})
 
-  if not {{model_db.variable_name}}_db{{' and %s_db.%s != auth.current_user_key()' % (model_db.variable_name, model_db.auth_user_key_property) if model_db.auth_user_key else ''}}:
+  if not {{model_db.variable_name}}_db{{' or %s_db.%s != auth.current_user_key()' % (model_db.variable_name, model_db.auth_user_key_property) if model_db.auth_user_key else ''}}:
     flask.abort(404)
 
   form = {{model_db.name}}UpdateForm(obj={{model_db.variable_name}}_db)
