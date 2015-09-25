@@ -25,6 +25,11 @@ window.init_property_update = ->
   $('select').each (i, val) ->
     $($('select')[i]).change()
 
+  $('#btn-delete').click (event) ->
+    event.preventDefault()
+    if confirm 'Are you sure you want to delete this property?'
+      $('#btn-delete').parent().submit()
+
 
 on_change = (event) ->
   $this = $(event.currentTarget)

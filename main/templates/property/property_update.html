@@ -5,7 +5,13 @@
 # block content
   <div class="page-header">
     <h1>
-      <small class="pull-right">Property</small>
+      <div class="pull-right text-nowrap">
+        # if property_db.key.id()
+          <form action="{{url_for('property_delete', project_id=project_db.key.id(), model_id=model_db.key.id(), property_id=property_db.key.id())}}" method="POST">
+            <button class="btn btn-sm btn-danger" id="btn-delete">Delete</button>
+          </form>
+        # endif
+      </div>
       {{utils.back_link('Back', 'model_view', project_id=project_db.key.id(), model_id=model_db.key.id())}}
       <small>{{project_db.variable_name}}.{{model_db.name}}.</small>{{title}}
     </h1>

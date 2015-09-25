@@ -245,3 +245,24 @@ def property_rank(project_id, model_id, property_id, direction='up'):
 
   ndb.put_multi(property_dbs)
   return flask.redirect(flask.url_for('model_view', project_id=project_db.key.id(), model_id=model_db.key.id()))
+
+
+@app.route('/project/<int:project_id>/model/<int:model_id>/property/<int:property_id>/delete/', methods=['GET', 'POST'])
+@auth.login_required
+def property_delete(project_id, model_id, property_id):
+  user_key = auth.current_user_key()
+  project_db = model.Project.get_by_id(project_id)
+  if not project_db or project_db.user_key != user_key:
+    flask.abort(404)
+
+  model_db = model.Model.get_by_id(model_id, parent=project_db.key)
+  if not model_db:
+    flask.abort(404)
+
+  property_db = model.Property.get_by_id(property_id, parent=model_db.key)
+  if not property_db:
+    flask.abort(404)
+
+  property_db.key.delete()
+  flask.flash('Property "%s" deleted.' % property_db.name, category='success')
+  return flask.redirect(flask.url_for('model_view', project_id=project_db.key.id(), model_id=model_db.key.id()))
