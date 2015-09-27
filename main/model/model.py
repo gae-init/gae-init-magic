@@ -72,7 +72,12 @@ class Model(model.Base):
     result = ''
     for model_name in model_names:
       variable_name = util.camel_to_snake(model_name)
-      result += '  %s_dbs, %s_cursor = model.%s.get_dbs()\n' % (variable_name, variable_name, model_name)
+      user_specific = ''
+      for model_db in model_dbs:
+        if model_db.name == model_name and model_db.auth_user_key_property:
+          user_specific = '%s=auth.current_user_key()' % model_db.auth_user_key_property
+          break
+      result += '  %s_dbs, %s_cursor = model.%s.get_dbs(%s)\n' % (variable_name, variable_name, model_name, user_specific)
 
     for property_db in property_dbs:
       # For showing in user update

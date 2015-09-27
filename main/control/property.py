@@ -101,6 +101,10 @@ class PropertyUpdateForm(wtf.Form):
       model.Property.auto_now_add._verbose_name,
       [wtforms.validators.optional()],
     )
+  ndb_choices = wtforms.StringField(
+      model.Property.ndb_choices._verbose_name,
+      [wtforms.validators.optional()],
+    )
   wtf_property = wtforms.SelectField(
       model.Property.wtf_property._verbose_name,
       [wtforms.validators.optional()],

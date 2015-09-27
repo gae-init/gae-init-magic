@@ -46,11 +46,16 @@ on_ndb_change = ->
   show_tags = Boolean value.indexOf('ndb.String') == 0
   $('#tags').parent().toggle show_tags
 
+  show_choices = Boolean value.indexOf('ndb.String') == 0
+  $('#ndb_choices').parent().toggle show_choices
+
   if $('#ndb_property').is(':focus')
     if not show_kind
       $('#kind').val ''
     if not show_tags
       $('#tags').prop 'checked', false
+    if not show_choices
+      $('#ndb_choices').val ''
 
 
 on_kind_change = ->
