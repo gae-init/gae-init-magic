@@ -15,6 +15,7 @@ def {{model_db.variable_name}}_list():
       title='{{model_db.verbose_name_}} List',
       {{model_db.variable_name}}_dbs={{model_db.variable_name}}_dbs,
       next_url=util.generate_next_url({{model_db.variable_name}}_cursor),
+      api_url=flask.url_for('api.{{model_db.variable_name}}.list'),
     )
 
 
@@ -41,4 +42,5 @@ def {{model_db.variable_name}}_view({{model_db.variable_name}}_id):
       title='{{model_db.verbose_name_}}',
       # endif
       {{model_db.variable_name}}_db={{model_db.variable_name}}_db,
+      api_url=flask.url_for('api.{{model_db.variable_name}}', {{model_db.variable_name}}_key={{model_db.variable_name}}_db.key.urlsafe() if {{model_db.variable_name}}_db.key else ''),
     )
