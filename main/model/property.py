@@ -54,7 +54,7 @@ class Property(model.Base):
         'repeated=%s' % self.repeated if self.repeated else '',
         'indexed=False' if not self.indexed else '',
         'choices=[%s]' % self.ndb_choices if self.ndb_choices else '',
-        "verbose_name='%s'" % self.verbose_name if self.verbose_name else '',
+        "verbose_name=u'%s'" % self.verbose_name if self.verbose_name else '',
       ]
     return '%s = %s(%s)' % (
         self.name,
