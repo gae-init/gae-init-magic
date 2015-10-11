@@ -86,7 +86,7 @@ def model_update(project_id, model_id=0):
   form.auth_user_key.choices = auth_choices
 
   if form.validate_on_submit():
-    if model_id and not form.admin_only.data and form.auth_user_key.data:
+    if model_id and form.auth_user_key.data:
       form.auth_user_key.data = ndb.Key(urlsafe=form.auth_user_key.data)
     else:
       form.auth_user_key.data = None

@@ -43,23 +43,14 @@ class {{model_db.name}}UpdateAdminForm({{model_db.name}}UpdateForm):
 
 {% raw %}{% endraw %}
 {% raw %}{% endraw %}
-
-
-# if not model_db.auth_user_key
 @app.route('/admin/{{model_db.variable_name}}/create/', methods=['GET', 'POST'])
-# endif
 @app.route('/admin/{{model_db.variable_name}}/&lt;int:{{model_db.variable_name}}_id&gt;/update/', methods=['GET', 'POST'])
 @auth.admin_required
-# if model_db.auth_user_key
-def admin_{{model_db.variable_name}}_update({{model_db.variable_name}}_id):
-  {{model_db.variable_name}}_db = model.{{model_db.name}}.get_by_id({{model_db.variable_name}}_id)
-# else
 def admin_{{model_db.variable_name}}_update({{model_db.variable_name}}_id=0):
   if {{model_db.variable_name}}_id:
     {{model_db.variable_name}}_db = model.{{model_db.name}}.get_by_id({{model_db.variable_name}}_id)
   else:
-    {{model_db.variable_name}}_db = model.{{model_db.name}}()
-# endif
+    {{model_db.variable_name}}_db = model.{{model_db.name}}({{'%s=auth.current_user_key()' % model_db.auth_user_key_property if model_db.auth_user_key else ''}})
 
   if not {{model_db.variable_name}}_db:
     flask.abort(404)

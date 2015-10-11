@@ -7,7 +7,6 @@
 &#35; endblock
 
 &#35; block admin_content
-# if not model_db.auth_user_key
   &lt;div class="panel panel-default"&gt;
     &lt;div class="panel-body"&gt;
       &lt;a class="btn btn-sm btn-primary" href="&#123;&#123;url_for('admin_{{model_db.variable_name}}_update')&#125;&#125;"&gt;
@@ -15,7 +14,6 @@
       &lt;/a&gt;
     &lt;/div&gt;
   &lt;/div&gt;
-# endif
 
   &lt;div class="table-responsive &#123;&#123;'hide' if not {{model_db.variable_name}}_dbs|count&#125;&#125;"&gt;
     &lt;table class="table table-striped table-bordered table-hover"&gt;
