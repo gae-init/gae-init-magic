@@ -16,18 +16,22 @@ from main import api_v1
 
 @api_v1.resource('/{{model_db.variable_name}}/', endpoint='api.{{model_db.variable_name}}.list')
 class {{model_db.name}}ListAPI(restful.Resource):
+# if model_db.auth_user_key and not model_db.public_view
   @auth.login_required
+# endif
   def get(self):
-    {{model_db.variable_name}}_dbs, {{model_db.variable_name}}_cursor = model.{{model_db.name}}.get_dbs({{'%s=auth.current_user_key()' % (model_db.auth_user_key_property) if model_db.auth_user_key else ''}})
+    {{model_db.variable_name}}_dbs, {{model_db.variable_name}}_cursor = model.{{model_db.name}}.get_dbs({{'%s=auth.current_user_key()' % (model_db.auth_user_key_property) if model_db.auth_user_key and not model_db.public_view else ''}})
     return helpers.make_response({{model_db.variable_name}}_dbs, model.{{model_db.name}}.FIELDS, {{model_db.variable_name}}_cursor)
 
 
 @api_v1.resource('/{{model_db.variable_name}}/&lt;string:{{model_db.variable_name}}_key&gt;/', endpoint='api.{{model_db.variable_name}}')
 class {{model_db.name}}API(restful.Resource):
+# if model_db.auth_user_key and not model_db.public_view
   @auth.login_required
+# endif
   def get(self, {{model_db.variable_name}}_key):
     {{model_db.variable_name}}_db = ndb.Key(urlsafe={{model_db.variable_name}}_key).get()
-    if not {{model_db.variable_name}}_db{{' or %s_db.%s != auth.current_user_key()' % (model_db.variable_name, model_db.auth_user_key_property) if model_db.auth_user_key else ''}}:
+    if not {{model_db.variable_name}}_db{{' or %s_db.%s != auth.current_user_key()' % (model_db.variable_name, model_db.auth_user_key_property) if model_db.auth_user_key and not model_db.public_view else ''}}:
       helpers.make_not_found_exception('{{model_db.name}} %s not found' % {{model_db.variable_name}}_key)
     return helpers.make_response({{model_db.variable_name}}_db, model.{{model_db.name}}.FIELDS)
 
