@@ -76,28 +76,6 @@
 
 <hr>
 
-# if model_dbs
-  <h3>
-    Init via command line
-  </h3>
-
-<pre><code class="bash"># If you starting completely from scratch
-git clone https://github.com/gae-init/gae-init.git {{project_db.variable_name}}
-
-&#35; Go to the root of your project
-cd {{project_db.variable_name}}
-
-&#35; Execute at your own risk to update your project
-./magic.py -p {{project_db.key.id()}}{% if not project_db.public%}/{{project_db.access}}{% endif %}
-
-&#35; Install depndecies if you are starting from scratch
-npm install
-
-&#35; Start the project locally
-gulp
-
-&#35; Visit http://localhost:8080 to verify!
-</code></pre>
-# endif
+# include 'project/command_line.html'
 
 # endblock
