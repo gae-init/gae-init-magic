@@ -152,7 +152,7 @@ def model_view(project_id, model_id):
   files = [
       ('main/control/__init__.py', 'generated/control_init.py', 'python'),
       ('main/model/__init__.py', 'generated/model_init.py', 'python'),
-      ('main/api/v1/__init__.py', 'generated/model_init.py', 'python'),
+      ('main/api/v1/__init__.py', 'generated/api_init.py', 'python'),
       ('main/templates/bit/header.html', 'generated/bit/header.html', 'html'),
       ('main/templates/admin/admin.html', 'generated/admin/admin.html', 'html'),
 
