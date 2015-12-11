@@ -1,6 +1,7 @@
 # coding: utf-8
 
 from .admin import *
+from .auth import *
 from .config import *
 from .user import *
 from .project import *

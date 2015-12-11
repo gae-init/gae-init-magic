@@ -36,7 +36,6 @@ class {{model_db.name}}API(restful.Resource):
     return helpers.make_response({{model_db.variable_name}}_db, model.{{model_db.name}}.FIELDS)
 
 
-
 {% raw -%}
 ###############################################################################
 # Admin
