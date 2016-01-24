@@ -14,9 +14,9 @@ class {{model_db.name}}(model.Base):
 # endfor
 {% raw %}{% endraw %}
   FIELDS = {
-    # for property_db in property_dbs if property_db.field_property
-      {{property_db.api_field}}
-    # endfor
-    }
+  # for property_db in property_dbs if property_db.field_property
+    {{property_db.api_field}}
+  # endfor
+  }
 
   FIELDS.update(model.Base.FIELDS)

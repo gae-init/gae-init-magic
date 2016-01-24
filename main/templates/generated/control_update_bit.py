@@ -56,13 +56,13 @@ def {{model_db.variable_name}}_update({{model_db.variable_name}}_id=0):
     return flask.redirect(flask.url_for('{{model_db.variable_name}}_view', {{model_db.variable_name}}_id={{model_db.variable_name}}_db.key.id()))
 
   return flask.render_template(
-      '{{model_db.variable_name}}/{{model_db.variable_name}}_update.html',
-      # if model_db.title_property_key
-      title={{model_db.variable_name}}_db.{{model_db.title_property_key.get().name}} if {{model_db.variable_name}}_id else 'New {{model_db.verbose_name_}}',
-      # else
-      title='{{model_db.verbose_name_}}' if {{model_db.variable_name}}_id else 'New {{model_db.verbose_name_}}',
-      # endif
-      html_class='{{model_db.css_name}}-update',
-      form=form,
-      {{model_db.variable_name}}_db={{model_db.variable_name}}_db,
-    )
+    '{{model_db.variable_name}}/{{model_db.variable_name}}_update.html',
+    # if model_db.title_property_key
+    title={{model_db.variable_name}}_db.{{model_db.title_property_key.get().name}} if {{model_db.variable_name}}_id else 'New {{model_db.verbose_name_}}',
+    # else
+    title='{{model_db.verbose_name_}}' if {{model_db.variable_name}}_id else 'New {{model_db.verbose_name_}}',
+    # endif
+    html_class='{{model_db.css_name}}-update',
+    form=form,
+    {{model_db.variable_name}}_db={{model_db.variable_name}}_db,
+  )

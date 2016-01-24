@@ -7,16 +7,16 @@
 @auth.admin_required
 def admin_{{model_db.variable_name}}_list():
   {{model_db.variable_name}}_dbs, {{model_db.variable_name}}_cursor = model.{{model_db.name}}.get_dbs(
-      order=util.param('order') or '-modified',
-    )
+    order=util.param('order') or '-modified',
+  )
   return flask.render_template(
-      '{{model_db.variable_name}}/admin_{{model_db.variable_name}}_list.html',
-      html_class='admin-{{model_db.css_name}}-list',
-      title='{{model_db.verbose_name_}} List',
-      {{model_db.variable_name}}_dbs={{model_db.variable_name}}_dbs,
-      next_url=util.generate_next_url({{model_db.variable_name}}_cursor),
-      api_url=flask.url_for('api.admin.{{model_db.variable_name}}.list'),
-    )
+    '{{model_db.variable_name}}/admin_{{model_db.variable_name}}_list.html',
+    html_class='admin-{{model_db.css_name}}-list',
+    title='{{model_db.verbose_name_}} List',
+    {{model_db.variable_name}}_dbs={{model_db.variable_name}}_dbs,
+    next_url=util.generate_next_url({{model_db.variable_name}}_cursor),
+    api_url=flask.url_for('api.admin.{{model_db.variable_name}}.list'),
+  )
 
 {% raw %}
 ###############################################################################
@@ -84,19 +84,19 @@ def admin_{{model_db.variable_name}}_update({{model_db.variable_name}}_id=0):
     return flask.redirect(flask.url_for('admin_{{model_db.variable_name}}_list', order='-modified'))
 
   return flask.render_template(
-      '{{model_db.variable_name}}/admin_{{model_db.variable_name}}_update.html',
-      # if model_db.auth_user_key and model_db.title_property_key
-      title={{model_db.variable_name}}_db.{{model_db.title_property_key.get().name}},
-      # elif model_db.auth_user_key and not model_db.title_property_key
-      title='{{model_db.verbose_name_}}',
-      # elif not model_db.auth_user_key and model_db.title_property_key
-      title={{model_db.variable_name}}_db.{{model_db.title_property_key.get().name}} if {{model_db.variable_name}}_id else 'New {{model_db.verbose_name_}}',
-      # else
-      title='%s{{model_db.verbose_name_}}' % ('' if {{model_db.variable_name}}_id else 'New '),
-      # endif
-      html_class='admin-{{model_db.css_name}}-update',
-      form=form,
-      {{model_db.variable_name}}_db={{model_db.variable_name}}_db,
-      back_url_for='admin_{{model_db.variable_name}}_list',
-      api_url=flask.url_for('api.admin.{{model_db.variable_name}}', {{model_db.variable_name}}_key={{model_db.variable_name}}_db.key.urlsafe() if {{model_db.variable_name}}_db.key else ''),
-    )
+    '{{model_db.variable_name}}/admin_{{model_db.variable_name}}_update.html',
+    # if model_db.auth_user_key and model_db.title_property_key
+    title={{model_db.variable_name}}_db.{{model_db.title_property_key.get().name}},
+    # elif model_db.auth_user_key and not model_db.title_property_key
+    title='{{model_db.verbose_name_}}',
+    # elif not model_db.auth_user_key and model_db.title_property_key
+    title={{model_db.variable_name}}_db.{{model_db.title_property_key.get().name}} if {{model_db.variable_name}}_id else 'New {{model_db.verbose_name_}}',
+    # else
+    title='%s{{model_db.verbose_name_}}' % ('' if {{model_db.variable_name}}_id else 'New '),
+    # endif
+    html_class='admin-{{model_db.css_name}}-update',
+    form=form,
+    {{model_db.variable_name}}_db={{model_db.variable_name}}_db,
+    back_url_for='admin_{{model_db.variable_name}}_list',
+    api_url=flask.url_for('api.admin.{{model_db.variable_name}}', {{model_db.variable_name}}_key={{model_db.variable_name}}_db.key.urlsafe() if {{model_db.variable_name}}_db.key else ''),
+  )
