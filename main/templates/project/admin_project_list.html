@@ -32,10 +32,14 @@
             <td class="text-center">{{project_db.model_count}}</td>
             <td class="ellipsis not-link">
               # set user_db = project_db.user_key.get()
-              <a href="{{url_for('user_update', user_id=user_db.key.id())}}">
-                <img src="{{user_db.avatar_url_size(36)}}" width="18" height="18">
-                {{user_db.name}}
-              </a>
+              # if user_db
+                <a href="{{url_for('user_update', user_id=user_db.key.id())}}">
+                  <img src="{{user_db.avatar_url_size(36)}}" width="18" height="18">
+                  {{user_db.name}}
+                </a>
+              # else
+                Deleted User :/
+              # endif
             </td>
             <td>
               <time datetime="{{project_db.modified}}">

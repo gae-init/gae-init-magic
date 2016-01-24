@@ -4,10 +4,13 @@
 
 # block content
   <div class="page-header">
-    <a class="pull-right btn btn-primary" href="{{url_for('property_update', project_id=project_db.key.id(), model_id=model_db.key.id())}}">
-      <fa class="fa fa-plus fa-fw"></fa>
-      Add Property
-    </a>
+    <div class="pull-right text-nowrap">
+      <a class="btn btn-primary" href="{{url_for('property_update', project_id=project_db.key.id(), model_id=model_db.key.id())}}">
+        <fa class="fa fa-plus fa-fw"></fa>
+        Add Property
+      </a>
+    </div>
+
     <h1>
       {{utils.back_link('Back to model list', 'model_list', project_id=project_db.key.id())}}
       <small>{{project_db.variable_name}}.</small>{{title}}

@@ -168,7 +168,7 @@ on_generic_change = ->
   else if value == 'datetime'
     $('#ndb_property').val('ndb.DateTimeProperty').change()
     $('#wtf_property').val('wtforms.DateTimeField').change()
-    $('#forms_property').val('forms.date_field').change()
+    $('#forms_property').val('forms.datetime_field').change()
     $('#field_property').val('fields.DateTime').change()
 
   else if value == 'key'

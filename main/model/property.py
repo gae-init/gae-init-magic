@@ -89,15 +89,19 @@ class Property(model.Base):
     if self.wtf_property in ['wtforms.RadioField', 'wtforms.SelectField', 'wtforms.SelectMultipleField']:
       choices = '      choices=%s,\n' % (self.choices if self.choices else '[]')
 
+    date_format = ''
+    if self.wtf_property == 'wtforms.DateTimeField':
+      date_format = "      format='%Y-%m-%dT%H:%M',\n"
+
     title = '%r' % self.verbose_name_
     if self.ndb_property:
       title = 'model.%s.%s._verbose_name' % (self.key.parent().get().name, self.name)
     s = (
       '%s = %s(\n'
       '      %s,\n'
-      '      %s,\n%s%s%s'
+      '      %s,\n%s%s%s%s'
       '    )'
-      % (self.name, self.wtf_property, title, validators, filters, choices, description))
+      % (self.name, self.wtf_property, title, validators, filters, choices, description, date_format))
     return s
 
   @ndb.ComputedProperty

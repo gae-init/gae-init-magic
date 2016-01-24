@@ -236,3 +236,22 @@ def model_rank(project_id, model_id, direction='up'):
 
   ndb.put_multi(model_dbs)
   return flask.redirect(flask.url_for('model_list', project_id=project_db.key.id()))
+
+
+@app.route('/project/<int:project_id>/model/<int:model_id>/delete/', methods=['POST'])
+@auth.login_required
+def model_delete(project_id, model_id):
+  user_key = auth.current_user_key()
+  project_db = model.Project.get_by_id(project_id)
+  if not project_db or project_db.user_key != user_key:
+    flask.abort(404)
+
+  model_db = model.Model.get_by_id(model_id, parent=project_db.key)
+  if not model_db:
+    flask.abort(404)
+
+  property_dbs, property_cursor = model_db.get_property_dbs(limit=-1, keys_only=True)
+  ndb.delete_multi(property_dbs)
+  model_db.key.delete()
+  flask.flash('Model "%s" deleted.' % model_db.name, category='success')
+  return flask.redirect(flask.url_for('model_list', project_id=project_db.key.id()))

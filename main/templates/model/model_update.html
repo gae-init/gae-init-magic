@@ -4,8 +4,14 @@
 
 # block content
   <div class="page-header">
+    <div class="pull-right text-nowrap">
+      # if model_db.key.id()
+        <form class="pull-left" action="{{url_for('model_delete', project_id=project_db.key.id(), model_id=model_db.key.id())}}" method="POST">
+          <button class="btn btn-sm btn-danger" id="btn-delete">Delete</button>
+        </form>
+      # endif
+    </div>
     <h1>
-      <small class="pull-right">Model</small>
       # if model_db.key.id()
         {{utils.back_link('Back', 'model_view', project_id=project_db.key.id(), model_id=model_db.key.id())}}
       # else

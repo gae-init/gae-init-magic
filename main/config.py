@@ -125,6 +125,7 @@ FORMS_PROPERIES = [
     ('', '-'),
     ('forms.checkbox_field', 'checkbox_field'),
     ('forms.date_field', 'date_field'),
+    ('forms.datetime_field', 'datetime_field'),
     ('forms.email_field', 'email_field'),
     ('forms.hidden_field', 'hidden_field'),
     ('forms.input_field', 'input_field'),

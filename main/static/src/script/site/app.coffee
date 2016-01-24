@@ -32,5 +32,8 @@ $ -> $('html.admin-config').each ->
 $ -> $('html.model-view').each ->
   init_model_view()
 
+$ -> $('html.model-update').each ->
+  init_model_update()
+
 $ -> $('html.property-update').each ->
   init_property_update()

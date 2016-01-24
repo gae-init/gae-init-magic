@@ -251,7 +251,7 @@ def property_rank(project_id, model_id, property_id, direction='up'):
   return flask.redirect(flask.url_for('model_view', project_id=project_db.key.id(), model_id=model_db.key.id()))
 
 
-@app.route('/project/<int:project_id>/model/<int:model_id>/property/<int:property_id>/delete/', methods=['GET', 'POST'])
+@app.route('/project/<int:project_id>/model/<int:model_id>/property/<int:property_id>/delete/', methods=['POST'])
 @auth.login_required
 def property_delete(project_id, model_id, property_id):
   user_key = auth.current_user_key()
