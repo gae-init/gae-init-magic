@@ -88,11 +88,11 @@ def admin_{{model_db.variable_name}}_update({{model_db.variable_name}}_id=0):
     # if model_db.auth_user_key and model_db.title_property_key
     title={{model_db.variable_name}}_db.{{model_db.title_property_key.get().name}},
     # elif model_db.auth_user_key and not model_db.title_property_key
-    title='{{model_db.verbose_name_}}',
+    title='%s' % '{{model_db.verbose_name_}}',
     # elif not model_db.auth_user_key and model_db.title_property_key
-    title={{model_db.variable_name}}_db.{{model_db.title_property_key.get().name}} if {{model_db.variable_name}}_id else 'New {{model_db.verbose_name_}}',
+    title='%s' % {{model_db.variable_name}}_db.{{model_db.title_property_key.get().name}} if {{model_db.variable_name}}_id else 'New {{model_db.verbose_name_}}',
     # else
-    title='%s{{model_db.verbose_name_}}' % ('' if {{model_db.variable_name}}_id else 'New '),
+    title='%s' % '%s{{model_db.verbose_name_}}' % ('' if {{model_db.variable_name}}_id else 'New '),
     # endif
     html_class='admin-{{model_db.css_name}}-update',
     form=form,
