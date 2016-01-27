@@ -118,8 +118,8 @@
       link.target = nodes[link.target] || (nodes[link.target] = {name: link.target});
     });
 
-    var width = 960,
-        height = 500;
+    var width = $('.model-data').width(),
+        height = 480;
 
     var force = d3.layout.force()
         .nodes(d3.values(nodes))
