@@ -3,6 +3,7 @@
   "dependencies": {
     "bootstrap": "~3",
     "bootswatch": "~3",
+    "d3": "3.5.10",
     "font-awesome": "~4",
     "highlight.js": "https://github.com/isagalaev/highlight.js.git#8.4",
     "jquery": "~2",

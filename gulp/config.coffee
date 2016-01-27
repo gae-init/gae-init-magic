@@ -12,6 +12,7 @@ config =
     "#{paths.static.ext}/bootstrap/js/tooltip.js"
     "#{paths.static.lib}/highlight.pack.js"
     "#{paths.static.ext}/selectize/dist/js/standalone/selectize.js"
+    "#{paths.static.ext}/d3/d3.js"
   ]
   style: [
     "#{paths.src.style}/style.less"
