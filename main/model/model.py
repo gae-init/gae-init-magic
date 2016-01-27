@@ -19,6 +19,7 @@ class Model(model.Base):
   admin_only = ndb.BooleanProperty(default=False, verbose_name='Only for Admins')
   public_view = ndb.BooleanProperty(default=False)
   title_property_key = ndb.KeyProperty(verbose_name='Title Property')
+  default_order = ndb.StringProperty(default='')
 
   @ndb.ComputedProperty
   def variable_name(self):
@@ -120,6 +121,7 @@ class Model(model.Base):
       'variable_name': fields.String,
       'verbose_name_': fields.String,
       'verbose_name': fields.String,
+      'default_order': fields.String,
     }
 
   FIELDS.update(model.Base.FIELDS)

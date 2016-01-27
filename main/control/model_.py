@@ -53,6 +53,11 @@ class ModelUpdateForm(wtf.Form):
       model.Model.public_view._verbose_name,
       [wtforms.validators.optional()],
     )
+  default_order = wtforms.StringField(
+      model.Model.default_order._verbose_name,
+      [wtforms.validators.optional()],
+      filters=[util.strip_filter],
+    )
 
 
 @app.route('/project/<int:project_id>/model/create/', methods=['GET', 'POST'])
