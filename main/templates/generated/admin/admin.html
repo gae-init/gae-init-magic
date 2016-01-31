@@ -1,4 +1,4 @@
 # set model_dbs = model_dbs or [model_db]
 # for model_db in model_dbs
-&#123;&#123;admin_link('{{model_db.verbose_name_}} List', '{{model_db.icon}}', {% raw %}url_for{% endraw %}('admin_{{model_db.variable_name}}_list'))&#125;&#125;
+&#123;&#123;admin_link('{{model_db.verbose_name_}}', '{{model_db.icon}}', {% raw %}url_for{% endraw %}('admin_{{model_db.variable_name}}_list'))&#125;&#125;
 # endfor

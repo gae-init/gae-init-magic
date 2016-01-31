@@ -69,7 +69,7 @@ def admin_{{model_db.variable_name}}_update({{model_db.variable_name}}_id=0):
     form.{{property_db.name}}.data = {{model_db.variable_name}}_db.{{property_db.name}}.urlsafe() if {{model_db.variable_name}}_db.{{property_db.name}} else None
     # endif
   # if loop.last
-  {% raw %}{% endraw %}
+{% raw %}{% endraw %}
   # endif
 # endfor
   if form.validate_on_submit():
