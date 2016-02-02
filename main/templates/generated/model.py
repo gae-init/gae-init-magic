@@ -23,7 +23,13 @@ class {{model_db.name}}(model.Base):
       **kwargs
     )
 # endif
+# set foreign_dbs = model_db.get_foreign_dbs()
+# if foreign_dbs
 {% raw %}{% endraw %}
+{{foreign_dbs}}
+#- else
+{% raw %}{% endraw %}
+# endif
   FIELDS = {
   # for property_db in property_dbs if property_db.field_property
     {{property_db.api_field}}

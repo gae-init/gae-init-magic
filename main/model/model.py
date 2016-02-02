@@ -46,6 +46,13 @@ class Model(model.Base):
   def show_in_header(self):
     return not self.admin_only or self.public_view
 
+  @classmethod
+  def get_dbs(cls, order=None, **kwargs):
+    return super(Model, cls).get_dbs(
+      order=util.param('order') or 'rank',
+      **kwargs
+    )
+
   def get_title_property(self):
     if self.title_property_key:
       return self.title_property_key.get().name
@@ -76,9 +83,9 @@ class Model(model.Base):
       user_specific = ''
       for model_db in model_dbs:
         if model_db.name == model_name and model_db.auth_user_key_property and not model_db.public_view:
-          user_specific = '%s=auth.current_user_key()' % model_db.auth_user_key_property
+          user_specific = ', %s=auth.current_user_key()' % model_db.auth_user_key_property
           break
-      result += '  %s_dbs, %s_cursor = model.%s.get_dbs(%s)\n' % (variable_name, variable_name, model_name, user_specific)
+      result += '  %s_dbs, %s_cursor = model.%s.get_dbs(limit=-1%s)\n' % (variable_name, variable_name, model_name, user_specific)
 
     for property_db in property_dbs:
       # For showing in user update
@@ -103,6 +110,21 @@ class Model(model.Base):
         result += '[(c.key.urlsafe(), c.%s) for c in %s_dbs]' % (title, model_name)
 
         result += '\n'
+
+    return result
+
+  def get_foreign_dbs(self):
+    result = ''
+    for model_db in self.get_dbs(ancestor=self.key.parent())[0]:
+      for property_db in model_db.get_property_dbs(ndb_property='ndb.KeyProperty')[0]:
+        if property_db.kind.replace('model.', '') == self.name:
+          result += (
+            '  def get_%s_dbs(self):\n'
+            '    return model.%s.get_dbs(%s=self.key)\n\n'
+            % (util.camel_to_snake(model_db.name), model_db.name, property_db.name)
+          )
+          found = True
+          break
 
     return result
 
