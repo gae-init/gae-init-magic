@@ -73,9 +73,9 @@ def admin_{{model_db.variable_name}}_update({{model_db.variable_name}}_id=0):
   # endif
 # endfor
   if form.validate_on_submit():
-    # for property_db in property_dbs if property_db.wtf_property and (property_db.show_on_update or property_db.show_on_admin_update) and property_db.kind and property_db.kind != 'model.User'
+  # for property_db in property_dbs if property_db.wtf_property and (property_db.show_on_update or property_db.show_on_admin_update) and property_db.kind
     form.{{property_db.name}}.data = ndb.Key(urlsafe=form.{{property_db.name}}.data) if form.{{property_db.name}}.data else None
-    # endfor
+  # endfor
     # for property_db in property_dbs if property_db.tags and (property_db.show_on_update or property_db.show_on_admin_update)
     form.{{property_db.name}}.data = util.parse_tags(form.{{property_db.name}}.data)
     # endfor

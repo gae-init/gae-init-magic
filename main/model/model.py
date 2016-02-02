@@ -67,15 +67,13 @@ class Model(model.Base):
 
   # TODO: This madness should be done smarter in a way :)
   def get_property_key_choices(self, admin=False):
-    model_names = ['User']
+    model_names = []
     model_dbs, model_cursor = self.key.parent().get().get_model_dbs()
     property_dbs, property_cursor = self.get_property_dbs()
     for property_db in property_dbs:
       kind = property_db.kind.replace('model.', '')
       if kind and kind not in model_names:
         model_names.append(kind)
-
-    model_names = model_names[1:]
 
     result = ''
     for model_name in model_names:
@@ -102,13 +100,16 @@ class Model(model.Base):
         if not property_db.required:
           result += u"[('', u'-')] + "
         model_name = util.camel_to_snake(property_db.kind.replace('model.', ''))
+
         title = 'key.id()'
+        if kind == 'User':
+          title = 'name'
+        else:
+          for model_db in model_dbs:
+            if model_db.name == kind and model_db.title_property_key:
+              title = model_db.title_property_key.get().name
 
-        for model_db in model_dbs:
-          if model_db.name == kind and model_db.title_property_key:
-            title = model_db.title_property_key.get().name
         result += '[(c.key.urlsafe(), c.%s) for c in %s_dbs]' % (title, model_name)
-
         result += '\n'
 
     return result

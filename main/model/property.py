@@ -120,8 +120,10 @@ class Property(model.Base):
     return self.verbose_name or self.default_verbose_name
 
   def get_title_name(self):
-    if self.ndb_property != 'ndb.KeyProperty' or not self.kind or self.kind == 'model.User':
+    if self.ndb_property != 'ndb.KeyProperty' or not self.kind:
       return None
+    if self.kind == 'model.User':
+      return 'name'
     model_qry = model.Model.query(ancestor=self.key.parent().parent())
     model_qry = model_qry.filter(model.Model.name == self.kind.split('.')[1])
     model_db = model_qry.get()
