@@ -19,7 +19,7 @@ class {{model_db.name}}(model.Base):
   @classmethod
   def get_dbs(cls, order=None, **kwargs):
     return super({{model_db.name}}, cls).get_dbs(
-      order=util.param('order') or '{{model_db.default_order}}',
+      order=order or util.param('order') or '{{model_db.default_order}}',
       **kwargs
     )
 # endif
