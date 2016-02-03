@@ -120,8 +120,8 @@ class Model(model.Base):
       for property_db in model_db.get_property_dbs(ndb_property='ndb.KeyProperty')[0]:
         if property_db.kind.replace('model.', '') == self.name:
           result += (
-            '  def get_%s_dbs(self):\n'
-            '    return model.%s.get_dbs(%s=self.key)\n\n'
+            '  def get_%s_dbs(self, **kwargs):\n'
+            '    return model.%s.get_dbs(%s=self.key, **kwargs)\n\n'
             % (util.camel_to_snake(model_db.name), model_db.name, property_db.name)
           )
           found = True

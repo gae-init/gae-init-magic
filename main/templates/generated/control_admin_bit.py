@@ -59,7 +59,7 @@ def admin_{{model_db.variable_name}}_update({{model_db.variable_name}}_id=0):
 
 {{model_db.get_property_key_choices(True)}}
 
-#- for property_db in property_dbs if (property_db.show_on_update or property_db.show_on_admin_update) and ((property_db.wtf_property and property_db.kind and property_db.kind != 'model.User') or property_db.tags)
+#- for property_db in property_dbs if (property_db.show_on_update or property_db.show_on_admin_update) and ((property_db.wtf_property and property_db.kind) or property_db.tags)
   # if loop.first
   if flask.request.method == 'GET' and not form.errors:
   # endif
