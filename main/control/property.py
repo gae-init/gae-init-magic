@@ -31,6 +31,7 @@ class PropertyUpdateForm(wtf.Form):
   verbose_name = wtforms.StringField(
       model.Property.verbose_name._verbose_name,
       [wtforms.validators.optional()],
+      filters=[util.strip_filter],
     )
   generic_property = wtforms.SelectField(
       'Generic Property Type',
@@ -113,6 +114,7 @@ class PropertyUpdateForm(wtf.Form):
   description = wtforms.StringField(
       model.Property.description._verbose_name,
       [wtforms.validators.optional()],
+      filters=[util.strip_filter],
     )
   email_filter = wtforms.BooleanField(
       model.Property.email_filter._verbose_name,
@@ -129,6 +131,7 @@ class PropertyUpdateForm(wtf.Form):
   choices = wtforms.StringField(
       model.Property.choices._verbose_name,
       [wtforms.validators.optional()],
+      filters=[util.strip_filter],
     )
   forms_property = wtforms.SelectField(
       model.Property.forms_property._verbose_name,
@@ -146,6 +149,7 @@ class PropertyUpdateForm(wtf.Form):
   placeholder = wtforms.StringField(
       model.Property.placeholder._verbose_name,
       [wtforms.validators.optional()],
+      filters=[util.strip_filter],
     )
   field_property = wtforms.SelectField(
       model.Property.field_property._verbose_name,
