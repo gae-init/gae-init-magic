@@ -45,17 +45,20 @@ class Property(model.Base):
   autofocus = ndb.BooleanProperty(default=False)
   readonly = ndb.BooleanProperty(default=False)
 
-  @ndb.ComputedProperty
-  def ndb_field(self):
+  def ndb_field(self, include_babel=False):
     args = [
-        'kind=%s' % self.kind if self.kind else '',
-        'default=%s' % self.default if self.default else '',
-        'required=True' if self.required else '',
-        'repeated=%s' % self.repeated if self.repeated else '',
-        'indexed=False' if not self.indexed else '',
-        'choices=[%s]' % self.ndb_choices if self.ndb_choices else '',
-        "verbose_name=u'%s'" % self.verbose_name if self.verbose_name else '',
-      ]
+      'kind=%s' % self.kind if self.kind else '',
+      'default=%s' % self.default if self.default else '',
+      'required=True' if self.required else '',
+      'repeated=%s' % self.repeated if self.repeated else '',
+      'indexed=False' if not self.indexed else '',
+      'choices=[%s]' % self.ndb_choices if self.ndb_choices else '',
+    ]
+    if include_babel:
+      args.append("verbose_name=_(u'%s')" % self.verbose_name_)
+    else:
+      args.append("verbose_name=u'%s'" % self.verbose_name if self.verbose_name else '')
+
     return '%s = %s(%s)' % (
         self.name,
         self.ndb_property,

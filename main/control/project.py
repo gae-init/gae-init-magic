@@ -16,23 +16,27 @@ from main import app
 ###############################################################################
 class ProjectUpdateForm(wtf.Form):
   description = wtforms.TextAreaField(
-      model.Project.description._verbose_name,
-      [wtforms.validators.optional()],
-      filters=[util.strip_filter],
-    )
+    model.Project.description._verbose_name,
+    [wtforms.validators.optional()],
+    filters=[util.strip_filter],
+  )
   name = wtforms.StringField(
-      model.Project.name._verbose_name,
-      [wtforms.validators.required()],
-      filters=[util.strip_filter],
-    )
+    model.Project.name._verbose_name,
+    [wtforms.validators.required()],
+    filters=[util.strip_filter],
+  )
   public = wtforms.BooleanField(
-      model.Project.public._verbose_name,
-      [wtforms.validators.optional()],
-    )
+    model.Project.public._verbose_name,
+    [wtforms.validators.optional()],
+  )
   url = wtforms.StringField(
-      model.Project.url._verbose_name,
+    model.Project.url._verbose_name,
+    [wtforms.validators.optional()],
+    filters=[util.strip_filter],
+  )
+  include_babel = wtforms.BooleanField(
+      model.Project.include_babel._verbose_name,
       [wtforms.validators.optional()],
-      filters=[util.strip_filter],
     )
 
 

@@ -17,6 +17,7 @@ class Project(model.Base):
   public = ndb.BooleanProperty(default=False, verbose_name='Make this project publicly accessible')
   access = ndb.StringProperty(default=util.uuid()[:4], verbose_name='Access Code')
   model_count = ndb.IntegerProperty(default=0)
+  include_babel = ndb.BooleanProperty(default=False, verbose_name='Include Babel (Experimental)')
 
   @ndb.ComputedProperty
   def variable_name(self):
