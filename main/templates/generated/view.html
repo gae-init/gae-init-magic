@@ -27,8 +27,7 @@
         &lt;tbody&gt;
         # for property_db in property_dbs if property_db.show_on_view
           &lt;tr&gt;
-            &lt;th class="text-nowrap col-xs-1"&gt;{{property_db.verbose_name_}}&lt;/th&gt;
-
+            &lt;th class="text-nowrap col-xs-1"&gt;{{("{{_('%s')}}" if project_db.include_babel else '%s') % (property_db.verbose_name_)}}&lt;/th&gt;
             # set property_title = property_db.get_title_name()
           # if property_title
             &lt;td class="col-xs-11"&gt;&#123;&#123;{{model_db.variable_name}}_db.{{property_db.name}}.get().{{property_title}} if {{model_db.variable_name}}_db.{{property_db.name}} else ''&#125;&#125;&lt;/td&gt;

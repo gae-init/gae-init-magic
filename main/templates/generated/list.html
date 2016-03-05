@@ -21,9 +21,9 @@
         &lt;tr class="text-nowrap"&gt;
       # for property_db in property_dbs if property_db.show_on_list
         # if property_db.indexed
-          &lt;th class="col-xs-1{{utils.ndb_align_class(property_db.ndb_property)}}"&gt;&#123;&#123;utils.order_by_link('{{property_db.name}}', '{{property_db.verbose_name_}}')&#125;&#125;&lt;/th&gt;
+          &lt;th class="col-xs-1{{utils.ndb_align_class(property_db.ndb_property)}}"&gt;&#123;&#123;utils.order_by_link('{{property_db.name}}', {{("_('%s')" if project_db.include_babel else "'%s'") % (property_db.verbose_name_)}})&#125;&#125;&lt;/th&gt;
         # else
-          &lt;th class="col-xs-1{{utils.ndb_align_class(property_db.ndb_property)}}"&gt;{{property_db.verbose_name_}}&lt;/th&gt;
+          &lt;th class="col-xs-1{{utils.ndb_align_class(property_db.ndb_property)}}"&gt;{{("{{_('%s')}}" if project_db.include_babel else '%s') % (property_db.verbose_name_)}}&lt;/th&gt;
         # endif
       # endfor
         &lt;/tr&gt;
