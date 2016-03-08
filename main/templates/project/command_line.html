@@ -4,7 +4,7 @@
   </h3>
 
 <pre><code class="bash">#  If you're starting from scratch
-git clone https://github.com/gae-init/gae-init.git {{project_db.variable_name}}
+git clone https://github.com/gae-init/gae-init{{'-babel' if project_db.include_babel}}.git {{project_db.variable_name}}
 
 &#35; Go to the root of your project
 cd {{project_db.variable_name}}
