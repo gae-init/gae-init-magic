@@ -85,15 +85,15 @@ def admin_{{model_db.variable_name}}_update({{model_db.variable_name}}_id=0):
 
   return flask.render_template(
     '{{model_db.variable_name}}/admin_{{model_db.variable_name}}_update.html',
-    # if model_db.auth_user_key and model_db.title_property_key
+  # if model_db.auth_user_key and model_db.title_property_key
     title={{model_db.variable_name}}_db.{{model_db.title_property_key.get().name}},
-    # elif model_db.auth_user_key and not model_db.title_property_key
+  # elif model_db.auth_user_key and not model_db.title_property_key
     title='%s' % '{{model_db.verbose_name_}}',
-    # elif not model_db.auth_user_key and model_db.title_property_key
+  # elif not model_db.auth_user_key and model_db.title_property_key
     title='%s' % {{model_db.variable_name}}_db.{{model_db.title_property_key.get().name}} if {{model_db.variable_name}}_id else 'New {{model_db.verbose_name_}}',
-    # else
+  # else
     title='%s' % '%s{{model_db.verbose_name_}}' % ('' if {{model_db.variable_name}}_id else 'New '),
-    # endif
+  # endif
     html_class='admin-{{model_db.css_name}}-update',
     form=form,
     {{model_db.variable_name}}_db={{model_db.variable_name}}_db,
