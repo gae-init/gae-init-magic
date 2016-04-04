@@ -13,9 +13,17 @@
       # endfor
         &lt;button type="submit" class="btn btn-primary btn-block btn-loading" &#123;&#123;forms.data_loading_text()&#125;&#125;&gt;
           &#35; if {{model_db.variable_name}}_db.key
+          # if project_db.include_babel
+            &#123;&#123;_('Update')&#125;&#125;
+          # else
             Update
+          # endif
           &#35; else
+          # if project_db.include_babel
+            &#123;&#123;_('Create')&#125;&#125;
+          # else
             Create
+          # endif
           &#35; endif
         &lt;/button&gt;
       &lt;/form&gt;
