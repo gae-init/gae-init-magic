@@ -255,8 +255,6 @@ def model_delete(project_id, model_id):
   if not model_db:
     flask.abort(404)
 
-  property_dbs, property_cursor = model_db.get_property_dbs(limit=-1, keys_only=True)
-  ndb.delete_multi(property_dbs)
   model_db.key.delete()
   flask.flash('Model "%s" deleted.' % model_db.name, category='success')
   return flask.redirect(flask.url_for('model_list', project_id=project_db.key.id()))

@@ -35,6 +35,12 @@ class Project(model.Base):
     model_qry = model_qry.filter(model.Model.variable_name == variable_name)
     return model_qry.get()
 
+  @classmethod
+  def _pre_delete_hook(cls, key):
+    project_db = key.get()
+    model_keys, _null = project_db.get_model_dbs(keys_only=True, limit=-1)
+    ndb.delete_multi(model_keys)
+
   FIELDS = {
       'access': fields.String,
       'description': fields.String,
@@ -47,3 +53,5 @@ class Project(model.Base):
     }
 
   FIELDS.update(model.Base.FIELDS)
+
+

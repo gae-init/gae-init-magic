@@ -129,6 +129,12 @@ class Model(model.Base):
 
     return result
 
+  @classmethod
+  def _pre_delete_hook(cls, key):
+    model_db = key.get()
+    property_keys, _null = model_db.get_property_dbs(keys_only=True, limit=-1)
+    ndb.delete_multi(property_keys)
+
   FIELDS = {
       'admin_only': fields.Boolean,
       'auth_user_key_property': fields.String,

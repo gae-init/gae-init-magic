@@ -5,8 +5,14 @@
 
 # block content
   <div class="page-header">
+    <div class="pull-right text-nowrap">
+      # if project_db.key
+        <form class="pull-left" action="{{url_for('project_delete', project_id=project_db.key.id())}}" method="POST">
+          <button class="btn btn-sm btn-danger" id="btn-delete">Delete</button>
+        </form>
+      # endif
+    </div>
     <h1>
-      <small class="pull-right">Project</small>
       # if project_db.key
         {{utils.back_link('Back', 'model_list', project_id=project_db.key.id())}}
       # else

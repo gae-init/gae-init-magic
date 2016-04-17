@@ -123,3 +123,19 @@ def admin_project_list():
       next_url=util.generate_next_url(project_cursor),
       api_url=flask.url_for('api.projects'),
     )
+
+
+###############################################################################
+# Delete
+###############################################################################
+@app.route('/project/<int:project_id>/delete/', methods=['POST'])
+@auth.login_required
+def project_delete(project_id):
+  user_key = auth.current_user_key()
+  project_db = model.Project.get_by_id(project_id)
+  if not project_db or project_db.user_key != user_key:
+    flask.abort(404)
+
+  project_db.key.delete()
+  flask.flash('Project "%s" deleted.' % project_db.name, category='success')
+  return flask.redirect(flask.url_for('project_list'))

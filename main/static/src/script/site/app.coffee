@@ -32,6 +32,9 @@ $ -> $('html.admin-config').each ->
 $ -> $('html.model-view').each ->
   init_model_view()
 
+$ -> $('html.project-update').each ->
+  init_project_update()
+
 $ -> $('html.model-update').each ->
   init_model_update()
 
