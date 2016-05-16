@@ -100,3 +100,16 @@ def admin_{{model_db.variable_name}}_update({{model_db.variable_name}}_id=0):
     back_url_for='admin_{{model_db.variable_name}}_list',
     api_url=flask.url_for('api.admin.{{model_db.variable_name}}', {{model_db.variable_name}}_key={{model_db.variable_name}}_db.key.urlsafe() if {{model_db.variable_name}}_db.key else ''),
   )
+
+{% raw %}
+###############################################################################
+# Admin Delete
+###############################################################################
+{%- endraw %}
+@app.route('/admin/{{model_db.variable_name}}/&lt;int:{{model_db.variable_name}}_id&gt;/delete/', methods=['POST'])
+@auth.admin_required
+def admin_{{model_db.variable_name}}_delete({{model_db.variable_name}}_id):
+  {{model_db.variable_name}}_db = model.{{model_db.name}}.get_by_id({{model_db.variable_name}}_id)
+  {{model_db.variable_name}}_db.key.delete()
+  flask.flash('{{model_db.name}} deleted.', category='success')
+  return flask.redirect(flask.url_for('admin_{{model_db.variable_name}}_list'))

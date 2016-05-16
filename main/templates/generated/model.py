@@ -28,9 +28,17 @@ class {{model_db.name}}(model.Base):
 # endif
 # set foreign_dbs = model_db.get_foreign_dbs()
 # if foreign_dbs
-{% raw %}{% endraw %}
 {{foreign_dbs}}
-#- else
+  @classmethod
+  def _pre_delete_hook(cls, key):
+    {{model_db.variable_name}}_db = key.get()
+    # set foreign_names = model_db.get_foreign_dbs_names()
+    # for foreign_name in foreign_names
+    {{foreign_name}}_keys, _null = {{model_db.variable_name}}_db.get_{{foreign_name}}_dbs(keys_only=True, limit=-1)
+    # endfor
+    ndb.delete_multi({{'_keys + '.join(foreign_names)}}_keys)
+{% raw %}{% endraw %}
+# else
 {% raw %}{% endraw %}
 # endif
   FIELDS = {

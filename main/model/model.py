@@ -119,14 +119,24 @@ class Model(model.Base):
     for model_db in self.get_dbs(ancestor=self.key.parent())[0]:
       for property_db in model_db.get_property_dbs(ndb_property='ndb.KeyProperty')[0]:
         if property_db.kind.replace('model.', '') == self.name:
-          result += (
+          result += ('\n'
             '  def get_%s_dbs(self, **kwargs):\n'
-            '    return model.%s.get_dbs(%s=self.key, **kwargs)\n\n'
+            '    return model.%s.get_dbs(%s=self.key, **kwargs)\n'
             % (util.camel_to_snake(model_db.name), model_db.name, property_db.name)
           )
           found = True
           break
 
+    return result
+
+  def get_foreign_dbs_names(self):
+    result = []
+    for model_db in self.get_dbs(ancestor=self.key.parent())[0]:
+      for property_db in model_db.get_property_dbs(ndb_property='ndb.KeyProperty')[0]:
+        if property_db.kind.replace('model.', '') == self.name:
+          result.append(util.camel_to_snake(model_db.name))
+          found = True
+          break
     return result
 
   @classmethod

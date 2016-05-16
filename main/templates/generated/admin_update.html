@@ -28,5 +28,10 @@
         &lt;/button&gt;
       &lt;/form&gt;
     &lt;/div&gt;
+    &lt;div class="col-sm-6"&gt;
+      &lt;form class="pull-right" action="&#123;&#123;url_for('admin_{{model_db.variable_name}}_delete', {{model_db.variable_name}}_id={{model_db.variable_name}}_db.key.id())&#125;&#125;" method="POST"&gt;
+        &lt;button class="btn btn-sm btn-danger btn-delete"&gt;Delete&lt;/button&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
 &#35; endblock

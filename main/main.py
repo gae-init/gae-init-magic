@@ -14,6 +14,7 @@ app.jinja_env.globals.update(
   is_iterable=util.is_iterable,
   slugify=util.slugify,
   update_query_argument=util.update_query_argument,
+  camel_to_snake=util.camel_to_snake,
 )
 
 import auth

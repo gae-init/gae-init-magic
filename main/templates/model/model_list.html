@@ -42,9 +42,11 @@
               <a href="{{url_for('model_rank', project_id=project_db.key.id(), model_id=model_db.key.id(), direction='down')}}">
                 <span class="text-muted fa fa-fw fa-chevron-down" title="Move Down"></span></a>
             # endif
+
           </td>
           <td class="h4">
             <span class="fa fa-fw fa-{{model_db.icon}}"></span> {{model_db.name}}
+            {{model_db.get_foreign_dbs_names()}}
           </td>
           <td class="hidden-xs">
             # if model_db.verbose_name
