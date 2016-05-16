@@ -54,6 +54,18 @@ class Admin{{model_db.name}}ListAPI(restful.Resource):
     {{model_db.variable_name}}_dbs, {{model_db.variable_name}}_cursor = model.{{model_db.name}}.get_dbs()
     return helpers.make_response({{model_db.variable_name}}_dbs, model.{{model_db.name}}.FIELDS, {{model_db.variable_name}}_cursor)
 
+  @auth.admin_required
+  def delete(self):
+    {{model_db.variable_name}}_keys = util.param('{{model_db.variable_name}}_keys', list)
+    if not {{model_db.variable_name}}_keys:
+      helpers.make_not_found_exception('{{model_db.name}}(s) %s not found' % {{model_db.variable_name}}_keys)
+    {{model_db.variable_name}}_db_keys = [ndb.Key(urlsafe=k) for k in {{model_db.variable_name}}_keys]
+    ndb.delete_multi({{model_db.variable_name}}_db_keys)
+    return flask.jsonify({
+      'result': {{model_db.variable_name}}_keys,
+      'status': 'success',
+    })
+
 
 @api_v1.resource('/admin/{{model_db.variable_name}}/&lt;string:{{model_db.variable_name}}_key&gt;/', endpoint='api.admin.{{model_db.variable_name}}')
 class Admin{{model_db.name}}API(restful.Resource):
@@ -62,4 +74,12 @@ class Admin{{model_db.name}}API(restful.Resource):
     {{model_db.variable_name}}_db = ndb.Key(urlsafe={{model_db.variable_name}}_key).get()
     if not {{model_db.variable_name}}_db:
       helpers.make_not_found_exception('{{model_db.name}} %s not found' % {{model_db.variable_name}}_key)
+    return helpers.make_response({{model_db.variable_name}}_db, model.{{model_db.name}}.FIELDS)
+
+  @auth.admin_required
+  def delete(self, {{model_db.variable_name}}_key):
+    {{model_db.variable_name}}_db = ndb.Key(urlsafe={{model_db.variable_name}}_key).get()
+    if not {{model_db.variable_name}}_db:
+      helpers.make_not_found_exception('{{model_db.name}} %s not found' % {{model_db.variable_name}}_key)
+    {{model_db.variable_name}}_db.key.delete()
     return helpers.make_response({{model_db.variable_name}}_db, model.{{model_db.name}}.FIELDS)
