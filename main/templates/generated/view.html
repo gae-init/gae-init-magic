@@ -9,10 +9,10 @@
   # if not model_db.admin_only
     &lt;div class="pull-right"&gt;
       &lt;a class="btn btn-default" href="&#123;&#123;url_for('{{model_db.variable_name}}_update')&#125;&#125;" title="Add {{model_db.name}}"&gt;
-        &lt;fa class="fa fa-plus fa-fw"&gt;&lt;/fa&gt;
+        &lt;span class="fa fa-plus fa-fw"&gt;&lt;/span&gt;
       &lt;/a&gt;
       &lt;a class="btn btn-primary" href="&#123;&#123;url_for('{{model_db.variable_name}}_update', {{model_db.variable_name}}_id={{model_db.variable_name}}_db.key.id())&#125;&#125;"&gt;
-        &lt;fa class="fa fa-fw fa-pencil"&gt;&lt;/fa&gt; Edit
+        &lt;span class="fa fa-fw fa-pencil"&gt;&lt;/span&gt; Edit
       &lt;/a&gt;
     &lt;/div&gt;
   # endif
