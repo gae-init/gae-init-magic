@@ -22,6 +22,7 @@ def param(name, cast=None):
   def switch(case):
     return {
       int: wf.Int(missing=None),
+      float: wf.Float(missing=None),
       bool: wf.Bool(missing=None),
       list: wf.DelimitedList(wf.Str(), delimiter=',', missing=[]),
     }.get(case)
@@ -30,7 +31,8 @@ def param(name, cast=None):
   else:
     cast_ = switch(cast) or cast
   args = parser.parse({name: cast_})
-  return ndb.Key(urlsafe=args[name]) if cast is ndb.Key else args[name]
+  value = args[name]
+  return ndb.Key(urlsafe=value) if cast is ndb.Key and value else value
 
 
 def get_next_url(next_url=''):
@@ -207,7 +209,7 @@ def update_query_argument(name, value=None, ignore='cursor', is_list=False):
 
 def parse_tags(tags, separator=None):
   if not is_iterable(tags):
-    tags = str(tags.strip()).split(separator or config.TAG_SEPARATOR)
+    tags = unicode(tags.strip()).split(separator or config.TAG_SEPARATOR)
   return filter(None, sorted(list(set(tags))))
 
 
