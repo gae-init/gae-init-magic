@@ -74,8 +74,16 @@
 
   {{utils.next_link(next_url)}}
 
-<hr>
+  <hr>
 
-# include 'project/command_line.html'
+  # include 'project/command_line.html'
 
+  <h3>Data Model</h3>
+
+  <pre class="model-data"></pre>
+
+# endblock
+
+# block scripts
+  # include 'project/data_diagram.html'
 # endblock
