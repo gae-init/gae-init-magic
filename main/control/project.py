@@ -34,6 +34,10 @@ class ProjectUpdateForm(wtf.Form):
     [wtforms.validators.optional()],
     filters=[util.strip_filter],
   )
+  include_angular = wtforms.BooleanField(
+      model.Project.include_angular._verbose_name,
+      [wtforms.validators.optional()],
+    )
   include_babel = wtforms.BooleanField(
       model.Project.include_babel._verbose_name,
       [wtforms.validators.optional()],
