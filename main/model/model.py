@@ -26,6 +26,10 @@ class Model(model.Base):
     return util.camel_to_snake(self.name)
 
   @ndb.ComputedProperty
+  def variable_name_camel(self):
+    return util.lower_first(self.name)
+
+  @ndb.ComputedProperty
   def css_name(self):
     return util.camel_to_snake(self.name).replace('_', '-')
 

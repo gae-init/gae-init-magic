@@ -232,3 +232,4 @@ def camel_to_verbose(name):
 strip_filter = lambda x: x.strip() if x else ''
 email_filter = lambda x: x.lower().strip() if x else ''
 sort_filter = lambda x: sorted(x) if x else []
+lower_first = lambda x: x[:1].lower() + x[1:] if x else ''

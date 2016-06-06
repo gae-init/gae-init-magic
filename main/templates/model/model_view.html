@@ -57,6 +57,7 @@
 <div id="{{slugify(name)}}" class="anchor"></div>
 <hr class="break">
 <h4 class="text-right">
+  <a href="{{url_for('api.project', project_id=project_db.key.id())}}magic/{{name}}"><span class="fa fa-code"></span></a>
   <span class="{{'text-muted' if not path}}">{{name}}</span>
   <a href="#top" title="Back to top"><fa class="fa fa-fw fa-angle-double-up"></fa></a>
 </h4>

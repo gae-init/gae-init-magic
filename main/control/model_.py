@@ -171,6 +171,14 @@ def model_view(project_id, model_id):
       ('main/templates/%(name)s/admin_%(name)s_update.html' % {'name': model_db.variable_name}, 'generated/admin_update.html', 'html'),
       ('main/templates/%(name)s/admin_%(name)s_list.html' % {'name': model_db.variable_name}, 'generated/admin_list.html', 'html'),
       ('main/api/v1/%s.py' % model_db.variable_name, 'generated/api.py', 'python'),
+      ('main/static/src/script/app/%(name)s/%(name)s-list.template.html' % {'name': model_db.variable_name}, 'generated/angular/list.template.html', 'html'),
+      ('main/static/src/script/app/%(name)s/%(name)s-list.component.js' % {'name': model_db.variable_name}, 'generated/angular/list.component.js', 'js'),
+      ('main/static/src/script/app/%(name)s/%(name)s-list.module.js' % {'name': model_db.variable_name}, 'generated/angular/list.module.js', 'js'),
+      ('main/static/src/script/app/core/%(name)s/%(name)s.module.js' % {'name': model_db.variable_name}, 'generated/angular/model.module.js', 'js'),
+      ('main/static/src/script/app/core/%(name)s/%(name)s.service.js' % {'name': model_db.variable_name}, 'generated/angular/model.service.js', 'js'),
+      ('main/static/src/script/app/core/core.module.js' % {'name': model_db.variable_name}, 'generated/angular/core.module.js', 'js'),
+      ('main/static/src/script/app/app.module.js' % {'name': model_db.variable_name}, 'generated/angular/app.module.js', 'js'),
+      ('main/static/src/script/app/app.config.js' % {'name': model_db.variable_name}, 'generated/angular/app.config.js', 'js'),
     ]
 
   return flask.render_template(

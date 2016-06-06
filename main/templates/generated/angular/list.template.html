@@ -1,0 +1,20 @@
+&lt;div class="alert alert-danger" ng-if="$ctrl.error"&gt;
+  &#123;&#123;$ctrl.error.data.error_code&#125;&#125; - &#123;&#123;$ctrl.error.data.description&#125;&#125;
+&lt;/div&gt;
+
+&lt;div class="table-responsive" ng-if="$ctrl.{{model_db.variable_name}}_dbs"&gt;
+  &lt;table class="table table-bordered table-hover"&gt;
+    &lt;thead&gt;
+      &lt;tr class="text-nowrap"&gt;
+        &lt;th class="col-xs-1"&gt;Modified&lt;/th&gt;
+        &lt;th class="col-xs-1"&gt;Created&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr ng-repeat="{{model_db.variable_name}} in $ctrl.{{model_db.variable_name}}_dbs"&gt;
+        &lt;td&gt;&lt;time am-time-ago="{{model_db.variable_name}}.modified"&gt;&lt;/time&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;time am-time-ago="{{model_db.variable_name}}.created"&gt;&lt;/time&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;
