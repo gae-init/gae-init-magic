@@ -137,14 +137,15 @@ def generate_angular_bits(project_id):
   return response
 
 
-@app.route('/api/v1/project/<int:project_id>/magic/main/static/src/script/app/app.<what>.js')
-def generate_angular_app(project_id, what):
+@app.route('/api/v1/project/<int:project_id>/magic/main/static/src/script/app/<filename>')
+@app.route('/api/v1/project/<int:project_id>/magic/main/templates/<filename>')
+def generate_angular_app(project_id, filename):
   project_db = model.Project.get_by_id(project_id)
   if not project_db:
     flask.abort(404)
   model_dbs, model_cursor = project_db.get_model_dbs()
   response = flask.make_response(flask.render_template(
-    'generated/angular/app.%s.js' % what,
+    'generated/angular/%s' % filename,
     project_db=project_db,
     model_dbs=model_dbs,
   ))

@@ -179,6 +179,7 @@ def model_view(project_id, model_id):
       ('main/static/src/script/app/core/core.module.js' % {'name': model_db.variable_name}, 'generated/angular/core.module.js', 'js'),
       ('main/static/src/script/app/app.module.js' % {'name': model_db.variable_name}, 'generated/angular/app.module.js', 'js'),
       ('main/static/src/script/app/app.config.js' % {'name': model_db.variable_name}, 'generated/angular/app.config.js', 'js'),
+      ('main/templates/angular.html', 'generated/angular/angular.html', 'html'),
     ]
 
   return flask.render_template(
