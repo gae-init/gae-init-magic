@@ -1,4 +1,8 @@
 # import 'macro/utils.html' as utils
+&lt;div class="page-header"&gt;
+  &lt;h1&gt;{{model_db.verbose_name_}}&lt;/h1&gt;
+&lt;/div&gt;
+
 &lt;div class="alert alert-danger" ng-if="$ctrl.error"&gt;
   &#123;&#123;$ctrl.error.data.error_code&#125;&#125; - &#123;&#123;$ctrl.error.data.description&#125;&#125;
 &lt;/div&gt;

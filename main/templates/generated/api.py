@@ -3,8 +3,8 @@
 from __future__ import absolute_import
 
 from google.appengine.ext import ndb
-from flask.ext import restful
 import flask
+import flask_restful
 
 from api import helpers
 import auth
@@ -15,7 +15,7 @@ from main import api_v1
 
 
 @api_v1.resource('/{{model_db.variable_name}}/', endpoint='api.{{model_db.variable_name}}.list')
-class {{model_db.name}}ListAPI(restful.Resource):
+class {{model_db.name}}ListAPI(flask_restful.Resource):
 # if model_db.auth_user_key and not model_db.public_view
   @auth.login_required
 # endif
@@ -25,7 +25,7 @@ class {{model_db.name}}ListAPI(restful.Resource):
 
 
 @api_v1.resource('/{{model_db.variable_name}}/&lt;string:{{model_db.variable_name}}_key&gt;/', endpoint='api.{{model_db.variable_name}}')
-class {{model_db.name}}API(restful.Resource):
+class {{model_db.name}}API(flask_restful.Resource):
 # if model_db.auth_user_key and not model_db.public_view
   @auth.login_required
 # endif
@@ -42,7 +42,7 @@ class {{model_db.name}}API(restful.Resource):
 ###############################################################################
 {%- endraw %}
 @api_v1.resource('/admin/{{model_db.variable_name}}/', endpoint='api.admin.{{model_db.variable_name}}.list')
-class Admin{{model_db.name}}ListAPI(restful.Resource):
+class Admin{{model_db.name}}ListAPI(flask_restful.Resource):
   @auth.admin_required
   def get(self):
     {{model_db.variable_name}}_keys = util.param('{{model_db.variable_name}}_keys', list)
@@ -68,7 +68,7 @@ class Admin{{model_db.name}}ListAPI(restful.Resource):
 
 
 @api_v1.resource('/admin/{{model_db.variable_name}}/&lt;string:{{model_db.variable_name}}_key&gt;/', endpoint='api.admin.{{model_db.variable_name}}')
-class Admin{{model_db.name}}API(restful.Resource):
+class Admin{{model_db.name}}API(flask_restful.Resource):
   @auth.admin_required
   def get(self, {{model_db.variable_name}}_key):
     {{model_db.variable_name}}_db = ndb.Key(urlsafe={{model_db.variable_name}}_key).get()
