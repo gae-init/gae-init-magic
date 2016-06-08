@@ -14,14 +14,14 @@
       &lt;/tr&gt;
     &lt;/thead&gt;
     &lt;tbody&gt;
-      &lt;tr ng-repeat="{{model_db.variable_name}} in $ctrl.{{model_db.variable_name}}_dbs"&gt;
+      &lt;tr ng-repeat="{{model_db.variable_name}}_db in $ctrl.{{model_db.variable_name}}_dbs"&gt;
       # for property_db in property_dbs if property_db.show_on_admin_list
         # set property_title = property_db.get_title_name()
-        &lt;td{{utils.ndb_align_class(property_db.ndb_property, True)}}&gt;&#123;&#123;{{model_db.variable_name}}.{{property_db.name}}&#125;&#125;&lt;/td&gt;
+        &lt;td{{utils.ndb_align_class(property_db.ndb_property, True)}}&gt;&#123;&#123;{{model_db.variable_name}}_db.{{property_db.name}}&#125;&#125;&lt;/td&gt;
       # endfor
         &lt;td&gt;
-          &lt;time am-time-ago="{{model_db.variable_name}}.modified"&gt;&lt;/time&gt;&lt;br&gt;
-          &lt;time class="small" am-time-ago="{{model_db.variable_name}}.created"&gt;&lt;/time&gt;
+          &lt;time am-time-ago="{{model_db.variable_name}}_db.modified"&gt;&lt;/time&gt;&lt;br&gt;
+          &lt;time class="small" am-time-ago="{{model_db.variable_name}}_db.created"&gt;&lt;/time&gt;
         &lt;/td&gt;
       &lt;/tr&gt;
     &lt;/tbody&gt;
