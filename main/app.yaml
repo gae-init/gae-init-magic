@@ -46,6 +46,8 @@ handlers:
 
 - url: /.*
   script: main.app
+  redirect_http_response_code: 301
+  secure: always
 
 skip_files:
 - ^(.*/)?#.*#

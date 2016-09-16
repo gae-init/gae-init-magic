@@ -6,7 +6,7 @@
     "d3": "3.5.10",
     "font-awesome": "~4",
     "highlight.js": "https://github.com/isagalaev/highlight.js.git#8.4",
-    "jquery": "~2",
+    "jquery": "~3",
     "moment": "~2",
     "selectize": "~0"
   },

@@ -76,8 +76,10 @@ class Property(model.Base):
 
   @ndb.ComputedProperty
   def wtf_field(self):
-    required = 'wtforms.validators.%s()' % ('required' if self.required else 'optional')
-    validators = '[%s]' % required
+    validators = ['wtforms.validators.%s()' % ('required' if self.required else 'optional')]
+    if self.ndb_property == 'ndb.StringProperty' and self.wtf_property in ['wtforms.TextAreaField', 'wtforms.StringField']:
+      validators.append('wtforms.validators.length(max=500)')
+    validators = '[%s]' % ', '.join(validators)
     filters = [
         'util.strip_filter' if self.strip_filter else '',
         'util.email_filter' if self.email_filter else '',

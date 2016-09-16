@@ -33,7 +33,7 @@ PARSER.add_argument(
   help='the host to start the dev_appserver.py',
 )
 PARSER.add_argument(
-  '-p', '--port', dest='port', action='store', default='8080',
+  '-p', '--port', dest='port', action='store', default='8020',
   help='the port to start the dev_appserver.py',
 )
 PARSER.add_argument(
@@ -175,7 +175,7 @@ def install_py_libs():
   exclude_prefix = ['setuptools-', 'pip-', 'Pillow-']
   exclude = [
     'test', 'tests', 'pip', 'setuptools', '_markerlib', 'PIL',
-    'easy_install.py', 'pkg_resources.py'
+    'easy_install.py', 'pkg_resources', 'pkg_resources.py'
   ]
 
   def _exclude_prefix(pkg):
