@@ -49,6 +49,10 @@ on_ndb_change = ->
   show_choices = Boolean value.indexOf('ndb.String') == 0
   $('#ndb_choices').parent().toggle show_choices
 
+  show_computed = Boolean value.indexOf('ndb.Computed') == 0
+  $('#default').parent().toggle not show_computed
+  $('#ndb-checkboxes').toggle not show_computed
+
   if $('#ndb_property').is(':focus')
     if not show_kind
       $('#kind').val ''
@@ -116,6 +120,12 @@ on_generic_change = ->
     $('#wtf_property').val('wtforms.BooleanField').change()
     $('#forms_property').val('forms.checkbox_field').change()
     $('#field_property').val('fields.Boolean').change()
+
+  else if value == 'computed'
+    $('#ndb_property').val('ndb.ComputedProperty').change()
+    $('#wtf_property').val('').change()
+    $('#forms_property').val('').change()
+    $('#field_property').val('').change()
 
   else if value == 'string'
     $('#ndb_property').val('ndb.StringProperty').change()

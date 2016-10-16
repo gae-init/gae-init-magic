@@ -47,6 +47,7 @@ TAG_SEPARATOR = ' '
 GENERIC_PROPERIES = [
     ('', '-'),
     ('boolean', 'Boolean'),
+    ('computed', 'Computed'),
     ('date', 'Date'),
     ('datetime', 'DateTime'),
     ('float', 'Float'),

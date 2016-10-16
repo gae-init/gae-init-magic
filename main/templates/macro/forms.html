@@ -177,17 +177,13 @@
     </div>
     <div id="{{slugify(name)}}" class="panel-collapse collapse">
       <div class="panel-body">
-        # if is_iterable(fields)
-          # for field in fields:
-            # if field.type == 'BooleanField'
-              {{checkbox_field(field)}}
-            # else
-              {{text_field(field)}}
-            # endif
-          # endfor
-        #else
-          {{text_field(fields)}}
-        #endif
+        # for field in (fields if is_iterable(fields) else [fields]):
+          # if field.type == 'BooleanField'
+            {{checkbox_field(field)}}
+          # else
+            {{text_field(field)}}
+          # endif
+        # endfor
         # if help
           <p class="help-block">{{help|safe}}</p>
         # endif
