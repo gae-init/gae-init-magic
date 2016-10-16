@@ -1,8 +1,8 @@
 # coding: utf-8
 
 from google.appengine.ext import ndb
-from flask.ext import wtf
 import flask
+import flask_wtf
 import wtforms
 
 import auth
@@ -17,7 +17,7 @@ from main import app
 ###############################################################################
 # Property Update
 ###############################################################################
-class PropertyUpdateForm(wtf.Form):
+class PropertyUpdateForm(flask_wtf.FlaskForm):
   name = wtforms.StringField(
       model.Property.name._verbose_name,
       [wtforms.validators.required()],

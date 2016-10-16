@@ -25,7 +25,7 @@ def admin_{{model_db.variable_name}}_list():
 {%- endraw %}
 
 # if model_db.admin_only
-class {{model_db.name}}UpdateAdminForm(wtf.Form):
+class {{model_db.name}}UpdateAdminForm(flask_wtf.FlaskForm):
 # for property_db in property_dbs if property_db.wtf_property and (property_db.show_on_update or property_db.show_on_admin_update)
   {{property_db.wtf_field}}
 # else

@@ -1,6 +1,6 @@
 $ ->
   init_common()
-  hljs.initHighlightingOnLoad()
+  hljs.initHighlighting()
 
   $('#icon').selectize
     sortField: 'text'

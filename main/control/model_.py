@@ -1,7 +1,7 @@
 # coding: utf-8
 
 from google.appengine.ext import ndb
-from flask.ext import wtf
+import flask_wtf
 import flask
 import wtforms
 import random
@@ -18,7 +18,7 @@ from main import app
 ###############################################################################
 # Model Update
 ###############################################################################
-class ModelUpdateForm(wtf.Form):
+class ModelUpdateForm(flask_wtf.FlaskForm):
   name = wtforms.StringField(
       model.Model.name._verbose_name,
       [wtforms.validators.required()],

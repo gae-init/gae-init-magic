@@ -1,7 +1,7 @@
 # coding: utf-8
 
-from flask.ext import wtf
 import flask
+import flask_wtf
 import wtforms
 
 import auth
@@ -14,7 +14,7 @@ from main import app
 ###############################################################################
 # Update
 ###############################################################################
-class ProjectUpdateForm(wtf.Form):
+class ProjectUpdateForm(flask_wtf.FlaskForm):
   description = wtforms.TextAreaField(
     model.Project.description._verbose_name,
     [wtforms.validators.optional()],

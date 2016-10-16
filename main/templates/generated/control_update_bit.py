@@ -3,7 +3,7 @@
 # Update
 ###############################################################################
 {%- endraw %}
-class {{model_db.name}}UpdateForm(wtf.Form):
+class {{model_db.name}}UpdateForm(flask_wtf.FlaskForm):
 
 # for property_db in property_dbs if property_db.wtf_property and property_db.show_on_update
   {{property_db.wtf_field}}

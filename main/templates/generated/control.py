@@ -1,8 +1,8 @@
 &#35; coding: utf-8
 
-from flask.ext import wtf
 from google.appengine.ext import ndb
 import flask
+import flask_wtf
 import wtforms
 
 import auth
