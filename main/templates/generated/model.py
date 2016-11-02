@@ -3,7 +3,7 @@
 from __future__ import absolute_import
 {% raw %}{% endraw %}
 # if project_db.include_babel
-from flask.ext.babel import lazy_gettext as _
+from flask_babel import lazy_gettext as _
 # endif
 from google.appengine.ext import ndb
 
