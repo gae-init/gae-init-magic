@@ -29,6 +29,13 @@ indexes:
 - kind: Property
   ancestor: yes
   properties:
+  - name: kind
+  - name: ndb_property
+  - name: rank
+
+- kind: Property
+  ancestor: yes
+  properties:
   - name: ndb_property
   - name: rank
 
