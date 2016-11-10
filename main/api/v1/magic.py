@@ -30,7 +30,7 @@ def generate_python_modules(project_id, what, variable_name):
     model_db = project_db.get_model_by_variable_name(variable_name)
     if not model_db:
       flask.abort(404)
-    property_dbs, property_cursor = model_db.get_property_dbs(limit=config.MAX_DB_LIMIT)
+    property_dbs, property_cursor = model_db.get_property_dbs(limit=-1)
     response = flask.make_response(flask.render_template(
       'generated/%s.py' % what,
       project_db=project_db,
@@ -68,7 +68,7 @@ def generate_templates(project_id, directory, variable_name, what):
   if not model_db:
     flask.abort(404)
 
-  property_dbs, property_cursor = model_db.get_property_dbs(limit=config.MAX_DB_LIMIT)
+  property_dbs, property_cursor = model_db.get_property_dbs(limit=-1)
 
   path = 'generated/%s.html' % what
   if '/admin_' in flask.request.path:
@@ -99,7 +99,7 @@ def generate_angular_template(project_id, directory, variable_name):
   if not model_db:
     flask.abort(404)
 
-  property_dbs, property_cursor = model_db.get_property_dbs(limit=config.MAX_DB_LIMIT)
+  property_dbs, property_cursor = model_db.get_property_dbs(limit=-1)
 
   path = 'generated/angular/list.template.html'
   if flask.request.path.endswith('-list.component.js'):
