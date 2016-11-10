@@ -46,4 +46,54 @@
       &lt;/table&gt;
     &lt;/div&gt;
   &lt;/div&gt;
+{% raw %}{% endraw %}
+
+# for foreign_db in model_db.get_foreign_dbs()
+  &#35; set {{foreign_db.variable_name_camel}}_dbs, {{foreign_db.variable_name_camel}}_cursor = {{model_db.variable_name_camel}}_db.get_{{foreign_db.variable_name_camel}}_dbs(limit=-1)
+  &lt;div class="&#123;&#123;'hide' if not {{foreign_db.variable_name}}_dbs|count&#125;&#125;"&gt;
+    &lt;h3&gt;{{foreign_db.name}} List&lt;/h3&gt;
+
+    # set property_dbs, property_cursor = foreign_db.get_property_dbs(limit=-1)
+
+    &lt;div class="table-responsive"&gt;
+      &lt;table class="table table-striped table-bordered table-hover"&gt;
+        &lt;thead&gt;
+          &lt;tr class="text-nowrap"&gt;
+        # for property_db in property_dbs if property_db.show_on_list
+          &lt;th class="col-xs-1{{utils.ndb_align_class(property_db.ndb_property)}}"&gt;{{("{{_('%s')}}" if project_db.include_babel else '%s') % (property_db.verbose_name_)}}&lt;/th&gt;
+        # endfor
+          &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+          &#35; for {{foreign_db.variable_name}}_db in {{foreign_db.variable_name}}_dbs
+            &lt;tr class="row-link" id="&#123;&#123;{{foreign_db.variable_name}}_db.key.urlsafe()&#125;&#125;" data-href="&#123;&#123;url_for('{{foreign_db.variable_name}}_view', {{foreign_db.variable_name}}_id={{foreign_db.variable_name}}_db.key.id())&#125;&#125;"&gt;
+          # for property_db in property_dbs if property_db.show_on_list
+            # set property_title = property_db.get_title_name()
+            # if property_title
+              &lt;td&gt;&#123;&#123;{{foreign_db.variable_name}}_db.{{property_db.name}}.get().{{property_title}} if {{foreign_db.variable_name}}_db.{{property_db.name}} else ''&#125;&#125;&lt;/td&gt;
+            # elif property_db.ndb_property == 'ndb.BooleanProperty'
+              &lt;td{{utils.ndb_align_class(property_db.ndb_property, True)}}&gt;
+                &#35; if {{foreign_db.variable_name}}_db.{{property_db.name}}
+                  &lt;span class="fa fa-fw fa-check"&gt;&lt;/span&gt;
+                &#35; else
+                  &lt;span class="fa fa-fw fa-minus"&gt;&lt;/span&gt;
+                &#35; endif
+              &lt;/td&gt;
+            # elif property_db.tags
+              &lt;td{{utils.ndb_align_class(property_db.ndb_property, True)}}&gt;
+                &#35; for tag in {{foreign_db.variable_name}}_db.{{property_db.name}}
+                  &lt;span class="label label-default"&gt;&#123;&#123;tag&#125;&#125;&lt;/span&gt;
+                &#35; endfor
+              &lt;/td&gt;
+            # else
+              &lt;td{{utils.ndb_align_class(property_db.ndb_property, True)}}&gt;&#123;&#123;{{foreign_db.variable_name}}_db.{{property_db.name}}&#125;&#125;&lt;/td&gt;
+            # endif
+          # endfor
+            &lt;/tr&gt;
+          &#35; endfor
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+# endfor
 &#35; endblock

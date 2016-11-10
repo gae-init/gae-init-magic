@@ -235,7 +235,7 @@ def model_rank(project_id, model_id, direction='up'):
   if not model_db:
     flask.abort(418)
 
-  model_dbs, model_cursor = project_db.get_model_dbs(limit=config.MAX_DB_LIMIT)
+  model_dbs, model_cursor = project_db.get_model_dbs(limit=-1)
 
   found_rank = 1
   for i, m_db in enumerate(model_dbs):
