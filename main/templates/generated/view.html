@@ -46,9 +46,9 @@
       &lt;/table&gt;
     &lt;/div&gt;
   &lt;/div&gt;
-{% raw %}{% endraw %}
 
 # for foreign_db in model_db.get_foreign_dbs()
+  {% raw %}{% endraw %}
   &#35; set {{foreign_db.variable_name_camel}}_dbs, {{foreign_db.variable_name_camel}}_cursor = {{model_db.variable_name_camel}}_db.get_{{foreign_db.variable_name_camel}}_dbs(limit=-1)
   &lt;div class="&#123;&#123;'hide' if not {{foreign_db.variable_name}}_dbs|count&#125;&#125;"&gt;
     &lt;h3&gt;{{foreign_db.name}} List&lt;/h3&gt;
