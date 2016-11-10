@@ -129,7 +129,6 @@ class Model(model.Base):
         )
     return result
 
-  @ndb.ComputedProperty
   def get_child_dbs_names(self):
     result = []
     for model_db in self.get_dbs(ancestor=self.key.parent())[0]:
@@ -140,7 +139,7 @@ class Model(model.Base):
 
   def get_child_dbs(self):
     result = []
-    for model_db in self.get_dbs(ancestor=self.key.parent())[0]:
+    for model_db in self.get_dbs(ancestor=self.key.parent(), show_in_header=True)[0]:
       property_dbs = model_db.get_property_dbs(ndb_property='ndb.KeyProperty', kind='model.%s' % self.name)[0]
       if property_dbs:
         result.append(model_db)

@@ -15,6 +15,12 @@ indexes:
   properties:
   - name: rank
 
+- kind: Model
+  ancestor: yes
+  properties:
+  - name: show_in_header
+  - name: rank
+
 - kind: Project
   properties:
   - name: public
