@@ -45,7 +45,6 @@ class Model(model.Base):
   def verbose_name_(self):
     return self.verbose_name or self.default_verbose_name
 
-  # Make this header clickable in header
   @ndb.ComputedProperty
   def show_in_header(self):
     return not self.admin_only or self.public_view
@@ -118,35 +117,34 @@ class Model(model.Base):
 
     return result
 
+  @ndb.ComputedProperty
   def get_child_get_dbs(self):
     result = ''
     for model_db in self.get_dbs(ancestor=self.key.parent())[0]:
-      for property_db in model_db.get_property_dbs(ndb_property='ndb.KeyProperty')[0]:
-        if property_db.kind.replace('model.', '') == self.name:
-          result += ('\n'
-            '  def get_%s_dbs(self, **kwargs):\n'
-            '    return model.%s.get_dbs(%s=self.key, **kwargs)\n'
-            % (util.camel_to_snake(model_db.name), model_db.name, property_db.name)
-          )
-          break
+      for property_db in model_db.get_property_dbs(ndb_property='ndb.KeyProperty', kind='model.%s' % self.name)[0]:
+        result += ('\n'
+          '  def get_%s_dbs(self, **kwargs):\n'
+          '    return model.%s.get_dbs(%s=self.key, **kwargs)\n'
+          % (model_db.variable_name_camel, model_db.name, property_db.name)
+        )
+        break
     return result
 
   def get_child_dbs(self):
     result = []
     for model_db in self.get_dbs(ancestor=self.key.parent())[0]:
-      for property_db in model_db.get_property_dbs(ndb_property='ndb.KeyProperty')[0]:
-        if property_db.kind.replace('model.', '') == self.name:
-          result.append(model_db)
-          break
+      for property_db in model_db.get_property_dbs(ndb_property='ndb.KeyProperty', kind='model.%s' % self.name)[0]:
+        result.append(model_db)
+        break
     return result
 
+  @ndb.ComputedProperty
   def get_child_dbs_names(self):
     result = []
     for model_db in self.get_dbs(ancestor=self.key.parent())[0]:
-      for property_db in model_db.get_property_dbs(ndb_property='ndb.KeyProperty')[0]:
-        if property_db.kind.replace('model.', '') == self.name:
-          result.append(model_db.variable_name_camel)
-          break
+      for property_db in model_db.get_property_dbs(ndb_property='ndb.KeyProperty', kind='model.%s' % self.name)[0]:
+        result.append(model_db.variable_name_camel)
+        break
     return result
 
   @classmethod
