@@ -49,9 +49,9 @@
 
 # for child_db in model_db.get_child_dbs()
   {% raw %}{% endraw %}
-  &#35; set {{child_db.variable_name_camel}}_dbs, {{child_db.variable_name_camel}}_cursor = {{model_db.variable_name_camel}}_db.get_{{child_db.variable_name_camel}}_dbs(limit=-1)
+  &#35; set {{child_db.variable_name}}_dbs, {{child_db.variable_name}}_cursor = {{model_db.variable_name}}_db.get_{{child_db.variable_name}}_dbs(limit=-1)
   &lt;div class="&#123;&#123;'hide' if not {{child_db.variable_name}}_dbs|count&#125;&#125;"&gt;
-    &lt;h3&gt;{{child_db.name}} List&lt;/h3&gt;
+    &lt;h3&gt;{{child_db.verbose_name_}} List&lt;/h3&gt;
 
     # set property_dbs, property_cursor = child_db.get_property_dbs(limit=-1)
 

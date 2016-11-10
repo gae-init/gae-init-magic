@@ -68,7 +68,6 @@ class Model(model.Base):
         **kwargs
       )
 
-  # TODO: This madness should be done smarter in a way :)
   def get_property_key_choices(self, admin=False):
     model_names = []
     model_dbs, model_cursor = self.key.parent().get().get_model_dbs()
@@ -121,30 +120,30 @@ class Model(model.Base):
   def get_child_get_dbs(self):
     result = ''
     for model_db in self.get_dbs(ancestor=self.key.parent())[0]:
-      for property_db in model_db.get_property_dbs(ndb_property='ndb.KeyProperty', kind='model.%s' % self.name)[0]:
+      property_dbs = model_db.get_property_dbs(ndb_property='ndb.KeyProperty', kind='model.%s' % self.name)[0]
+      if property_dbs:
         result += ('\n'
           '  def get_%s_dbs(self, **kwargs):\n'
           '    return model.%s.get_dbs(%s=self.key, **kwargs)\n'
-          % (model_db.variable_name_camel, model_db.name, property_db.name)
+          % (model_db.variable_name, model_db.name, property_dbs[0].name)
         )
-        break
-    return result
-
-  def get_child_dbs(self):
-    result = []
-    for model_db in self.get_dbs(ancestor=self.key.parent())[0]:
-      for property_db in model_db.get_property_dbs(ndb_property='ndb.KeyProperty', kind='model.%s' % self.name)[0]:
-        result.append(model_db)
-        break
     return result
 
   @ndb.ComputedProperty
   def get_child_dbs_names(self):
     result = []
     for model_db in self.get_dbs(ancestor=self.key.parent())[0]:
-      for property_db in model_db.get_property_dbs(ndb_property='ndb.KeyProperty', kind='model.%s' % self.name)[0]:
-        result.append(model_db.variable_name_camel)
-        break
+      property_dbs = model_db.get_property_dbs(ndb_property='ndb.KeyProperty', kind='model.%s' % self.name)[0]
+      if property_dbs:
+        result.append(model_db.variable_name)
+    return result
+
+  def get_child_dbs(self):
+    result = []
+    for model_db in self.get_dbs(ancestor=self.key.parent())[0]:
+      property_dbs = model_db.get_property_dbs(ndb_property='ndb.KeyProperty', kind='model.%s' % self.name)[0]
+      if property_dbs:
+        result.append(model_db)
     return result
 
   @classmethod
