@@ -118,7 +118,7 @@ class Model(model.Base):
 
     return result
 
-  def get_foreign_get_dbs(self):
+  def get_child_get_dbs(self):
     result = ''
     for model_db in self.get_dbs(ancestor=self.key.parent())[0]:
       for property_db in model_db.get_property_dbs(ndb_property='ndb.KeyProperty')[0]:
@@ -131,7 +131,7 @@ class Model(model.Base):
           break
     return result
 
-  def get_foreign_dbs(self):
+  def get_child_dbs(self):
     result = []
     for model_db in self.get_dbs(ancestor=self.key.parent())[0]:
       for property_db in model_db.get_property_dbs(ndb_property='ndb.KeyProperty')[0]:
@@ -140,7 +140,7 @@ class Model(model.Base):
           break
     return result
 
-  def get_foreign_dbs_names(self):
+  def get_child_dbs_names(self):
     result = []
     for model_db in self.get_dbs(ancestor=self.key.parent())[0]:
       for property_db in model_db.get_property_dbs(ndb_property='ndb.KeyProperty')[0]:
