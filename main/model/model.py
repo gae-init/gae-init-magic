@@ -49,6 +49,14 @@ class Model(model.Base):
   def show_in_header(self):
     return not self.admin_only or self.public_view
 
+  @ndb.ComputedProperty
+  def has_update(self):
+    return not self.admin_only
+
+  @ndb.ComputedProperty
+  def has_view(self):
+    return not self.admin_only or self.public_view
+
   @classmethod
   def get_dbs(cls, order=None, **kwargs):
     return super(Model, cls).get_dbs(
@@ -150,17 +158,20 @@ class Model(model.Base):
       'auth_user_key_property': fields.String,
       'auth_user_key': fields.Key,
       'css_name': fields.String,
+      'default_order': fields.String,
       'default_verbose_name': fields.String,
+      'has_view': fields.Boolean,
+      'has_update': fields.Boolean,
       'icon': fields.String,
       'name': fields.String,
       'property_count': fields.Integer,
       'public_view': fields.Boolean,
       'rank': fields.Integer,
+      'show_in_header': fields.Boolean,
       'title_property_key': fields.Key,
       'variable_name': fields.String,
       'verbose_name_': fields.String,
       'verbose_name': fields.String,
-      'default_order': fields.String,
     }
 
   FIELDS.update(model.Base.FIELDS)
