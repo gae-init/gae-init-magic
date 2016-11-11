@@ -26,17 +26,16 @@ class {{model_db.name}}(model.Base):
       **kwargs
     )
 # endif
-# set child_get_dbs = model_db.get_child_get_dbs
-# if child_get_dbs
-{{child_get_dbs}}
+# set get_model_dbs, model_names = model_db.get_child_model_stuff
+# if get_model_dbs
+{{get_model_dbs}}
   @classmethod
   def _pre_delete_hook(cls, key):
     {{model_db.variable_name}}_db = key.get()
-    # set child_dbs_names = model_db.get_child_dbs_names()
-    # for child_db_name in child_dbs_names
+    # for child_db_name in model_names
     {{child_db_name}}_keys, _null = {{model_db.variable_name}}_db.get_{{child_db_name}}_dbs(keys_only=True, limit=-1)
     # endfor
-    ndb.delete_multi({{'_keys + '.join(child_dbs_names)}}_keys)
+    ndb.delete_multi({{'_keys + '.join(model_names)}}_keys)
 {% raw %}{% endraw %}
 # else
 {% raw %}{% endraw %}

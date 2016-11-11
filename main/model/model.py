@@ -117,25 +117,21 @@ class Model(model.Base):
     return result
 
   @ndb.ComputedProperty
-  def get_child_get_dbs(self):
-    result = ''
+  def get_child_model_stuff(self):
+    get_model_dbs = ''
+    model_names = []
+
     for model_db in self.get_dbs(ancestor=self.key.parent())[0]:
       property_dbs = model_db.get_property_dbs(ndb_property='ndb.KeyProperty', kind='model.%s' % self.name)[0]
       if property_dbs:
-        result += ('\n'
+        get_model_dbs += ('\n'
           '  def get_%s_dbs(self, **kwargs):\n'
           '    return model.%s.get_dbs(%s=self.key, **kwargs)\n'
           % (model_db.variable_name, model_db.name, property_dbs[0].name)
         )
-    return result
+        model_names.append(model_db.variable_name)
 
-  def get_child_dbs_names(self):
-    result = []
-    for model_db in self.get_dbs(ancestor=self.key.parent())[0]:
-      property_dbs = model_db.get_property_dbs(ndb_property='ndb.KeyProperty', kind='model.%s' % self.name)[0]
-      if property_dbs:
-        result.append(model_db.variable_name)
-    return result
+    return get_model_dbs, model_names
 
   def get_child_dbs(self):
     result = []
