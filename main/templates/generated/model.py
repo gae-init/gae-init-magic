@@ -27,14 +27,15 @@ class {{model_db.name}}(model.Base):
     )
 # endif
 # set get_model_dbs, model_names = model_db.get_child_model_stuff
+# set model_names = model_names.split(',')
 # if get_model_dbs
 {{get_model_dbs}}
   @classmethod
   def _pre_delete_hook(cls, key):
     {{model_db.variable_name}}_db = key.get()
-    # for child_db_name in model_names
-    {{child_db_name}}_keys, _null = {{model_db.variable_name}}_db.get_{{child_db_name}}_dbs(keys_only=True, limit=-1)
-    # endfor
+  # for child_db_name in model_names
+    {{child_db_name}}_keys = {{model_db.variable_name}}_db.get_{{child_db_name}}_dbs(keys_only=True, limit=-1)[0]
+  # endfor
     ndb.delete_multi({{'_keys + '.join(model_names)}}_keys)
 {% raw %}{% endraw %}
 # else
