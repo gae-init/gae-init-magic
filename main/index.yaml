@@ -13,6 +13,12 @@ indexes:
 - kind: Model
   ancestor: yes
   properties:
+  - name: has_view
+  - name: rank
+
+- kind: Model
+  ancestor: yes
+  properties:
   - name: rank
 
 - kind: Model

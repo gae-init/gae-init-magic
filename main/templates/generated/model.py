@@ -26,8 +26,10 @@ class {{model_db.name}}(model.Base):
       **kwargs
     )
 # endif
-# set get_model_dbs, model_names = model_db.get_child_model_stuff
-# set model_names = model_names.split(',')
+# set get_child_model_stuff = model_db.get_child_model_stuff
+# set model_names = get_child_model_stuff.split('\n')[0].split(',')
+# set get_model_dbs = '\n'.join(get_child_model_stuff.split('\n')[1:])
+
 # if get_model_dbs
 {{get_model_dbs}}
   @classmethod

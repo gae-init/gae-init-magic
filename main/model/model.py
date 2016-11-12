@@ -137,15 +137,16 @@ class Model(model.Base):
           % (model_db.variable_name, model_db.name, property_dbs[0].name)
         )
         model_names.append(model_db.variable_name)
-    return [get_model_dbs, ','.join(model_names)]
+    # should split when used
+    return '%s\n%s' % (','.join(model_names), get_model_dbs)
 
-  # def get_child_dbs(self):
-  #   result = []
-  #   for model_db in self.get_dbs(ancestor=self.key.parent(), show_in_header=True)[0]:
-  #     property_dbs = model_db.get_property_dbs(ndb_property='ndb.KeyProperty', kind='model.%s' % self.name)[0]
-  #     if property_dbs:
-  #       result.append(model_db)
-  #   return result
+  def get_child_dbs(self):
+    result = []
+    for model_db in self.get_dbs(ancestor=self.key.parent())[0]:
+      property_dbs = model_db.get_property_dbs(ndb_property='ndb.KeyProperty', kind='model.%s' % self.name)[0]
+      if property_dbs:
+        result.append(model_db)
+    return result
 
   @classmethod
   def _pre_delete_hook(cls, key):
