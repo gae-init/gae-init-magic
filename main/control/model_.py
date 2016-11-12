@@ -155,22 +155,26 @@ def model_view(project_id, model_id):
   property_dbs, property_cursor = model_db.get_property_dbs()
 
   files = [
-      ('main/control/__init__.py', 'generated/control_init.py', 'python'),
-      ('main/model/__init__.py', 'generated/model_init.py', 'python'),
-      ('main/api/v1/__init__.py', 'generated/api_init.py', 'python'),
-      ('main/templates/bit/header.html', 'generated/bit/header.html', 'html'),
-      ('main/templates/admin/admin.html', 'generated/admin/admin.html', 'html'),
+    ('main/control/__init__.py', 'generated/control_init.py', 'python'),
+    ('main/model/__init__.py', 'generated/model_init.py', 'python'),
+    ('main/api/v1/__init__.py', 'generated/api_init.py', 'python'),
+    ('main/templates/bit/header.html', 'generated/bit/header.html', 'html'),
+    ('main/templates/admin/admin.html', 'generated/admin/admin.html', 'html'),
 
-      ('main/model/%s.py' % model_db.variable_name, 'generated/model.py', 'python'),
-      ('main/control/%s.py' % model_db.variable_name, 'generated/control.py', 'python'),
+    ('main/model/%s.py' % model_db.variable_name, 'generated/model.py', 'python'),
+    ('main/control/%s.py' % model_db.variable_name, 'generated/control.py', 'python'),
 
-      ('main/templates/%(name)s/%(name)s_update.html' % {'name': model_db.variable_name}, 'generated/update.html', 'html'),
-      ('main/templates/%(name)s/%(name)s_view.html' % {'name': model_db.variable_name}, 'generated/view.html', 'html'),
-      ('main/templates/%(name)s/%(name)s_list.html' % {'name': model_db.variable_name}, 'generated/list.html', 'html'),
+    ('main/templates/%(name)s/%(name)s_update.html' % {'name': model_db.variable_name}, 'generated/update.html', 'html'),
+    ('main/templates/%(name)s/%(name)s_view.html' % {'name': model_db.variable_name}, 'generated/view.html', 'html'),
+    ('main/templates/%(name)s/%(name)s_list.html' % {'name': model_db.variable_name}, 'generated/list.html', 'html'),
 
-      ('main/templates/%(name)s/admin_%(name)s_update.html' % {'name': model_db.variable_name}, 'generated/admin_update.html', 'html'),
-      ('main/templates/%(name)s/admin_%(name)s_list.html' % {'name': model_db.variable_name}, 'generated/admin_list.html', 'html'),
-      ('main/api/v1/%s.py' % model_db.variable_name, 'generated/api.py', 'python'),
+    ('main/templates/%(name)s/admin_%(name)s_update.html' % {'name': model_db.variable_name}, 'generated/admin_update.html', 'html'),
+    ('main/templates/%(name)s/admin_%(name)s_list.html' % {'name': model_db.variable_name}, 'generated/admin_list.html', 'html'),
+    ('main/api/v1/%s.py' % model_db.variable_name, 'generated/api.py', 'python'),
+  ]
+
+  if project_db.include_angular:
+    files += [
       ('main/static/src/script/app/%(name)s/%(name)s-list.template.html' % {'name': model_db.variable_name}, 'generated/angular/list.template.html', 'html'),
       ('main/static/src/script/app/%(name)s/%(name)s-list.component.js' % {'name': model_db.variable_name}, 'generated/angular/list.component.js', 'js'),
       ('main/static/src/script/app/%(name)s/%(name)s-list.module.js' % {'name': model_db.variable_name}, 'generated/angular/list.module.js', 'js'),
