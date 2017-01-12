@@ -300,6 +300,7 @@ def url_for_signin(service_name, next_url):
 
 def urls_for_oauth(next_url):
   return {
+    'azure_ad_signin_url': url_for_signin('azure_ad', next_url),
     'bitbucket_signin_url': url_for_signin('bitbucket', next_url),
     'dropbox_signin_url': url_for_signin('dropbox', next_url),
     'facebook_signin_url': url_for_signin('facebook', next_url),
@@ -308,6 +309,7 @@ def urls_for_oauth(next_url):
     'gae_signin_url': url_for_signin('gae', next_url),
     'instagram_signin_url': url_for_signin('instagram', next_url),
     'linkedin_signin_url': url_for_signin('linkedin', next_url),
+    'mailru_signin_url': url_for_signin('mailru', next_url),
     'microsoft_signin_url': url_for_signin('microsoft', next_url),
     'reddit_signin_url': url_for_signin('reddit', next_url),
     'twitter_signin_url': url_for_signin('twitter', next_url),

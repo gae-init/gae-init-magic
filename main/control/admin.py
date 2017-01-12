@@ -86,6 +86,8 @@ def admin_config():
 # Auth Stuff
 ###############################################################################
 class AuthUpdateForm(flask_wtf.FlaskForm):
+  azure_ad_client_id = wtforms.StringField(model.Config.azure_ad_client_id._verbose_name, filters=[util.strip_filter])
+  azure_ad_client_secret = wtforms.StringField(model.Config.azure_ad_client_secret._verbose_name, filters=[util.strip_filter])
   bitbucket_key = wtforms.StringField(model.Config.bitbucket_key._verbose_name, filters=[util.strip_filter])
   bitbucket_secret = wtforms.StringField(model.Config.bitbucket_secret._verbose_name, filters=[util.strip_filter])
   dropbox_app_key = wtforms.StringField(model.Config.dropbox_app_key._verbose_name, filters=[util.strip_filter])
@@ -100,6 +102,8 @@ class AuthUpdateForm(flask_wtf.FlaskForm):
   instagram_client_secret = wtforms.StringField(model.Config.instagram_client_secret._verbose_name, filters=[util.strip_filter])
   linkedin_api_key = wtforms.StringField(model.Config.linkedin_api_key._verbose_name, filters=[util.strip_filter])
   linkedin_secret_key = wtforms.StringField(model.Config.linkedin_secret_key._verbose_name, filters=[util.strip_filter])
+  mailru_app_id = wtforms.StringField(model.Config.mailru_app_id._verbose_name, filters=[util.strip_filter])
+  mailru_app_secret = wtforms.StringField(model.Config.mailru_app_secret._verbose_name, filters=[util.strip_filter])
   microsoft_client_id = wtforms.StringField(model.Config.microsoft_client_id._verbose_name, filters=[util.strip_filter])
   microsoft_client_secret = wtforms.StringField(model.Config.microsoft_client_secret._verbose_name, filters=[util.strip_filter])
   reddit_client_id = wtforms.StringField(model.Config.reddit_client_id._verbose_name, filters=[util.strip_filter])
