@@ -1,15 +1,15 @@
 {
-  "name": "gae-init",
   "dependencies": {
-    "bootstrap": "~3",
-    "bootswatch": "~3",
-    "d3": "3.5.10",
-    "font-awesome": "~4",
+    "bootstrap": "3.3.7",
+    "bootswatch": "3.3.7",
+    "d3": "4.12.2",
+    "font-awesome": "4.7.0",
     "highlight.js": "https://github.com/isagalaev/highlight.js.git#8.4",
-    "jquery": "~3",
-    "moment": "~2",
-    "selectize": "~0"
+    "jquery": "3.2.1",
+    "moment": "2.20.1",
+    "selectize": "0.12.4"
   },
+  "name": "gae-init",
   "overrides": {
     "bootstrap": {
       "main": ["less/**", "fonts/*", "js/*"]
