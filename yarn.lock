@@ -1269,13 +1269,9 @@ commander@^2.9.0:
   dependencies:
     graceful-readlink ">= 1.0.0"
 
-commander@~2.12.1:
-  version "2.12.2"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-2.12.2.tgz#0f5946c427ed9ec0d91a46bb9def53e54650e555"
-
-commander@~2.14.1:
-  version "2.14.1"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-2.14.1.tgz#2235123e37af8ca3c65df45b026dbd357b01b9aa"
+commander@~2.15.0:
+  version "2.15.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.15.0.tgz#ad2a23a1c3b036e392469b8012cec6b33b4c1322"
 
 component-bind@1.0.0:
   version "1.0.0"
@@ -5968,11 +5964,11 @@ ua-parser-js@0.7.12:
   version "0.7.12"
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.12.tgz#04c81a99bdd5dc52263ea29d24c6bf8d4818a4bb"
 
-uglify-js@3.3.10:
-  version "3.3.10"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.3.10.tgz#8e47821d4cf28e14c1826a0078ba0825ed094da8"
+uglify-js@3.3.15, uglify-js@^3.0.5:
+  version "3.3.15"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.3.15.tgz#5b8783b6856110d3a03a9b81e07324a3b925f2dd"
   dependencies:
-    commander "~2.14.1"
+    commander "~2.15.0"
     source-map "~0.6.1"
 
 uglify-js@^2.8.22:
@@ -5983,13 +5979,6 @@ uglify-js@^2.8.22:
     yargs "~3.10.0"
   optionalDependencies:
     uglify-to-browserify "~1.0.0"
-
-uglify-js@^3.0.5:
-  version "3.3.5"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.3.5.tgz#4c4143dfe08e8825746675cc49a6874a933b543e"
-  dependencies:
-    commander "~2.12.1"
-    source-map "~0.6.1"
 
 uglify-to-browserify@~1.0.0:
   version "1.0.2"
