@@ -234,7 +234,7 @@ def property_rank(project_id, model_id, property_id, direction='up'):
   if not property_db:
     flask.abort(404)
 
-  property_dbs, property_cursor = model_db.get_property_dbs(limit=config.MAX_DB_LIMIT)
+  property_dbs, property_cursor = model_db.get_property_dbs(limit=-1)
 
   found_rank = 1
   for i, p_db in enumerate(property_dbs):
