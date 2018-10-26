@@ -2,7 +2,7 @@ paths = require './paths'
 
 config =
   host: "127.0.0.1"
-  port: "8080"
+  port: "8020"
   ext: [
     "#{paths.static.ext}/jquery/dist/jquery.js"
     "#{paths.static.ext}/moment/moment.js"
