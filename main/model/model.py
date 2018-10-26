@@ -154,6 +154,7 @@ class Model(model.Base):
       'auth_user_key_property': fields.String,
       'auth_user_key': fields.Key,
       'css_name': fields.String,
+      'default_order': fields.String,
       'default_verbose_name': fields.String,
       'icon': fields.String,
       'name': fields.String,
@@ -164,7 +165,6 @@ class Model(model.Base):
       'variable_name': fields.String,
       'verbose_name_': fields.String,
       'verbose_name': fields.String,
-      'default_order': fields.String,
     }
 
   FIELDS.update(model.Base.FIELDS)
