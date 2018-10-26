@@ -1,15 +1,19 @@
 gulp = require('gulp-help') require 'gulp'
+browserSync = require('browser-sync')
 $ = require('gulp-load-plugins')()
+config = require '../config'
 paths = require '../paths'
 
 
-gulp.task 'reload', false, ->
-  $.livereload.listen 36789
+gulp.task 'browser-sync', false, ->
+  browserSync.init
+    proxy: "#{config.host}:#{config.port}"
+    notify: false
   $.watch [
     "#{paths.static.dev}/**/*.{css,js}"
     "#{paths.main}/**/*.{html,py}"
   ], events: ['change'], (file) ->
-    $.livereload.changed file
+    browserSync.reload()
 
 
 gulp.task 'ext_watch_rebuild', false, (callback) ->
@@ -20,7 +24,7 @@ gulp.task 'watch', false, ->
   $.watch 'requirements.txt', ->
     $.sequence('pip')()
   $.watch 'package.json', ->
-    $.sequence('npm')()
+    $.sequence('yarn')()
   $.watch 'bower.json', ->
     $.sequence('ext_watch_rebuild')()
   $.watch 'gulp/config.coffee', ->

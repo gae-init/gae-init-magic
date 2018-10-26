@@ -3,7 +3,7 @@
 from __future__ import absolute_import
 
 from google.appengine.ext import ndb
-from flask.ext import restful
+import flask_restful
 
 from api import helpers
 import model
@@ -13,7 +13,7 @@ from main import api_v1
 
 
 @api_v1.resource('/project/', endpoint='api.projects')
-class ProjectsAPI(restful.Resource):
+class ProjectsAPI(flask_restful.Resource):
   def get(self):
     project_keys = util.param('project_keys', list)
     if project_keys:
@@ -26,7 +26,7 @@ class ProjectsAPI(restful.Resource):
 
 
 @api_v1.resource('/project/<int:project_id>/', endpoint='api.project')
-class ProjectAPI(restful.Resource):
+class ProjectAPI(flask_restful.Resource):
   def get(self, project_id):
     project_db = model.Project.get_by_id(project_id)
     if not project_db:

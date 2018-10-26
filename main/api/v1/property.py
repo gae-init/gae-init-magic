@@ -2,7 +2,7 @@
 
 from __future__ import absolute_import
 
-from flask.ext import restful
+import flask_restful
 import flask
 
 from api import helpers
@@ -12,7 +12,7 @@ from main import api_v1
 
 
 @api_v1.resource('/project/<int:project_id>/model/<int:model_id>/property/', endpoint='api.properties')
-class PropertiesAPI(restful.Resource):
+class PropertiesAPI(flask_restful.Resource):
   def get(self, project_id, model_id):
     project_db = model.Project.get_by_id(project_id)
     if not project_db:
@@ -27,7 +27,7 @@ class PropertiesAPI(restful.Resource):
 
 
 @api_v1.resource('/project/<int:project_id>/model/<int:model_id>/property/<int:property_id>/', endpoint='api.property')
-class PropertyAPI(restful.Resource):
+class PropertyAPI(flask_restful.Resource):
   def get(self, project_id, model_id, property_id):
     project_db = model.Project.get_by_id(project_id)
     if not project_db:
