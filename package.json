@@ -65,6 +65,7 @@
   },
   "scripts": {
     "build": "gulp build",
+    "deploy": "gulp deploy --project=gae-init",
     "fix:assets": "yarn prettier --write",
     "fix:code": "yarn test:code --fix",
     "fix": "yarn fix:assets && yarn fix:code",
