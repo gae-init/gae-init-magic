@@ -45,9 +45,16 @@ class Model(model.Base):
   def verbose_name_(self):
     return self.verbose_name or self.default_verbose_name
 
-  # Make this header clickable in header
   @ndb.ComputedProperty
   def show_in_header(self):
+    return not self.admin_only or self.public_view
+
+  @ndb.ComputedProperty
+  def has_update(self):
+    return not self.admin_only
+
+  @ndb.ComputedProperty
+  def has_view(self):
     return not self.admin_only or self.public_view
 
   @classmethod
@@ -69,7 +76,6 @@ class Model(model.Base):
         **kwargs
       )
 
-  # TODO: This madness should be done smarter in a way :)
   def get_property_key_choices(self, admin=False):
     model_names = []
     model_dbs, model_cursor = self.key.parent().get().get_model_dbs()
@@ -118,29 +124,28 @@ class Model(model.Base):
 
     return result
 
-  def get_foreign_dbs(self):
-    result = ''
+  @ndb.ComputedProperty
+  def get_child_model_stuff(self):
+    get_model_dbs = ''
+    model_names = []
     for model_db in self.get_dbs(ancestor=self.key.parent())[0]:
-      for property_db in model_db.get_property_dbs(ndb_property='ndb.KeyProperty')[0]:
-        if property_db.kind.replace('model.', '') == self.name:
-          result += ('\n'
-            '  def get_%s_dbs(self, **kwargs):\n'
-            '    return model.%s.get_dbs(%s=self.key, **kwargs)\n'
-            % (util.camel_to_snake(model_db.name), model_db.name, property_db.name)
-          )
-          found = True
-          break
+      property_dbs = model_db.get_property_dbs(ndb_property='ndb.KeyProperty', kind='model.%s' % self.name)[0]
+      if property_dbs:
+        get_model_dbs += ('\n'
+          '  def get_%s_dbs(self, **kwargs):\n'
+          '    return model.%s.get_dbs(%s=self.key, **kwargs)\n'
+          % (model_db.variable_name, model_db.name, property_dbs[0].name)
+        )
+        model_names.append(model_db.variable_name)
+    # should split when used
+    return '%s\n%s' % (','.join(model_names), get_model_dbs)
 
-    return result
-
-  def get_foreign_dbs_names(self):
+  def get_child_dbs(self):
     result = []
     for model_db in self.get_dbs(ancestor=self.key.parent())[0]:
-      for property_db in model_db.get_property_dbs(ndb_property='ndb.KeyProperty')[0]:
-        if property_db.kind.replace('model.', '') == self.name:
-          result.append(util.camel_to_snake(model_db.name))
-          found = True
-          break
+      property_dbs = model_db.get_property_dbs(ndb_property='ndb.KeyProperty', kind='model.%s' % self.name)[0]
+      if property_dbs:
+        result.append(model_db)
     return result
 
   @classmethod
@@ -156,11 +161,14 @@ class Model(model.Base):
       'css_name': fields.String,
       'default_order': fields.String,
       'default_verbose_name': fields.String,
+      'has_view': fields.Boolean,
+      'has_update': fields.Boolean,
       'icon': fields.String,
       'name': fields.String,
       'property_count': fields.Integer,
       'public_view': fields.Boolean,
       'rank': fields.Integer,
+      'show_in_header': fields.Boolean,
       'title_property_key': fields.Key,
       'variable_name': fields.String,
       'verbose_name_': fields.String,
