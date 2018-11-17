@@ -17,7 +17,6 @@ class Project(model.Base):
   public = ndb.BooleanProperty(default=False, verbose_name='Make this project publicly accessible')
   access = ndb.StringProperty(default=util.uuid()[:4], verbose_name='Access Code')
   model_count = ndb.IntegerProperty(default=0)
-  include_angular = ndb.BooleanProperty(default=False, verbose_name='Include Angular')
   include_babel = ndb.BooleanProperty(default=False, verbose_name='Include Babel (Experimental)')
 
   @ndb.ComputedProperty
@@ -45,7 +44,6 @@ class Project(model.Base):
   FIELDS = {
       'access': fields.String,
       'description': fields.String,
-      'include_angular': fields.Boolean,
       'include_babel': fields.Boolean,
       'model_count': fields.Integer,
       'name': fields.String,

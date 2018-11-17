@@ -173,19 +173,6 @@ def model_view(project_id, model_id):
     ('main/api/v1/%s.py' % model_db.variable_name, 'generated/api.py', 'python'),
   ]
 
-  if project_db.include_angular:
-    files += [
-      ('main/static/src/script/app/%(name)s/%(name)s-list.template.html' % {'name': model_db.variable_name}, 'generated/angular/list.template.html', 'html'),
-      ('main/static/src/script/app/%(name)s/%(name)s-list.component.js' % {'name': model_db.variable_name}, 'generated/angular/list.component.js', 'js'),
-      ('main/static/src/script/app/%(name)s/%(name)s-list.module.js' % {'name': model_db.variable_name}, 'generated/angular/list.module.js', 'js'),
-      ('main/static/src/script/app/core/%(name)s/%(name)s.module.js' % {'name': model_db.variable_name}, 'generated/angular/model.module.js', 'js'),
-      ('main/static/src/script/app/core/%(name)s/%(name)s.service.js' % {'name': model_db.variable_name}, 'generated/angular/model.service.js', 'js'),
-      ('main/static/src/script/app/core/core.module.js' % {'name': model_db.variable_name}, 'generated/angular/core.module.js', 'js'),
-      ('main/static/src/script/app/app.module.js' % {'name': model_db.variable_name}, 'generated/angular/app.module.js', 'js'),
-      ('main/static/src/script/app/app.config.js' % {'name': model_db.variable_name}, 'generated/angular/app.config.js', 'js'),
-      ('main/templates/angular.html', 'generated/angular/angular.html', 'html'),
-    ]
-
   return flask.render_template(
       'model/model_view.html',
       title=model_db.name,
