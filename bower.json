@@ -2,7 +2,7 @@
   "dependencies": {
     "bootstrap": "3.3.7",
     "bootswatch": "https://github.com/lipis/bootswatch.git#3.3.7-a",
-    "d3": "4.12.2",
+    "d3": "3.5.17",
     "font-awesome": "4.7.0",
     "highlight.js": "https://github.com/isagalaev/highlight.js.git#8.4",
     "jquery": "3.3.1",
