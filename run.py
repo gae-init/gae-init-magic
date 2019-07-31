@@ -13,7 +13,7 @@ import sys
 import urllib
 import urllib2
 
-__version__ = '6.0.2'
+__version__ = '6.2.0'
 
 
 ###############################################################################
@@ -118,7 +118,7 @@ def site_packages_path():
 
 def create_virtualenv():
   if not os.path.exists(FILE_VENV):
-    os.system('virtualenv --no-site-packages %s' % DIR_VENV)
+    os.system('virtualenv --no-site-packages -p python2 %s' % DIR_VENV)
     os.system('echo %s >> %s' % (
       'set PYTHONPATH=' if IS_WINDOWS else 'unset PYTHONPATH', FILE_VENV
     ))
@@ -176,10 +176,7 @@ def install_py_libs():
 
   exclude_ext = ['.pth', '.pyc', '.egg-info', '.dist-info', '.so']
   exclude_prefix = ['setuptools-', 'pip-', 'Pillow-']
-  exclude = [
-    'test', 'tests', 'pip', 'setuptools', '_markerlib', 'PIL',
-    'easy_install.py', 'pkg_resources', 'pkg_resources.py'
-  ]
+  exclude = ['test', 'tests', 'pip', 'setuptools', '_markerlib', 'PIL', 'easy_install.py']
 
   def _exclude_prefix(pkg):
     for prefix in exclude_prefix:
