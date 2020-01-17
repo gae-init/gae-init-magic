@@ -29,6 +29,7 @@ class Property(model.Base):
   indexed = ndb.BooleanProperty(default=True)
   auto_now = ndb.BooleanProperty(default=False)
   auto_now_add = ndb.BooleanProperty(default=False)
+  compressed = ndb.BooleanProperty(default=False)
   ndb_choices = ndb.StringProperty(verbose_name='Choices')
 
   field_property = ndb.StringProperty(default='')
@@ -52,6 +53,7 @@ class Property(model.Base):
       'required=True' if self.required else '',
       'repeated=%s' % self.repeated if self.repeated else '',
       'indexed=False' if not self.indexed else '',
+      'compressed=True' if self.compressed else '',
       'choices=[%s]' % self.ndb_choices if self.ndb_choices else '',
     ]
     if include_babel:

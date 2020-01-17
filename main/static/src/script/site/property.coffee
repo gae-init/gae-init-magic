@@ -43,6 +43,9 @@ on_ndb_change = ->
   show_kind = Boolean value.indexOf('ndb.Key') == 0
   $('#kind').parent().toggle show_kind
 
+  show_compressed = Boolean value.indexOf('ndb.Json') == 0
+  $('#compressed').parent().toggle show_compressed
+
   show_tags = Boolean value.indexOf('ndb.String') == 0
   $('#tags').parent().toggle show_tags
 
