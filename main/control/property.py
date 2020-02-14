@@ -81,6 +81,10 @@ class PropertyUpdateForm(flask_wtf.FlaskForm):
       model.Property.repeated._verbose_name,
       [wtforms.validators.optional()],
     )
+  compressed = wtforms.BooleanField(
+      model.Property.compressed._verbose_name,
+      [wtforms.validators.optional()],
+    )
   tags = wtforms.BooleanField(
       model.Property.tags._verbose_name,
       [wtforms.validators.optional()],

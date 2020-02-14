@@ -13,7 +13,7 @@ import sys
 import urllib
 import urllib2
 
-__version__ = '6.2.0'
+__version__ = '6.2.1'
 
 
 ###############################################################################
@@ -83,6 +83,7 @@ CORE_VERSION_URL = 'https://gae-init.appspot.com/_s/version/'
 INTERNET_TEST_URL = 'https://www.google.com'
 REQUIREMENTS_URL = 'http://docs.gae-init.appspot.com/requirement/'
 TRAVIS = 'TRAVIS' in os.environ
+
 
 ###############################################################################
 # Helpers
