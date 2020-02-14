@@ -17,7 +17,7 @@
       `${paths.static.ext}/d3/d3.js`,
     ],
     host: '127.0.0.1',
-    port: '8080',
+    port: '8020',
     script: [`${paths.src.script}/**/*.js`, `${paths.src.script}/**/*.coffee`],
     style: [`${paths.src.style}/style.less`],
   };
