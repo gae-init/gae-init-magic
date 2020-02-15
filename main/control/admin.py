@@ -103,7 +103,6 @@ class AuthUpdateForm(flask_wtf.FlaskForm):
   microsoft_client_secret = wtforms.StringField(model.Config.microsoft_client_secret._verbose_name, filters=[util.strip_filter])
   twitter_consumer_key = wtforms.StringField(model.Config.twitter_consumer_key._verbose_name, filters=[util.strip_filter])
   twitter_consumer_secret = wtforms.StringField(model.Config.twitter_consumer_secret._verbose_name, filters=[util.strip_filter])
-  check_unique_email = wtforms.BooleanField(model.Config.check_unique_email._verbose_name)
 
 
 @app.route('/admin/auth/', methods=['GET', 'POST'])
