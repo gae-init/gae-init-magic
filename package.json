@@ -38,7 +38,7 @@
     "require-dir": "1.2.0",
     "uglify-es": "3.3.9",
     "uglify-js": "3.7.5",
-    "yargs-parser": "17.0.0",
+    "yargs-parser": "18.1.2",
     "yarn": "1.22.0"
   },
   "license": "MIT",
