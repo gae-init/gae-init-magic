@@ -1546,11 +1546,6 @@ camelcase@^3.0.0:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-3.0.0.tgz#32fc4b9fcdaf845fcdf7e73bb97cac2261f0ab0a"
   integrity sha1-MvxLn82vhF/N9+c7uXysImHwqwo=
 
-camelcase@^5.0.0:
-  version "5.3.1"
-  resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.3.1.tgz#e3c9b31569e106811df242f715725a1f4c494320"
-  integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
-
 caniuse-api@^1.5.2:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/caniuse-api/-/caniuse-api-1.6.1.tgz#b534e7c734c4f81ec5fbe8aca2ad24354b962c6c"
@@ -2123,7 +2118,7 @@ debug@=3.1.0, debug@~3.1.0:
   dependencies:
     ms "2.0.0"
 
-decamelize@^1.0.0, decamelize@^1.1.1, decamelize@^1.1.2, decamelize@^1.2.0:
+decamelize@^1.0.0, decamelize@^1.1.1, decamelize@^1.1.2:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/decamelize/-/decamelize-1.2.0.tgz#f6534d15148269b20352e7bee26f501f9a191290"
   integrity sha1-9lNNFRSCabIDUue+4m9QH5oZEpA=
@@ -7629,13 +7624,10 @@ yaml@^1.7.2:
   dependencies:
     "@babel/runtime" "^7.6.3"
 
-yargs-parser@17.0.0:
-  version "17.0.0"
-  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-17.0.0.tgz#cb2586e6fd445b17ced264dd4a38c60bdb35b7ec"
-  integrity sha512-Fl4RBJThsWeJl3cRZeGuolcuH78/foVUAYIUpKn8rkCnjn23ilZvJyEZJjnlzoG/+EJKPb1RggD4xS/Jie2nxg==
-  dependencies:
-    camelcase "^5.0.0"
-    decamelize "^1.2.0"
+yargs-parser@19.0.0:
+  version "19.0.0"
+  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-19.0.0.tgz#41ca31398dd1ef8f7988970c5b493e2dc1e049b5"
+  integrity sha512-YNvMZVZP6nZIiwSBfd/ll5nJMXqFMLtDNKsbQ+PrjabgAIXcL1hBmfQ7iWBwbY+aITCwRrPsVseNhdbKYejqYA==
 
 yargs-parser@^4.1.0, yargs-parser@^4.2.0:
   version "4.2.1"
