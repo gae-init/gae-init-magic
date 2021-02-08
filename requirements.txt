@@ -7,6 +7,6 @@ flask==1.1.1
 jinja2==2.11.1
 requests_toolbelt==0.9.1
 simplejson==3.17.0
-unidecode==1.1.1
+unidecode==1.2.0
 webargs==5.5.3
 werkzeug==1.0.0
