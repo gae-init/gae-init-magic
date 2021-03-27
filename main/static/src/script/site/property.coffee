@@ -113,7 +113,7 @@ on_forms_change = ->
 
 on_generic_change = ->
   value = $('#generic_property').val()
-
+  console.log('pame')
   $('#strip_filter').prop 'checked', false
   $('#repeated').prop 'checked', false
   $('#tags').prop 'checked', false
@@ -147,7 +147,7 @@ on_generic_change = ->
   else if value == 'string_tags'
     $('#ndb_property').val('ndb.StringProperty').change()
     $('#wtf_property').val('wtforms.StringField').change()
-    $('#forms_property').val('forms.text_field').change()
+    $('#forms_property').val('forms.geo_pt_field').change()
     $('#field_property').val('fields.String').change()
     $('#strip_filter').prop 'checked', false
     $('#repeated').prop 'checked', true
@@ -195,6 +195,16 @@ on_generic_change = ->
     $('#wtf_property').val('').change()
     $('#forms_property').val('').change()
     $('#field_property').val('fields.Raw').change()
+
+  else if value == 'geo_pt'
+    console.log('value', value)
+    $('#ndb_property').val('ndb.GeoPtProperty').change()
+    $('#wtf_property').val('wtforms.GeoPtField').change()
+    $('#forms_property').val('forms.geo_pt_field').change()
+    $('#field_property').val('fields.GeoPt').change()
+    $('#strip_filter').prop 'checked', false
+    $('#repeated').prop 'checked', false
+    $('#tags').prop 'checked', false
 
   else
     $('#ndb_property').val('').change()
