@@ -33,7 +33,7 @@ PARSER.add_argument(
   help='the host to start the dev_appserver.py',
 )
 PARSER.add_argument(
-  '-p', '--port', dest='port', action='store', default='8080',
+  '-p', '--port', dest='port', action='store', default='8082',
   help='the port to start the dev_appserver.py',
 )
 PARSER.add_argument(
