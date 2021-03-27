@@ -31,12 +31,16 @@ def {{model_db.variable_name}}_update({{model_db.variable_name}}_id=0):
 
 {{model_db.get_property_key_choices()}}
 
-#- for property_db in property_dbs if property_db.show_on_update and ((property_db.wtf_property and property_db.kind and property_db.kind != 'model.User') or property_db.tags)
+#- for property_db in property_dbs if property_db.show_on_update and ((property_db.wtf_property and property_db.kind and property_db.kind != 'model.User') or property_db.tags or property_db.ndb_property == 'ndb.GeoPtProperty')
 # if loop.first
   if flask.request.method == 'GET' and not form.errors:
 # endif
   # if property_db.tags
     form.{{property_db.name}}.data = config.TAG_SEPARATOR.join(form.{{property_db.name}}.data)
+  # elif property_db.ndb_property == 'ndb.GeoPtProperty'
+    if {{model_db.variable_name}}_db.{{property_db.name}}:
+      form.{{property_db.name}}_lat.data = {{model_db.variable_name}}_db.{{property_db.name}}.lat
+      form.{{property_db.name}}_lon.data = {{model_db.variable_name}}_db.{{property_db.name}}.lon
   # else
     form.{{property_db.name}}.data = {{model_db.variable_name}}_db.{{property_db.name}}.urlsafe() if {{model_db.variable_name}}_db.{{property_db.name}} else None
   # endif
@@ -52,6 +56,9 @@ def {{model_db.variable_name}}_update({{model_db.variable_name}}_id=0):
     form.{{property_db.name}}.data = util.parse_tags(form.{{property_db.name}}.data)
     # endfor
     form.populate_obj({{model_db.variable_name}}_db)
+    # for property_db in property_dbs if property_db.ndb_property == 'ndb.GeoPtProperty'
+    {{model_db.variable_name}}_db.{{property_db.name}} = ndb.GeoPt(form.{{property_db.name}}_lat.data, form.{{property_db.name}}_lon.data)
+    # endfor
     {{model_db.variable_name}}_db.put()
     return flask.redirect(flask.url_for('{{model_db.variable_name}}_view', {{model_db.variable_name}}_id={{model_db.variable_name}}_db.key.id()))
 

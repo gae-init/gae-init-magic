@@ -81,7 +81,6 @@ class Property(model.Base):
     validators = ['wtforms.validators.%s()' % ('required' if self.required else 'optional')]
     if self.ndb_property == 'ndb.StringProperty' and self.wtf_property in ['wtforms.TextAreaField', 'wtforms.StringField']:
       validators.append('wtforms.validators.length(max=500)')
-    validators = '[%s]' % ', '.join(validators)
     filters = [
         'util.strip_filter' if self.strip_filter else '',
         'util.email_filter' if self.email_filter else '',
@@ -103,19 +102,45 @@ class Property(model.Base):
     title = '%r' % self.verbose_name_
     if self.ndb_property:
       title = 'model.%s.%s._verbose_name' % (self.key.parent().get().name, self.name)
-    s = (
+
+    if self.wtf_property == 'wtforms.GeoPtField':
+      validators += ['wtforms.validators.NumberRange(min=-90, max=90)']
+      validatorss = '[%s]' % ', '.join(validators)
+      lat = (
+            '%s_lat = wtforms.FloatField(\n'
+            '    %s,\n'
+            '    %s,\n%s%s%s%s'
+            '  )'
+        % (self.name, title + " + ' Latitude'", validatorss, filters, choices, description, date_format))
+      validators.pop()
+      validators += ['wtforms.validators.NumberRange(min=-180, max=180)']
+      validatorss = '[%s]' % ', '.join(validators)
+      lon = (
+            '\n  %s_lon = wtforms.FloatField(\n'
+            '    %s,\n'
+            '    %s,\n%s%s%s%s'
+            '  )'
+        % (self.name, title + " + ' Longtitute'", validatorss, filters, choices, description, date_format))
+      return '%s %s' % (lat, lon)
+
+    validators = '[%s]' % ', '.join(validators)
+    return (
       '%s = %s(\n'
       '    %s,\n'
       '    %s,\n%s%s%s%s'
       '  )'
       % (self.name, self.wtf_property, title, validators, filters, choices, description, date_format))
-    return s
 
   @ndb.ComputedProperty
   def forms_field(self):
     autofocus = ', autofocus=True' if self.autofocus else ''
     readonly = ', readonly=True' if self.readonly else ''
     placeholder = ", placeholder='%s'" % self.placeholder if self.placeholder else ''
+    if self.forms_property == 'forms.geo_pt_field':
+      lat = "{{forms.number_field(form.%s_lat%s%s%s)}}" % (self.name, autofocus, readonly, placeholder)
+      lon = "{{forms.number_field(form.%s_lon%s%s%s)}}" % (self.name, autofocus, readonly, placeholder)
+      return ('<div class="row">\n'
+        '          <div class="col-sm-6">%s</div>\n          <div class="col-sm-6">%s</div>\n         </div>' %(lat, lon))
     return "{{%s(form.%s%s%s%s)}}" % (self.forms_property, self.name, autofocus, readonly, placeholder)
 
   @ndb.ComputedProperty

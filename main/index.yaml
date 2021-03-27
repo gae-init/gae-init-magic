@@ -11,10 +11,6 @@ indexes:
       - name: 'public'
       - name: 'created'
         direction: desc
-  - kind: 'Project'
-    properties:
-      - name: 'user_key'
-      - name: 'name'
   - kind: 'Model'
     ancestor: yes
     properties:
@@ -29,6 +25,10 @@ indexes:
       - name: 'kind'
       - name: 'ndb_property'
       - name: 'rank'
+  - kind: 'Project'
+    properties:
+      - name: 'user_key'
+      - name: 'name'
   - kind: 'Property'
     ancestor: yes
     properties:
