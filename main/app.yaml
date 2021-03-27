@@ -27,6 +27,10 @@ handlers:
     static_files: static/img/favicon.ico
     upload: static/img/favicon.ico
 
+  - url: /manifest.json
+    static_files: static/manifest.json
+    upload: static/manifest.json
+
   - url: /robots.txt
     static_files: static/robots.txt
     upload: static/robots.txt
@@ -67,7 +71,9 @@ skip_files:
   - ^(.*/)?app\.yml
   - ^(.*/)?index\.yaml
   - ^(.*/)?index\.yml
-  - ^lib/.*
+  - ^lib/.*-info/
+  - ^lib-dev/
+  - ^requirements-dev.txt
   - ^static/dev/.*
   - ^static/ext/.*\.coffee
   - ^static/ext/.*\.css

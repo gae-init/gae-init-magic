@@ -2,16 +2,16 @@
 
 from __future__ import absolute_import
 
-import functools
-import re
-
-from authlib.integrations.flask_client import OAuth, OAuthError
-from google.appengine.ext import ndb
 import flask
 import flask_login
 import flask_wtf
+import functools
+import re
 import unidecode
 import wtforms
+
+from authlib.integrations.flask_client import OAuth, OAuthError
+from google.appengine.ext import ndb
 
 import cache
 import config
@@ -306,6 +306,7 @@ def urls_for_oauth(next_url):
     'github_signin_url': url_for_signin('github', next_url),
     'google_signin_url': url_for_signin('google', next_url),
     'gae_signin_url': url_for_signin('gae', next_url),
+    'linkedin_signin_url': url_for_signin('linkedin', next_url),
     'microsoft_signin_url': url_for_signin('microsoft', next_url),
     'twitter_signin_url': url_for_signin('twitter', next_url),
   }
@@ -344,9 +345,12 @@ def signin_oauth(oauth_app, scheme=None):
   try:
     flask.session.pop('oauth_token', None)
     save_request_params()
-    return oauth_app.authorize_redirect(flask.url_for(
+    redirect_uri = flask.url_for(
       '%s_authorized' % oauth_app.name, _external=True, _scheme=scheme
-    ))
+    )
+    if oauth_app.name == 'microsoft':
+      redirect_uri = redirect_uri.replace('127.0.0.1', 'localhost')
+    return oauth_app.authorize_redirect(redirect_uri)
   except OAuthError:
     flask.flash(
       'Something went wrong with sign in. Please try again.',

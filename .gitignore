@@ -5,7 +5,7 @@
 *.pyo
 bower_components
 main/lib
-main/lib.zip
+main/libdev
 main/static/dev
 main/static/ext
 main/static/min
