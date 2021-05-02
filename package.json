@@ -22,7 +22,7 @@
     "gulp-less": "4.0.1",
     "gulp-load-plugins": "2.0.2",
     "gulp-plumber": "1.2.1",
-    "gulp-size": "3.0.0",
+    "gulp-size": "4.0.0",
     "gulp-sourcemaps": "2.6.5",
     "gulp-start": "1.0.1",
     "gulp-uglify-es": "2.0.0",
